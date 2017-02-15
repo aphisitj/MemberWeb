@@ -1,0 +1,10 @@
+@import '_constant.scss';
+
+footer{
+  background: $primary-color;
+  color: $primary-text-light;
+
+  .container{
+    padding: 30px 0;
+  }
+}

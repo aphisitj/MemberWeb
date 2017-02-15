@@ -1,0 +1,48 @@
+@import '_constant.scss';
+
+header{
+  background: $primary-color;
+  color: $primary-text-light;
+
+  .container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    a{
+      color: $primary-text-light;
+
+      &:hover{
+        color: $primary-text-light;
+      }
+    }
+
+    #logo{
+      padding: 20px 14px;
+      font-size: 24px;
+      font-weight: bold;
+      transition: background 0.4s;
+
+      &:hover{
+        background: #000;
+      }
+    }
+
+    nav{
+      flex: 1 0 auto;
+      text-align: right;
+
+      ul#nav{
+        margin: 0;
+        padding: 0;
+
+        li.nav-item{
+          display: inline-block;
+          margin: 0 5px;
+          padding: 10px 14px;
+          list-style: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@import '_constant.scss';
+
+body{
+  margin: 0;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: $primary-text-dark;
+}
+
+a{
+  color: $primary-link;
+  transition: color 0.2s;
+
+  &:hover{
+    color: $primary-link-hover;
+    text-decoration: none;
+  }
+}
+
+#ui-main{
+  min-height: 650px;
+}

@@ -1,0 +1,95 @@
+/* here you can put your own css to customize and override the theme */
+
+/***
+Rounded Portlets
+***/
+/*
+.portlet {
+	border-radius: 4px !important;
+}
+
+.portlet .portlet-title {
+	border-radius: 4px 4px 0px 0px !important;
+}
+
+.portlet .portlet-body,
+.portlet .portlet-body .form-actions  {
+	border-radius: 0px 0px 4px 4px !important;
+}
+*/
+.dropdown-menu {
+  border: medium none;
+  box-shadow: none;
+  display: none;
+  float: left;
+  font-size: 12px;
+  left: 0;
+  list-style: none outside none;
+  padding: 0;
+  position: absolute;
+  text-shadow: none;
+  top: 100%;
+  z-index: 9998;
+  border: 1px solid #D9DEE4;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+.dropdown-menu > li > a {
+  color: #5A738E; }
+
+.navbar-nav .open .dropdown-menu {
+  position: absolute;
+  background: #fff;
+  margin-top: 0;
+  border: 1px solid #D9DEE4;
+  -webkit-box-shadow: none;
+  right: 0;
+  left: auto;
+  width: 220px; }
+
+.navbar-nav .open .dropdown-menu.msg_list {
+  width: 300px; }
+
+.info-number .badge {
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 13px;
+  padding: 2px 6px;
+  position: absolute;
+  right: 2px;
+  top: 8px; }
+
+ul.to_do {
+  padding: 0; }
+.dropdown {
+  margin-bottom: 10px; }
+ul.to_do li {
+  background: #f3f3f3;
+  border-radius: 3px;
+  position: relative;
+  padding: 7px;
+  margin-bottom: 5px;
+  list-style: none; }
+.dropdown-menu a {
+  cursor: pointer; }
+ul.to_do p {
+  margin: 0; }
+.cropper .docs-options .dropdown-menu {
+  width: 100%; }
+
+.cropper .docs-options .dropdown-menu > li {
+  padding: 3px 20px; }
+
+.cropper .docs-options .dropdown-menu > li:hover {
+  background-color: #f7f7f7; }
+
+.cropper .docs-options .dropdown-menu > li > label {
+  display: block; }
+.dropdown-menu.msg_list span {
+  white-space: normal; }
+.top_nav .dropdown-menu li {
+  width: 100%; }
+
+.top_nav .dropdown-menu li a {
+  width: 100%;
+  padding: 12px 20px; }

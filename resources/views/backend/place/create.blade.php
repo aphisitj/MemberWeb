@@ -66,7 +66,7 @@ if(isset($data)) {
 							<label class="control-label col-md-3">Fee_percent</label>
 							<div class="col-md-9">
 								<div class="input-inline input-medium">
-									<input class="form-control touchspin" type="text" value="{{ $fee_percent }}" name="fee_percent">
+									<input class="form-control touchspin" type="text" value="" name="fee_percent">
 								</div>
 							</div>
 						</div>

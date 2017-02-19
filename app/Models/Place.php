@@ -12,8 +12,8 @@ class Place extends Model
     // use SoftDeletes;
     public $table = 'place';
     public $primaryKey = 'place_id';
-    public $fillable = ['place_id','place_name','address','status','lat','lng',
-                            'facility','service'];
+    public $fillable = ['place_id','place_name','mobile','detail','address','status','lat','lng',
+                            'facility','service','place_type'];
 
     // public $fillable = ['place_id','place_name','address','status','img',
     //                         'facility','service','type','fee_percent','email','phone','password','username'];

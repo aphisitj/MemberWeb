@@ -90,9 +90,9 @@ class AdminPlaceController extends Controller
 
         // $roles = Place::all();
 
-        $roles = DB::table('place_user')
-                ->join('user', 'user.user_id', '=', 'place_user.user_id')
-                ->join('place', 'place.place_id', '=', 'place_user.place_id')
+        $roles = DB::table('user_place')
+                ->join('user', 'user.user_id', '=', 'user_place.user_id')
+                ->join('place', 'place.place_id', '=', 'user_place.place_id')
                 ->get();
 
 
@@ -139,11 +139,11 @@ class AdminPlaceController extends Controller
 
         $data = $obj_model->find($id);
 
-        $roles = Place::all();
-        // $roles = DB::table('place_user')
-        //         ->join('user', 'user.user_id', '=', 'place_user.user_id')
-        //         ->join('place', 'place.place_id', '=', 'place_user.place_id')
-        //         ->get();
+        // $roles = Place::all();
+        $roles = DB::table('user_place')
+                ->join('user', 'user.user_id', '=', 'user_place.user_id')
+                ->join('place', 'place.place_id', '=', 'user_place.place_id')
+                ->get();
 
         return view($this->view_path.'update',compact('page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }

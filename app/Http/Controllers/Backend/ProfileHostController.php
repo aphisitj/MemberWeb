@@ -52,10 +52,10 @@ class ProfileHostController extends Controller
         $user_id = $this->user_id;
        
         $data = DB::table('place')
-                    ->join('place_user', function ($join) {
-                        $join->on('place.place_id', '=', 'place_user.place_id');
+                    ->join('user_place', function ($join) {
+                        $join->on('place.place_id', '=', 'user_place.place_id');
                     })
-                    ->where('place_user.user_id', $user_id)
+                    ->where('user_place.user_id', $user_id)
                     ->get();
 
         return view($this->view_path.'index',compact('page_title','data','path','obj_model','obj_fn'));

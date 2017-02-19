@@ -48,30 +48,21 @@ if(isset($data)) {
 						<div class="form-group">
 							<label class="control-label col-md-3">Phone</label>
 							<div class="col-md-4">
-								<input type="tel" class="form-control" name="phone" value="" disabled>
+								<input type="tel" class="form-control" name="phone" value="{{$mobile}}" disabled>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="control-label col-md-3">Type</label>
 							<div class="col-md-4">
-								<select class="form-control" name="type">
-									<option value=""></option>
+								<select class="form-control" name="type">							
 					                <option value="Hotel">Hotel</option>
 					                <option value="Restaurant" >Restaurant</option>
+
                             	</select>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">Fee_percent</label>
-							<div class="col-md-9">
-								<div class="input-inline input-medium">
-									<input class="form-control touchspin" type="text" value="{{ $fee_percent }}" name="fee_percent" disabled>
-								</div>
-							</div>
-						</div>
-
-					
+						
 						<div class="form-group">
 							<label class="control-label col-md-3">เปิดใช้</label>
 							<div class="col-md-4">

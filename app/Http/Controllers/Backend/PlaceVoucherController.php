@@ -57,8 +57,8 @@ class PlaceVoucherController extends Controller
         
         // $data = $this->obj_model;
         $data = DB::table('place_voucher')
-                    ->join('place_user', function ($join) {
-                        $join->on('place_voucher.place_id', '=', 'place_user.place_id');
+                    ->join('user_place', function ($join) {
+                        $join->on('place_voucher.place_id', '=', 'user_place.place_id');
                     })
                     ->where('place_user.user_id', $user_id);
                     

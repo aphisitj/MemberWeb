@@ -31,7 +31,7 @@ class AdminhomeController extends Controller
         $this->view_path = 'backend.home.'; // View Path
 
         $this->user_id = session()->get('s_host_id');
-        $this->user = Place_User::find($this->user_id);
+        //$this->user = Place_User::find($this->user_id);
         $this->session_id = $session_id = session()->getId();  
     }
 
@@ -46,25 +46,13 @@ class AdminhomeController extends Controller
         $page_title = $this->page_title;
         $per_page = config()->get('constants.PER_PAGE');
 
-        $order_by = Input::get('order_by');
-        if(empty($order_by)) $order_by = $obj_model->primaryKey;
-        $sort_by = Input::get('sort_by');
-        if(empty($sort_by)) $sort_by = 'desc';
-
-        $search = Input::get('search');
-
-        $user = $this->user;
-        $user_id = $this->user_id;
-        
-        
-        // $data = $this->obj_model;
+    
         $data = $obj_model;
         $data_place = $obj_place;            
                          
    
         $count_data = $data->count();
         $count_place = $data_place->count();
-        $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
         
         return view($this->view_path.'index',compact('page_title','count_place','count_data','data','path','obj_model','obj_fn'));

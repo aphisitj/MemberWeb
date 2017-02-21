@@ -23,7 +23,8 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
               <td>
                 <img src="{{ url()->asset('assets/backend/img/desktop1.jpg') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
               </td>
-
+              
+            
               <td class="text-left col-sm-6 col-md-6">
               @foreach($data as $key => $field)
                 <h2>{{ $field->place_name }}</h2>
@@ -44,6 +45,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                 <a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a> 
                 @endforeach
               </td>
+
 
             </tr>
           </table>

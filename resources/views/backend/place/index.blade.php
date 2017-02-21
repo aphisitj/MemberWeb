@@ -60,7 +60,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
               <th>{!! $obj_fn->sorting('Type','type',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th>{!! $obj_fn->sorting('Fee percent','fee_percent',$order_by,$sort_by,$str_param_sort,'') !!}</th>              
               <th>{!! $obj_fn->sorting('Status','status',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('CheckDetail','detail',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Check Detail','detail',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th class="text-center col-sm-2 col-md-2">
                 <a href="{{ url()->to($path.'/create') }}" class="btn btn-circle blue btn-xs"><i class="fa fa-plus"></i> Add</a>
               </th>

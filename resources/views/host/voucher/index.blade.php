@@ -81,7 +81,8 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                   </form>
                 </td>
               </tr>
-              @endforeach @else
+              @endforeach
+              @else
               <tr>
                 <td class="text-center" colspan="9">No Result.</td>
               </tr>

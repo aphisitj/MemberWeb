@@ -31,12 +31,10 @@
           <thead>
 
             <tr>
-              <th>Voucher Id</th>
-              <th>Voucher name</th>
-              <th>Price</th>
-              <th>Fee Percent</th>
-              <th>Fee Amount</th>
-              <th>Status</th>
+              <th>Package Id</th>
+              <th>Package name</th>
+              <th>Price</th>             
+              <th>Fee Amount</th>              
             </tr>
 
           </thead>
@@ -45,10 +43,7 @@
 
             <tr>
               <td class="text-center">test</td>
-              <td>test</a>
-              </td>
-              <td>test</td>
-              <td>test</td>
+              <td></td>
               <td>test</td>
               <td>test</td>
             </tr>

@@ -81,16 +81,19 @@
       <div class="hor-menu ">
         <ul class="nav navbar-nav">
           <li>
-            <a href="/backend/public/_host">Home</a>
+            <a href="{{ url()->to('_host') }}">Home</a>
           </li>
           <li>
-            <a href="/backend/public/_host/voucher">Voucher</a>
+            <a href="{{ url()->to('_host/package') }}">Package</a>
           </li>
           <li>
-            <a href="/backend/public/_host/department">Department</a>
+            <a href="{{ url()->to('_host/voucher') }}">Voucher</a>
           </li>
           <li>
-            <a href="/backend/public/_host/payment">Payment</a>
+            <a href="{{ url()->to('_host/department') }}">Department</a>
+          </li>
+          <li>
+            <a href="{{ url()->to('_host/payment') }}">Payment</a>
           </li>
           <li>
             <a href="#">ตอบคำถาม</a>

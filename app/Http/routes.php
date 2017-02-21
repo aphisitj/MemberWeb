@@ -33,11 +33,12 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
   // Route::get('place/update', function () { return view('backend.place.update'); });
   // Route::get('/listuser', function () { return view('backend.listuser.index'); });
   // Route::get('/listuser/update', function () { return view('backend.listuser.update'); });
+  
     Route::get('/place/detail', function () { return view('backend.place.detail'); });
     
     Route::resource('listuser','Backend\AdminUserController');
     Route::resource('place','Backend\AdminPlaceController');
-   Route::resource('/','Backend\AdminhomeController');
+    Route::resource('/','Backend\AdminhomeController');
     //Route::get('/', function () { return view('backend.index'); });
     Route::resource('user-management','Backend\AdminController');
     Route::resource('role','Backend\AdminRoleController');
@@ -56,8 +57,8 @@ Route::group(['middleware'=>'host'], function () {
     Route::get('_host/department', function () { return view('host.department.index'); });
     Route::get('_host/department/update', function () { return view('host.department.update'); });
     Route::get('_host/department/create', function () { return view('host.department.create'); });
-  
-  Route::get('_host/payment', function () { return view('host.payment.index'); });
+    Route::get('_host/package', function () { return view('host.package.index'); });
+    Route::get('_host/payment', function () { return view('host.payment.index'); });
   
     Route::get('_host/orders', function () { return view('host.orders.index'); });
 

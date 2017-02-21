@@ -1,4 +1,4 @@
-@extends('host.layout.main-layout') @section('page-style') @endsection @section('more-style') @endsection @section('page-title') Department @endsection @section('page-content')
+@extends('host.layout.main-layout') @section('page-style') @endsection @section('more-style') @endsection @section('page-title') Package @endsection @section('page-content')
 <div class="col-md-12">
   <div class="portlet light">
     <div class="form-search">
@@ -7,7 +7,7 @@
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="">
-            <span class="help-block">Search by Firstname, Username and Role name</span>
+            <span class="help-block">Search by Package name</span>
           </div>
         </div>
         <div class="form-group">
@@ -30,10 +30,12 @@
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th class="text-center col-sm-2">Department name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Type</th>
+              <th class="text-center col-sm-2">Package_id</th>
+              <th>Package name</th>
+              <th>Detail</th>
+              <th>Price</th>
+              <th>expire_type</th>
+              <th>Quota</th>
               <th class="text-center col-sm-2 col-md-2">
                 <a href="{{ url()->to('_host/department/create') }}" class="btn btn-circle blue btn-xs"><i class="fa fa-plus"></i> Add</a>
               </th>
@@ -43,6 +45,8 @@
 
             <tr>
               <td class="text-center">d</td>
+              <td>d</td>
+              <td>d</td>
               <td>d</td>
               <td>d</td>
               <td>d</td>

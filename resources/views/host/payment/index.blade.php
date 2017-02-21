@@ -7,7 +7,7 @@
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="">
-            <span class="help-block">Search by Firstname, Username and Role name</span>
+            <span class="help-block">Search by Package name</span>
           </div>
         </div>
         <div class="form-group">
@@ -31,7 +31,7 @@
           <thead>
             <tr>
               <th class="text-center col-sm-2">Orders_id</th>
-              <th>voucher name</th>
+              <th>Package name</th>
               <th>Qty</th>
               <th>Price</th>
               <th>payment type</th>

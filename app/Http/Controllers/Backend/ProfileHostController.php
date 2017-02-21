@@ -58,6 +58,8 @@ class ProfileHostController extends Controller
                     ->where('user_place.user_id', $user_id)
                     ->get();
 
+       
+
         return view($this->view_path.'index',compact('page_title','data','path','obj_model','obj_fn'));
     }
     // ------------------------------------ View Add Page

@@ -50,6 +50,7 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
 });
 /* --------------------- Host ------------------- */
 // Route::group(['prefix' => '_host'], function () {
+    Route::get('_host/forget', function () { return view('host.Forget'); });
     Route::controller('_host/login','Backend\HostLoginController');
     Route::get('_host/logout', 'Backend\HostLoginController@logout');
 // });

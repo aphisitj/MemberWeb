@@ -7,7 +7,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title>Host</title>
+    <title>Back Office</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -46,33 +46,26 @@
 </div>
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
-    <form class="login-form" action="{{ url('_host/login/form') }}" method="post">
+    <form class="login-form" action="{{ url()->to($bo_name.'/login/form') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <h3 class="form-title">Login to your account</h3>
+        <h3 class="form-title">Forget password</h3>
         <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>
-			<span>
-			Enter any username and password. </span>
+			
         </div>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-            <label class="control-label visible-ie8 visible-ie9">Username</label>
+            <label class="control-label visible-ie8 visible-ie9">Email</label>
             <div class="input-icon">
                 <i class="fa fa-user"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email" value="{{ old('email') }}"/>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="username" value="{{ old('username') }}"/>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Password</label>
-            <div class="input-icon">
-                <i class="fa fa-lock"></i>
-                <input class="form-control placeholder-no-fix" type="password"  placeholder="Password" name="password"/>
-            </div>
-        </div>
-        <div class="form-actions">                          
-                <a href="{{ url('_host/forget') }}">Forget Password</a>
-            <button type="submit" class="btn green-haze pull-right">
-                Login <i class="m-icon-swapright m-icon-white"></i>
+       
+        <div class="form-actions">
+            <label class="">            
+            <button type="submit" class="btn green-haze pull-Right">
+                Send <i class="m-icon-swapright m-icon-white"></i>
             </button>
         </div>
     </form>

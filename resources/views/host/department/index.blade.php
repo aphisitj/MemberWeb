@@ -7,7 +7,7 @@
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="">
-            <span class="help-block">Search by Firstname, Username and Role name</span>
+            <span class="help-block">Search by Department name</span>
           </div>
         </div>
         <div class="form-group">
@@ -42,10 +42,10 @@
           <tbody>
 
             <tr>
-              <td class="text-center">d</td>
-              <td>d</td>
-              <td>d</td>
-              <td>d</td>
+              <td class="text-center">Department 1</td>
+              <td>d@d.com</td>
+              <td>789569</td>
+              <td>Hotel</td>
               <td class="text-center">
                 <a href="{{ url()->to('_host/department/update') }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>
                 <form action="" class="form-delete" parent-data-id="" method="POST">

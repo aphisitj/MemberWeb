@@ -43,8 +43,9 @@
 						<div class="col-md-4">
 							<select class="form-control" name="admin_role_id">
 								<option value=""></option>
-                <option value="">available</option>
-                <option value="" >not available</option>
+				                <option value="">Hotal</option>
+				                <option value="" >Restaurant</option>
+                            
                             
                </select>
 						</div>

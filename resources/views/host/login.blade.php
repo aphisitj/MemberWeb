@@ -69,7 +69,10 @@
                 <input class="form-control placeholder-no-fix" type="password"  placeholder="Password" name="password"/>
             </div>
         </div>
-        <div class="form-actions">                          
+
+        <div class="form-actions">   
+         <label class="checkbox">
+                <input type="checkbox" name="remember" value="1" checked/> Remember me    </label>                       
                 <a href="{{ url('_host/forget') }}">Forget Password</a>
             <button type="submit" class="btn green-haze pull-right">
                 Login <i class="m-icon-swapright m-icon-white"></i>

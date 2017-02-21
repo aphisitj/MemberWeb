@@ -32,26 +32,30 @@
             <tr>
               <th class="text-center col-sm-2">Package_id</th>
               <th>Package name</th>
+              <th>QRcode</th>
               <th>Detail</th>
               <th>Price</th>
+              <th>Fee</th>
               <th>expire_type</th>
               <th>Quota</th>
               <th class="text-center col-sm-2 col-md-2">
-                <a href="{{ url()->to('_host/department/create') }}" class="btn btn-circle blue btn-xs"><i class="fa fa-plus"></i> Add</a>
+                <a href="{{ url()->to('_host/package/create') }}" class="btn btn-circle blue btn-xs"><i class="fa fa-plus"></i> Add</a>
               </th>
             </tr>
           </thead>
           <tbody>
 
             <tr>
-              <td class="text-center">d</td>
-              <td>d</td>
-              <td>d</td>
-              <td>d</td>
-              <td>d</td>
-              <td>d</td>
+              <td class="text-center">1</td>
+              <td>Package A</td>
+              <td><img src="{{ url()->asset('assets/backend/img/qrcode/qrcode.jpg') }}" alt="QRcode" style="width:100px;height:100px;"></td>
+              <td>โรงแรมระดับ 4-ดาว แห่งนี้ให้บริการห้องพัก 423 ห้อง ซึ่งได้รับการตกแต่งให้ตรงกับความต้องการของลูกค้า ทุกห้องได้รับการตกแต่งอย่างสวยงาม โดยมี ห้องปลอดบุหรี่</td>
+              <td>3500</td>
+              <th>5%</th>
+              <td>30</td>
+              <td>80/100</td>
               <td class="text-center">
-                <a href="{{ url()->to('_host/department/update') }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>
+                <a href="{{ url()->to('_host/package/update') }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>
                 <form action="" class="form-delete" parent-data-id="" method="POST">
                   <input type="hidden" name="_method" value="delete">
                   <input type="hidden" name="_token" value="">
@@ -62,7 +66,7 @@
 
 
             <tr>
-              <td class="text-center" colspan="6">No Result.</td>
+              <td class="text-center" colspan="9">No Result.</td>
             </tr>
 
           </tbody>

@@ -58,16 +58,26 @@ Route::group(['middleware'=>'host'], function () {
     Route::get('_host/department', function () { return view('host.department.index'); });
     Route::get('_host/department/update', function () { return view('host.department.update'); });
     Route::get('_host/department/create', function () { return view('host.department.create'); });
+
+
     Route::get('_host/package', function () { return view('host.package.index'); });
+    Route::get('_host/package/create', function () { return view('host.package.create'); });
+    Route::get('_host/package/update', function () { return view('host.package.update'); });
+
     Route::get('_host/payment', function () { return view('host.payment.index'); });
   
     Route::get('_host/orders', function () { return view('host.orders.index'); });
 
     // Route::get('_host', function () { return view('host.profile.index'); });
     Route::get('_host/update', function () { return view('host.profile.update'); });
-  
-    Route::resource('_host/voucher','Backend\PlaceVoucherController');
-    Route::resource('_host','Backend\ProfileHostController');
+    Route::get('_host', function () { return view('host.profile.index'); });
+
+    Route::get('_host/voucher/update', function () { return view('host.voucher.update'); });
+    Route::get('_host/voucher/create', function () { return view('host.voucher.create'); });
+    Route::get('_host/voucher', function () { return view('host.voucher.index'); });
+
+    //Route::resource('_host/voucher','Backend\PlaceVoucherController');
+    //Route::resource('_host','Backend\ProfileHostController');
 
 
     

@@ -7,7 +7,7 @@
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="">
-            <span class="help-block">Search by Package name</span>
+            <span class="help-block">Search by Orders_id </span>
           </div>
         </div>
         <div class="form-group">
@@ -41,12 +41,12 @@
           <tbody>
 
             <tr>
-              <td class="text-center">d</td>
-              <td>d</td>
-              <td>d</td>
-              <td>d</td>
-              <td>d</td>
-              <td>d</td>
+              <td class="text-center">1</td>
+              <td>Package A</td>
+              <td>1</td>
+              <td>3500</td>
+              <td>Visa</td>
+              <td>0</td>
             </tr>
 
 

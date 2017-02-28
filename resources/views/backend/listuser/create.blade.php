@@ -18,7 +18,9 @@ if(isset($data)) {
 ?>
 
 
-@extends('backend.layout.main-layout') @section('page-style') {{ Html::style('assets/global/plugins/jquery-tags-input/jquery.tagsinput.css') }} {{ Html::style('assets/global/plugins/select2/select2.css') }} {{ Html::style('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')
+@extends('backend.layout.main-layout') @section('page-style') 
+{{ Html::style('assets/global/plugins/jquery-tags-input/jquery.tagsinput.css') }} 
+{{ Html::style('assets/global/plugins/select2/select2.css') }} {{ Html::style('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')
 }} {{ Html::style('assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }} {{ Html::style('assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }} {{ Html::style('assets/global/plugins/jquery-minicolors/jquery.minicolors.css')
 }} {{ Html::style('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }} @endsection @section('more-style') @endsection @section('page-title') {{ $txt_manage.' '.$page_title }} @endsection @section('page-content')
 <div class="col-md-12">

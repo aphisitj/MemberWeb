@@ -7078,11 +7078,11 @@ Custimized Bootstrap Wells
 }
 .widget-thumb .widget-thumb-wrap .widget-thumb-icon {
   float: left;
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   display: inline-block;
   font-size: 20px;
-  line-height: 41px;
+  line-height: 100px;
   color: #fff;
   text-align: center;
   padding: 10px;

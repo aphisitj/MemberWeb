@@ -1,4 +1,16 @@
-@extends('host.layout.main-layout') @section('page-style') @endsection @section('more-style') @endsection @section('page-title') Department @endsection @section('page-content')
+@extends('host.layout.main-layout')
+
+@section('page-style') 
+@endsection 
+
+@section('more-style') 
+@endsection 
+
+@section('page-title') 
+Department 
+@endsection .
+
+@section('page-content')
 <div class="col-md-12">
   <div class="portlet light">
     <div class="form-search">
@@ -68,4 +80,10 @@
     </div>
   </div>
 </div>
-@endsection @section('page-plugin') @endsection @section('more-script') @endsection
+@endsection
+
+ @section('page-plugin') 
+ @endsection 
+
+ @section('more-script') 
+ @endsection

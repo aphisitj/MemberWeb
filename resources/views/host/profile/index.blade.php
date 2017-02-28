@@ -52,37 +52,37 @@
 
     <div class="portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                   <div class="tile-stats">
-                      <i class="icon fa fa-caret-square-o-right"></i>
+                      <i class="glyphicon glyphicon-credit-card"></i>
                       <h1>4785</h1>
                       <h4>Total Payment</h4>
                       <p></p>
                   </div>
                   <hr class="colorhr">
                   <div class="tile-stats">
-                      <i class="fa fa-caret-square-o-right"></i>
+                      <i class="glyphicon glyphicon-gift"></i>
                       <h1>179</h1>
                       <h4>Package</h4>
                       <p></p>
                   </div>
-                  <hr>
+                  
                   
               </div>
 
               <div class="portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                        <i class="glyphicon glyphicon-user"></i>
+                        <i class="glyphicon glyphicon-inbox"></i>
                         <h1>44</h1>
                         <h4>Orders</h4>
                         <p></p>
                     </div>
                     <hr>
                     <div class="tile-stats">
-                        <i class="icon fa fa-caret-square-o-right"></i>
+                        <i class="glyphicon glyphicon-piggy-bank"></i>
                         <h1>785</h1>
                         <h4>Fee</h4>
                         <p></p>
                     </div>
-                    <hr>                   
+                                     
               </div>
 
               

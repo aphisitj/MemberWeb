@@ -1,4 +1,11 @@
- @extends('backend.layout.main-layout') @section('page-style') @endsection @section('more-style') @endsection @section('page-title') @endsection @section('page-content')
+ @extends('backend.layout.main-layout') 
+ @section('page-style') 
+ @endsection 
+ @section('more-style') 
+ @endsection 
+ @section('page-title')
+ @endsection
+@section('page-content')
   <div class="col-md-12">
     <div class="portlet light">
       <div class="portlet-body">
@@ -104,4 +111,8 @@
     </div>
   </div>
 </div>
-@endsection @section('page-plugin') @endsection @section('more-script') @endsection
+@endsection 
+@section('page-plugin')
+@endsection 
+@section('more-script') 
+@endsection

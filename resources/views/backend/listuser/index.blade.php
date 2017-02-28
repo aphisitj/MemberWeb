@@ -13,7 +13,14 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
 
 ?>
 
-  @extends('backend.layout.main-layout') @section('page-style') @endsection @section('more-style') @endsection @section('page-title') {{ $page_title }} @endsection @section('page-content')
+  @extends('backend.layout.main-layout') 
+  @section('page-style') 
+  @endsection 
+  @section('more-style') 
+  @endsection 
+  @section('page-title') {{ $page_title }} 
+  @endsection 
+  @section('page-content')
   <div class="col-md-12">
     <div class="portlet light">
       <div class="form-search">
@@ -89,4 +96,8 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
       </div>
     </div>
   </div>
-  @endsection @section('page-plugin') @endsection @section('more-script') @endsection
+  @endsection 
+  @section('page-plugin')
+  @endsection 
+  @section('more-script') 
+  @endsection

@@ -98,7 +98,6 @@ if(isset($data)) {
 @section('page-plugin')
     {{ Html::script('assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}
     {{ Html::script('assets/global/plugins/jquery-validation/js/additional-methods.min.js') }}
-
     {{ Html::script('assets/global/plugins/bootstrap-pwstrength/pwstrength-bootstrap.min.js') }}
 @endsection
 @section('more-script')

@@ -48,29 +48,6 @@
           <li>
             <a href="{{ url()->to($bo_name.'/listuser') }}">listuser</a>
           </li>
-<!--           <li>
-            <a href="{{ url()->to($bo_name.'/create-place') }}">แบบฟอม</a>
-          </li>
-
-          <li>
-            <a href="{{ url()->to($bo_name.'/user-management') }}">Check Fee</a>
-          </li>
-          <li>
-            <a href="{{ url()->to($bo_name.'/role') }}">Manage Ad</a>
-          </li> -->
-          <!--                     <li class="menu-dropdown classic-menu-dropdown ">
-                        <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">
-                            Place Management <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu pull-left">
-                            <li>
-                                <a href="{{ url()->to($bo_name.'/user-management') }}">Voucher</a>
-                            </li>
-                            <li>
-                                <a href="{{ url()->to($bo_name.'/role') }}">Department</a>
-                            </li>
-                        </ul>
-                    </li> -->
           <li class="visible-xs">
             <a href="{{ url()->to($bo_name.'/logout') }}">Logout</a>
           </li>

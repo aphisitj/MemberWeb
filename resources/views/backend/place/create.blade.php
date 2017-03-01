@@ -36,7 +36,7 @@ if(isset($data)) {
 	@endsection 
 	@section('page-content')
 
-	dd($dataplace);
+
 	<div class="col-md-12">
 		<div class="portlet light">
 			<div class="portlet-body form">

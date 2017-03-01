@@ -34,7 +34,7 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
   // Route::get('/listuser', function () { return view('backend.listuser.index'); });
   // Route::get('/listuser/update', function () { return view('backend.listuser.update'); });
   
-    Route::get('/place/detail', function () { return view('backend.place.detail'); });
+   //Route::get('/place/detail', function () { return view('backend.place.show'); });
     
     Route::resource('listuser','Backend\AdminUserController');
     Route::resource('place','Backend\AdminPlaceController');

@@ -77,16 +77,7 @@ if(isset($data)) {
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label class="control-label col-md-3">เปิดใช้</label>
-								<div class="col-md-4">
-									<select class="form-control" name="admin_role_id">
-								<option value="{{$status}}"></option>
-				                <option value="">available</option>
-				                <option value="" >not available</option>                            
-				               </select>
-								</div>
-							</div>
+							
 						</div>
 
 						<hr>

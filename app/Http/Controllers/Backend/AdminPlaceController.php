@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
 use App\Models\PlaceVoucher;
+use App\Models\Package;
 use DB;
 use Input;
 use Hash;
@@ -50,19 +51,6 @@ class AdminPlaceController extends Controller
         $obj_modelplace = $this->obj_modelplace;
         $obj_modeluser = $this->obj_modeluser;
 
-
-        //$obj_modelplace = $this->obj_modelplace;
-       
-
-
-        //$input = $request->all(); // Get all post from form
-        // $input['password'] = Hash::make($request->password);
-
-        //$dataplace = $obj_modelplace->create();
-       // $dataplace1 = $dataplace->get();
-        //$this->modeluser = 'App\Models\Place_User';
-        //$this->obj_modeluser = new $this->modeluser; 
-        //$dataplace2  = $this->obj_modeluser ;
 
         $path = $this->path;
         $page_title = $this->page_title;
@@ -171,21 +159,25 @@ class AdminPlaceController extends Controller
     // ------------------------------------ Show Data : ID
     public function show($id)
     {
-
+    
     }
     // ------------------------------------ View Update Page
-    public function edit($id)
-    {
+    public function edit($id){
         $this->model = 'App\Models\Place';
-        $this->obj_modelplace = new $this->model;
+        $this->obj_modelplace = new $this->model;      
+      
+
 
         $obj_fn = $this->obj_fn;
         $obj_modelplace = $this->obj_modelplace;
+      
 
         $page_title = $this->page_title;
         $url_to = $this->path.'/'.$id;
         $method = 'PUT';
         $txt_manage = 'Update';
+
+
 
         $data = $obj_modelplace->find($id);
 
@@ -194,9 +186,16 @@ class AdminPlaceController extends Controller
                 ->join('user', 'user.user_id', '=', 'user_place.user_id')
                 ->join('place', 'place.place_id', '=', 'user_place.place_id')
                 ->get();
+        $data_package = DB::table('package')->where('place_id',$id)->get();
+        $package_count = DB::table('package')->count();
 
-        return view($this->view_path.'update',compact('page_title','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
+        return view($this->view_path.'detail',compact('page_title','package_count','data_package','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
     }
+
+
+
+   
+
     // ------------------------------------ Record Update Data
     public function update(Request $request,$id)
     {

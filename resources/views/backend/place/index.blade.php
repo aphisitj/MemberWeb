@@ -84,9 +84,8 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
 
                   <td>{{ $field->fee_percent }}</td>
                   <td>{{ $field->status }}</td>
-                  <td><a href="{{ url()->to($path.'/detail') }}">Detail !!</a></td>
-                  <td class="text-center">
-                    <a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>
+                  <td><a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}">Detail !!</a></td>
+                  <td class="text-center">                    
                       <form action="{{ url()->to($path.'/'.$field->$primaryKey) }}" class="form-delete" parent-data-id="{{ $field->$primaryKey }}" method="POST" >
                         <input type="hidden" name="_method" value="delete">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">

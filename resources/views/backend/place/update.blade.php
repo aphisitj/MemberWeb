@@ -1,7 +1,7 @@
 <?php
-$table = $obj_model->table;
-$primaryKey = $obj_model->primaryKey;
-$fillable = $obj_model->fillable;
+$table = $obj_modelplace->table;
+$primaryKey = $obj_modelplace->primaryKey;
+$fillable = $obj_modelplace->fillable;
 
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);

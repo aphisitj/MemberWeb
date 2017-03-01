@@ -1,7 +1,7 @@
 <?php
-$table = $obj_model->table;
-$primaryKey = $obj_model->primaryKey;
-$fillable = $obj_model->fillable;
+$table = $obj_modelplace->table;
+$primaryKey = $obj_modelplace->primaryKey;
+$fillable = $obj_modelplace->fillable;
 
 $order_by = Input::get('order_by');
 $sort_by = Input::get('sort_by');
@@ -10,6 +10,7 @@ $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
 $a_param_sort = Input::except(['order_by','sort_by']);
 $str_param_sort = $obj_fn->parameter($a_param_sort);
+
 
 ?>
 @extends('backend.layout.main-layout') 
@@ -25,6 +26,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
 @endsection
 @section('page-content')
 <div class="col-md-12">
+
   <div class="portlet light">
     <div class="form-search">
       <form action="{{ url()->to($path) }}" class="form-horizontal" method="GET">

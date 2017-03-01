@@ -18,13 +18,18 @@ class AdminPlaceController extends Controller
     public function __construct()
     {
         // $this->model = 'App\Models\Admin'; // Model
-        $this->model = 'App\Models\Place';
-        $this->obj_model = new $this->model; // Obj Model
+        $this->modelplace = 'App\Models\Place';
+        $this->obj_modelplace = new $this->modelplace; // Obj Model
+        $this->modeluser = 'App\Models\User';
+        $this->obj_modeluser = new $this->modeluser;
+        $this->modelplaceuser = 'App\Models\Place_User';
+        $this->obj_modelplaceuser = new $this->modelplaceuser;
+
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'Place'; // Page Title
         $this->a_search = ['place_id','place_name','address','status','img',
-                            'facility','service','type','phone','fee_percent']; // Array Search
+                            'facility','service','type','mobile','fee_percent']; // Array Search
         $this->path = '_admin/place'; // Url Path
         $this->view_path = 'backend.place.'; // View Path
 
@@ -36,17 +41,35 @@ class AdminPlaceController extends Controller
     // ------------------------------------ Show All List Page
     public function index()
     {
-        $this->model = 'App\Models\Place';
-        $this->obj_model = new $this->model; // Obj Model
+        $this->modelplace = 'App\Models\Place';
+        $this->obj_modelplace = new $this->modelplace;
+        $this->modeluser = 'App\Models\User';
+        $this->obj_modeluser = new $this->modeluser;
+         // Obj Model
         $obj_fn = $this->obj_fn;
-        $obj_model = $this->obj_model;
+        $obj_modelplace = $this->obj_modelplace;
+        $obj_modeluser = $this->obj_modeluser;
+
+
+        //$obj_modelplace = $this->obj_modelplace;
+       
+
+
+        //$input = $request->all(); // Get all post from form
+        // $input['password'] = Hash::make($request->password);
+
+        //$dataplace = $obj_modelplace->create();
+       // $dataplace1 = $dataplace->get();
+        //$this->modeluser = 'App\Models\Place_User';
+        //$this->obj_modeluser = new $this->modeluser; 
+        //$dataplace2  = $this->obj_modeluser ;
 
         $path = $this->path;
         $page_title = $this->page_title;
         $per_page = config()->get('constants.PER_PAGE');
 
         $order_by = Input::get('order_by');
-        if(empty($order_by)) $order_by = $obj_model->primaryKey;
+        if(empty($order_by)) $order_by = $obj_modelplace->primaryKey;
         $sort_by = Input::get('sort_by');
         if(empty($sort_by)) $sort_by = 'desc';
 
@@ -57,7 +80,7 @@ class AdminPlaceController extends Controller
         
         
         // $data = $this->obj_model;
-        $data = $obj_model;
+        $data = $obj_modelplace;
                     
                          
         if(!empty($search))
@@ -73,7 +96,7 @@ class AdminPlaceController extends Controller
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
 
-        return view($this->view_path.'index',compact('page_title','count_data','data','path','obj_model','obj_fn'));
+        return view($this->view_path.'index',compact('page_title','count_data','data','path','obj_modelplace','obj_fn'));
     }
     // ------------------------------------ View Add Page
     public function create()
@@ -81,7 +104,8 @@ class AdminPlaceController extends Controller
 
 
         $obj_fn = $this->obj_fn;
-        $obj_model = $this->obj_model;
+        $obj_modelplace = $this->obj_modelplace;
+        $obj_modeluser = $this->obj_modeluser;
         $page_title = $this->page_title;
         $url_to = $this->path;
         $method = 'POST';
@@ -97,25 +121,51 @@ class AdminPlaceController extends Controller
 
 
 
-        return view($this->view_path.'create',compact('page_title','url_to','method','txt_manage','obj_model','user_model','obj_fn','roles'));
+        return view($this->view_path.'create',compact('page_title','url_to','method','txt_manage','obj_modeluser','obj_modelplace','user_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Data
     public function store(Request $request)
     {
-        $obj_model = $this->obj_model;
+        $obj_modelplace = $this->obj_modelplace;
+        $obj_modeluser = $this->obj_modeluser;
+        $obj_modelplaceuser = $this->obj_modelplaceuser;
+
 
         $input = $request->all(); // Get all post from form
         // $input['password'] = Hash::make($request->password);
 
-        $data = $obj_model->create($input);
-        
-        $this->model = 'App\Models\User';
-        $this->obj_model = new $this->model;
-        $data->password = $request->password;
-        $data->email = $request->email;
-        $data->firstname = $request->firstname;
-        $data->mobile = $request->phone;
-        $data->save();
+        $dataplace = $obj_modelplace->create($input);
+        $datauser = $obj_modeluser->create($input);
+        //$dataplaceuser = $obj_modelplaceuser->create($input);
+
+
+
+        //$this->modelplaceuser = 'App\Models\Place_User';
+        //$this->obj_modelplaceuser = new $this->modelplaceuser;        
+        //$dataplaceuser->user_id = $datauser->get('user_id');
+        //$dataplaceuser->place_id = $dataplace->get('place_id') ;      
+        //$dataplaceuser->save();
+
+        $this->modeluser = 'App\Models\User';
+        $this->obj_modeluser = new $this->modeluser;        
+        $datauser->firstname = $request->firstname;
+        $datauser->lastname = $request->lastname;
+        $datauser->email = $request->email; 
+        $datauser['password'] = Hash::make($request->password);   
+        $datauser->mobile = $request->mobile;
+        $datauser->save();
+
+
+
+        $this->modelplace = 'App\Models\Place';
+        $this->obj_modelplace = new $this->modelplace;        
+        $dataplace->place_name = $request->place_name;
+        $dataplace->place_type = $request->placetype;
+        //$data->email = $request->email;    
+        $dataplace->mobile = $request->mobile;
+        $dataplace->save();
+
+
         return redirect()->to($this->path);
     }
     // ------------------------------------ Show Data : ID
@@ -127,17 +177,17 @@ class AdminPlaceController extends Controller
     public function edit($id)
     {
         $this->model = 'App\Models\Place';
-        $this->obj_model = new $this->model;
+        $this->obj_modelplace = new $this->model;
 
         $obj_fn = $this->obj_fn;
-        $obj_model = $this->obj_model;
+        $obj_modelplace = $this->obj_modelplace;
 
         $page_title = $this->page_title;
         $url_to = $this->path.'/'.$id;
         $method = 'PUT';
         $txt_manage = 'Update';
 
-        $data = $obj_model->find($id);
+        $data = $obj_modelplace->find($id);
 
         // $roles = Place::all();
         $roles = DB::table('user_place')
@@ -145,17 +195,17 @@ class AdminPlaceController extends Controller
                 ->join('place', 'place.place_id', '=', 'user_place.place_id')
                 ->get();
 
-        return view($this->view_path.'update',compact('page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
+        return view($this->view_path.'update',compact('page_title','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
     }
     // ------------------------------------ Record Update Data
     public function update(Request $request,$id)
     {
-        $obj_model = $this->obj_model;
+        $obj_modelplace = $this->obj_modelplace;
 
         $input = $request->except(['_token','_method','str_param']); // Get all post from form
         $input['password'] = Hash::make($request->password);
 
-        $data = $obj_model->find($id)->update($input);
+        $data = $obj_modelplace->find($id)->update($input);
 
         $str_param = $request->str_param;
         return redirect()->to($this->path.'?1'.$str_param);
@@ -164,8 +214,8 @@ class AdminPlaceController extends Controller
     public function destroy($id)
     {
         session()->put('ref_url',url()->previous());
-        $obj_model = $this->obj_model;
-        $obj_model->find($id)->delete();
+        $obj_modelplace = $this->obj_modelplace;
+        $obj_modelplace->find($id)->delete();
 
         return redirect()->to(session()->get('ref_url'));
     }

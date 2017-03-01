@@ -107,6 +107,7 @@
 
 </div>
 @endsection @section('page-plugin') 
+
 {{ Html::script('assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }} 
 {{ Html::script('assets/global/plugins/jquery-validation/js/additional-methods.min.js') }} 
 {{ Html::script('assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')}} 

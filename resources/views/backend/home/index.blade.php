@@ -59,7 +59,8 @@
                     </div>
               </div>
 
-              <div class="portlet light animated flipInY col-md-3">
+    <div >
+                   <div class="portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Popular<small>place</small></h2>
@@ -122,7 +123,7 @@
                 </div>
               </div>
 
-              <div class="portlet light animated flipInY col-md-3">
+              <div class="portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Popular<small>package</small></h2>
@@ -183,7 +184,8 @@
                     
                   </div>
                 </div>
-              </div>  
+              </div>
+    </div>>
  
 
     </div>

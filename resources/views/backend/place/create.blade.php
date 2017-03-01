@@ -1,7 +1,9 @@
 <?php
-$table = $obj_model->table;
-$primaryKey = $obj_model->primaryKey;
-$fillable = $obj_model->fillable;
+$table = $obj_modelplace->table;
+$primaryKey = $obj_modelplace->primaryKey;
+$fillable = $obj_modelplace->fillable;
+
+
 
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
@@ -33,6 +35,8 @@ if(isset($data)) {
 	{{ $txt_manage.' '.$page_title }}
 	@endsection 
 	@section('page-content')
+
+	dd($dataplace);
 	<div class="col-md-12">
 		<div class="portlet light">
 			<div class="portlet-body form">
@@ -48,10 +52,42 @@ if(isset($data)) {
 						<div class="form-group">
 							<label class="control-label col-md-3">Place name</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" name="place_name" value="{{$place_name}}">
+								<input type="text" class="form-control" name="place_name" value="">
 							</div>
-						</div>
+						</div>						
 
+						<div class="form-group">
+							<label class="control-label col-md-3">Type</label>
+							<div class="col-md-4">
+								<select class="form-control" name="placetype" id="placetype">
+					                <option value="1">Hotel</option>
+					                <option value="2" >Restaurant</option>
+                            	</select>
+							</div>
+						</div>		
+
+						<div class="control-label col-md-3">					        
+					        <span class="caption-subject font-green-sharp bold">User</span>
+					      </div>
+
+
+					 	<div class="form-group">						
+						</div>
+					     
+
+
+					      <div class="form-group">
+						<label class="control-label col-md-3">Fristname</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" name="firstname" value="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">lastname</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" name="lastname" value="">
+						</div>
+					</div>
 						<div class="form-group">
 							<label class="control-label col-md-3">Email</label>
 							<div class="col-md-4">
@@ -62,44 +98,16 @@ if(isset($data)) {
 						<div class="form-group">
 							<label class="control-label col-md-3">Phone</label>
 							<div class="col-md-4">
-								<input type="tel" class="form-control" name="phone" value="">
+								<input type="tel" max="10" class="form-control" name="mobile" value="">
 							</div>
 						</div>
-
-						<div class="form-group">
-							<label class="control-label col-md-3">Type</label>
-							<div class="col-md-4">
-								<select class="form-control" name="type">
-									<option value=""></option>
-					                <option value="Hotel">Hotel</option>
-					                <option value="Restaurant" >Restaurant</option>
-                            	</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">Fee_percent</label>
-							<div class="col-md-9">
-								<div class="input-inline input-medium">
-									<input class="form-control touchspin" type="text" value="" name="fee_percent">
-								</div>
-							</div>
-						</div>
-
 						<div class="form-group last password-strength">
 							<label class="control-label col-md-3">Password</label>
 							<div class="col-md-4">
 								<input type="password" class="form-control" name="password" value="">
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">เปิดใช้</label>
-							<div class="col-md-4">
-							<select class="form-control" name="status">							
-					                <option value="Available">Available</option>
-					                <option value="Not Available" >Not Available</option>                           
-			                </select>
-							</div>
-						</div>
+						
 
 					<hr>
 					<div class="form-actions">
@@ -117,6 +125,7 @@ if(isset($data)) {
 
 	</div>
 	@endsection @section('page-plugin') 
+	
 	{{ Html::script('assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}
 	{{ Html::script('assets/global/plugins/jquery-validation/js/additional-methods.min.js') }}
 	{{ Html::script('assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')	}} 

@@ -56,7 +56,6 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                 <th>{!! $obj_fn->sorting('Name','name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th>{!! $obj_fn->sorting('Email','email',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th>{!! $obj_fn->sorting('Phone','phone',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-                <th>{!! $obj_fn->sorting('Status','status',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th>{!! $obj_fn->sorting('Checkorders','checkorders',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th class="text-center col-sm-2 col-md-2">
                   <a href="{{ url()->to($path.'/create') }}" class="btn btn-circle blue btn-xs"><i class="fa fa-plus"></i> Add</a>
@@ -64,19 +63,21 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
               </tr>
             </thead>
             <tbody>
-              @if($count_data > 0) @foreach($data as $key => $field)
+              @if($count_data > 0)
+               @foreach($data as $key => $field)
               <tr>
                 <td class="text-center">{{ $field->$primaryKey }}</td>
                 <td>{{ $field->firstname }}</a>
                 </td>
                 <!--  <td>{{ $field->lastname }}</td> -->
                 <td>{{ $field->email }}</td>
-                <td>{{ $field->mobile }}</td>
-                <td>{{ $field->status }}</td>
+                <td>{{ $field->mobile }}</td>                
                 <td><a>Orders !!</a></td>
                 <td class="text-center">
                   <a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>
-                  <form action="" class="form-delete" parent-data-id="{{ $field->$primaryKey }}" method="POST">
+
+                  
+                  <form action="{{ url()->to($path.'/'.$field->$primaryKey) }}" class="form-delete" parent-data-id="{{ $field->$primaryKey }}" method="POST">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button type="button" class="btn btn-xs btn-circle red btn-delete" data-id="{{ $field->$primaryKey }}"><i class="fa fa-trash-o"></i></button>

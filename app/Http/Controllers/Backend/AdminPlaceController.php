@@ -124,35 +124,38 @@ class AdminPlaceController extends Controller
 
         $dataplace = $obj_modelplace->create($input);
         $datauser = $obj_modeluser->create($input);
-        //$dataplaceuser = $obj_modelplaceuser->create($input);
+        $dataplaceuser = $obj_modelplaceuser->create($input);
 
 
 
-        //$this->modelplaceuser = 'App\Models\Place_User';
-        //$this->obj_modelplaceuser = new $this->modelplaceuser;        
-        //$dataplaceuser->user_id = $datauser->get('user_id');
-        //$dataplaceuser->place_id = $dataplace->get('place_id') ;      
-        //$dataplaceuser->save();
 
         $this->modeluser = 'App\Models\User';
         $this->obj_modeluser = new $this->modeluser;        
         $datauser->firstname = $request->firstname;
         $datauser->lastname = $request->lastname;
-        $datauser->email = $request->email; 
+        $datauser->email = $request->email;
+        $dataverify = str_random(30);
+        $datauser->verify_email = $dataverify ;
         $datauser['password'] = Hash::make($request->password);   
         $datauser->mobile = $request->mobile;
         $datauser->save();
-
+        
 
 
         $this->modelplace = 'App\Models\Place';
         $this->obj_modelplace = new $this->modelplace;        
         $dataplace->place_name = $request->place_name;
         $dataplace->place_type = $request->placetype;
-        //$data->email = $request->email;    
         $dataplace->mobile = $request->mobile;
         $dataplace->save();
 
+
+
+        $this->modelplaceuser = 'App\Models\Place_User';
+        $this->obj_modelplaceuser = new $this->modelplaceuser;                
+        $dataplaceuser->user_id = $datauser->user_id;
+        $dataplaceuser->place_id = $dataplace->place_id ;      
+        $dataplaceuser->save();
 
         return redirect()->to($this->path);
     }
@@ -186,10 +189,12 @@ class AdminPlaceController extends Controller
                 ->join('user', 'user.user_id', '=', 'user_place.user_id')
                 ->join('place', 'place.place_id', '=', 'user_place.place_id')
                 ->get();
+
+        $path = $this->path;
         $data_package = DB::table('package')->where('place_id',$id)->get();
         $package_count = DB::table('package')->count();
 
-        return view($this->view_path.'detail',compact('page_title','package_count','data_package','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
+        return view($this->view_path.'detail',compact('path','page_title','package_count','data_package','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
     }
 
 

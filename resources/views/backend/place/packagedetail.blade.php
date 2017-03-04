@@ -1,7 +1,7 @@
  <?php
-$table = $obj_modelplace->table;
-$primaryKey = $obj_modelplace->primaryKey;
-$fillable = $obj_modelplace->fillable;
+$table = $obj_modelpackage->table;
+$primaryKey = $obj_modelpackage->primaryKey;
+$fillable = $obj_modelpackage->fillable;
 
 
 
@@ -42,38 +42,38 @@ if(isset($data)) {
             
               <td class="text-left col-sm-6 col-md-6">
               
-                <h2>{{$place_name}}</h2>
+                <h2>{{$package_name}}</h2>
                 <hr>
 
-                <h4>สถานที่ตั้ง</h4> 
+                <h4>Detail</h4> 
 
-                @if( $address === NULL)
+                @if( $detail === NULL)
                   <p> - </p>
                 @else
                   <p>
-                   {{$address}}
+                   {{$detail}}
                   </p>
                 @endif
 
 
-                <h4>สิ่งอำนวยความสะดวก</h4>
+                <h4>Price</h4>
 
-                @if( $service === NULL)
+                @if( $price === NULL)
                   <p> - </p>
                 @else
                   <p>
-                   {{$service}}
+                   {{$price}}
                   </p>
                 @endif
 
-                <h4>บริการที่มีอยู่</h4>
+                <h4>Fee</h4>
                               
-                @if( $facility === NULL)
+                @if( $fee === NULL)
                   <p> - </p>
                 @else
                   <p>
-                   {{$facility}}
-                  </p>
+                   {{$fee}}
+                  %</p>
                 @endif
               </td>
 
@@ -111,7 +111,7 @@ if(isset($data)) {
     <div class="portlet-title">
       <div class="caption">
         <i class="fa fa-database font-green-sharp"></i>
-        <span class="caption-subject font-green-sharp bold">Found {{$package_count}} Record(s).</span>
+        <span class="caption-subject font-green-sharp bold">Found {{$voucher_count}} Record(s).</span>
       </div>
     </div>
     <div class="portlet-body">
@@ -120,24 +120,24 @@ if(isset($data)) {
           <thead>
 
             <tr>
-              <th>Package id</th>
-              <th>Package name</th>
+              <th>Voucher id</th>
+              <th>Voucher name</th>
               <th>Price</th>             
               <th>Fee Amount</th>
-              <th>Detail</th>            
+                        
             </tr>
 
           </thead>
 
           <tbody>
-            @if($package_count > 0)
-              @foreach($data_package as $key => $field)
+            @if($voucher_count > 0)
+              @foreach($data_voucher as $key => $field)
                 <tr>
-                  <td class="text-center">{{ $field->package_id }}</td>                
-                  <td>{{ $field->package_name }}</td>
-                  <td>{{ $field->price }}</td>
-                  <td>{{ $field->fee }}%</td>
-                  <td><a href="{{ url()->to($path.'/package/'.$field->package_id.'/edit?1'.$str_param) }}">Detail!!</a></td>
+                  <td class="text-center">{{ $field->$primaryKey }}</td>                  
+                  <td>{{ $field->voucher_name }}</td>
+                  <td>{{ $field->detail_short }}</td>
+                  <td>{{ $field->description }}%</td>
+                  
                 </tr>
               @endforeach
                 @else

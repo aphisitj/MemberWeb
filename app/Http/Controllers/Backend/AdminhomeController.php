@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Library\MainFunction;
-
+use Mail;
 use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
@@ -59,7 +59,7 @@ class AdminhomeController extends Controller
         $data_place = $obj_place;            
         $data_package = $obj_package;                  
         $data_orders = $obj_orders;
-
+        
 
         $count_data = $data->count();
         $count_place = $data_place->count();
@@ -70,9 +70,11 @@ class AdminhomeController extends Controller
 
 
 
+
         $data = $data->paginate($per_page);
         
-        return view($this->view_path.'index',compact('page_title','sum_price','sum_fee','count_orders','count_package','count_place','count_data','data','path','obj_model','obj_fn'));
+        return view($this->view_path.'index',compact('page_title',
+            'sum_price','sum_fee','count_orders','count_package','count_place','count_data','data','path','obj_model','obj_fn'));
     }
     
 }

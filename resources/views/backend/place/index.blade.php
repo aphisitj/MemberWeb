@@ -74,7 +74,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
               @foreach($data as $key => $field)
                 <tr>
                   <td class="text-center">{{ $field->$primaryKey }}</td>
-                  <td><a href="{{ url()->to($path.'/detail') }}">{{ $field->place_name }}</a></td>
+                  <td><a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}">{{ $field->place_name }}</a></td>
                   
                   @if ($field->place_type === 1 )
                   <td>Hotel</td>
@@ -85,7 +85,10 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                   <td>{{ $field->fee_percent }}</td>
                   <td>{{ $field->status }}</td>
                   <td><a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}">Detail !!</a></td>
-                  <td class="text-center">                    
+                  <td class="text-center">      
+
+
+                                
                       <form action="{{ url()->to($path.'/'.$field->$primaryKey) }}" class="form-delete" parent-data-id="{{ $field->$primaryKey }}" method="POST" >
                         <input type="hidden" name="_method" value="delete">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">

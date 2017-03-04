@@ -92,11 +92,15 @@ class AdminUserController extends Controller
     public function store(Request $request)
     {
         $obj_model = $this->obj_model;
+       
 
         $input = $request->all(); // Get all post from form
         $input['password'] = Hash::make($request->password);
-
+    
         $data = $obj_model->create($input);
+        $dataverify = str_random(30);
+        $data->verify_email = $dataverify;
+        $data->save();
 
         return redirect()->to($this->path);
     }

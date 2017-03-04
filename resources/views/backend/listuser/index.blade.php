@@ -72,7 +72,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                 <!--  <td>{{ $field->lastname }}</td> -->
                 <td>{{ $field->email }}</td>
                 <td>{{ $field->mobile }}</td>                
-                <td><a>Orders !!</a></td>
+                <td><a href="{{ url()->to($path.'/order/'.$field->$primaryKey .'/edit?1'.$str_param) }}">Orders !!</a></td>
                 <td class="text-center">
                   <a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>
 

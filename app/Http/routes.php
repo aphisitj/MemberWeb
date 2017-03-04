@@ -37,6 +37,7 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
    //Route::get('/place/detail', function () { return view('backend.place.show'); });
     
     Route::resource('listuser','Backend\AdminUserController');
+    Route::resource('listuser/order','Backend\AdminOrderDetailController');    
     Route::resource('place','Backend\AdminPlaceController');
     Route::resource('place/package','Backend\AdminPackageDetailController');
     Route::resource('/','Backend\AdminhomeController');

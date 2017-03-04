@@ -1,7 +1,7 @@
  <?php
-$table = $obj_modelpackage->table;
-$primaryKey = $obj_modelpackage->primaryKey;
-$fillable = $obj_modelpackage->fillable;
+$table = $obj_modeluser->table;
+$primaryKey = $obj_modeluser->primaryKey;
+$fillable = $obj_modeluser->fillable;
 
 
 
@@ -18,6 +18,7 @@ if(isset($data)) {
         $$value = "";
     }
 }
+//dd($data_order);
 ?>
 @extends('backend.layout.main-layout') 
  @section('page-style') 
@@ -42,39 +43,30 @@ if(isset($data)) {
             
               <td class="text-left col-sm-6 col-md-6">
               
-                <h2>{{$package_name}}</h2>
+                <h2>{{$firstname}}  {{$lastname}} </h2>
                 <hr>
 
-                <h4>Detail</h4> 
+                <h4>Email</h4> 
 
-                @if( $detail === NULL)
+                @if( $email === NULL)
                   <p> - </p>
                 @else
                   <p>
-                   {{$detail}}
+                   {{$email}}
                   </p>
                 @endif
 
 
-                <h4>Price</h4>
+                <h4>Mobile</h4>
 
-                @if( $price === NULL)
+                @if( $mobile === NULL)
                   <p> - </p>
                 @else
                   <p>
-                   {{$price}}
+                   {{$mobile}}
                   </p>
                 @endif
-
-                <h4>Fee</h4>
-                              
-                @if( $fee === NULL)
-                  <p> - </p>
-                @else
-                  <p>
-                   {{$fee}}
-                  %</p>
-                @endif
+               
               </td>
 
 
@@ -96,7 +88,7 @@ if(isset($data)) {
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="">
-            <span class="help-block">Search by Package Id, Package name</span>
+            <span class="help-block">Search by Orders id</span>
           </div>
         </div>
         <div class="form-group">
@@ -111,7 +103,7 @@ if(isset($data)) {
     <div class="portlet-title">
       <div class="caption">
         <i class="fa fa-database font-green-sharp"></i>
-        <span class="caption-subject font-green-sharp bold">Found {{$voucher_count}} Record(s).</span>
+        <span class="caption-subject font-green-sharp bold">Found {{$order_count}} Record(s).</span>
       </div>
     </div>
     <div class="portlet-body">
@@ -120,27 +112,27 @@ if(isset($data)) {
           <thead>
 
             <tr>
-              <th>Voucher id</th>
-              <th>Voucher name</th>
-              <th>Price</th>             
-              <th>Fee Amount</th>
+              <th>Orders id</th>
+              <th>Price total</th>
+              <th>fee total</th>
+              <th>Quantity</th>             
+              <th>Used</th>
                         
             </tr>
 
           </thead>
 
           <tbody>
-            @if($voucher_count > 0)
-              @foreach($data_voucher as $key => $field)
+            @if($order_count > 0)
+              @foreach($data_order as $key => $field)
+              
                 <tr>
-                  <td class="text-center">{{ $field->$primaryKey }}</td>                  
-                  <td>{{ $field->voucher_name }}</td>
-                  <td>{{ $field->detail_short }}</td>
-                  <td>{{ $field->description }}%</td>
-                  <?php
-
-dd($field);
-?>
+                  <td class="text-center">{{$field->order_id}}</td>                  
+                  <td>{{$field->price_total}}</td>
+                  <td>{{$field->fee_total}}</td>
+                  <td>{{$field->quantity}}</td>
+                  <td>{{$field->used}}</td>
+      
                 </tr>
               @endforeach
                 @else

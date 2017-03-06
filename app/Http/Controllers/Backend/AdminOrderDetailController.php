@@ -34,6 +34,7 @@ class AdminOrderDetailController extends Controller
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'Orders'; // Page Title
+        $this->a_search = ['order_id']; // Array Search
         $this->path = '_admin/listuser/order'; // Url Path
         $this->view_path = 'backend.listuser.'; // View Path
 
@@ -66,12 +67,13 @@ class AdminOrderDetailController extends Controller
     public function edit($id){
         $this->modeluser = 'App\Models\User';
         $this->obj_modeluser = new $this->modeluser;      
-      
+        $this->modelorders = 'App\Models\Orders';
+        $this->obj_modelorders = new $this->modelorders; 
 
 
         $obj_fn = $this->obj_fn;
         $obj_modeluser = $this->obj_modeluser;
-      
+        $obj_modelorders  = $this->obj_modelorders ;
 
         $page_title = $this->page_title;
         $url_to = $this->path.'/'.$id;
@@ -79,31 +81,47 @@ class AdminOrderDetailController extends Controller
         $txt_manage = 'Detail';
 
 
-
+        $dataorders = $obj_modelorders->Where('user_id',$id) ;
         $data = $obj_modeluser->find($id);
 
+        if(empty($order_by)) $order_by = $obj_modelorders->primaryKey;
+        $sort_by = Input::get('sort_by');
+        if(empty($sort_by)) $sort_by = 'desc';
+         $search = Input::get('search');
 
+        if(!empty($search)) {
+            $dataorders  = $dataorders->where(function($query) use ($search){
+               foreach($this->a_search as $field)
+               {
+                   $query = $query->orWhere($field,'like','%'.$search.'%');
+               }
+            });
+        }
+        $per_page = config()->get('constants.PER_PAGE');
+        $dataorders = $dataorders->orderBy($order_by,$sort_by);
+        $dataorders = $dataorders->paginate($per_page);
+        $order_count = $dataorders->count();
 
-        $data_order = DB::table('orders')
-            ->join('order_package', 'orders.order_id', '=', 'order_package.order_package_id')
-            ->join('order_voucher', 'order_package.order_package_id', '=', 'order_voucher.order_voucher_id')
-            ->select('orders.*', 'order_package.*','order_voucher.*')
-            ->Where('orders.user_id',$id)                      
-            ->get();
+        // $data_order = DB::table('orders')
+        //     ->join('order_package', 'orders.order_id', '=', 'order_package.order_package_id')
+        //     ->join('order_voucher', 'order_package.order_package_id', '=', 'order_voucher.order_voucher_id')
+        //     ->select('orders.*', 'order_package.*','order_voucher.*')
+        //     ->Where('orders.user_id',$id)                      
+        //     ->get();
 
         $datauser = DB::table('orders')
             ->Where('user_id',$id)
             ->get();
-        $order_count = DB::table('orders')
-            ->join('order_package', 'orders.order_id', '=', 'order_package.order_package_id')
-            ->join('order_voucher', 'order_package.order_package_id', '=', 'order_voucher.order_voucher_id')
-            ->select('orders.user_id', 'order_package.*')
-            ->Where('orders.user_id',$id) 
-            ->count();
+        // $order_count = DB::table('orders')
+        //     ->join('order_package', 'orders.order_id', '=', 'order_package.order_package_id')
+        //     ->join('order_voucher', 'order_package.order_package_id', '=', 'order_voucher.order_voucher_id')
+        //     ->select('orders.user_id', 'order_package.*')
+        //     ->Where('orders.user_id',$id) 
+        //     ->count();
       
         
 
-        return view($this->view_path.'order',compact('page_title','data','data_order','order_count','datauser','url_to','method','txt_manage','obj_modeluser','obj_fn'));
+        return view($this->view_path.'order',compact('page_title','data','data_order','dataorders','order_count','datauser','url_to','method','txt_manage','obj_modeluser','obj_fn'));
     }
 
 

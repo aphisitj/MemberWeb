@@ -3,11 +3,14 @@ $table = $obj_modelpackage->table;
 $primaryKey = $obj_modelpackage->primaryKey;
 $fillable = $obj_modelpackage->fillable;
 
+$order_by = Input::get('order_by');
+$sort_by = Input::get('sort_by');
 
 
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
-
+$a_param_sort = Input::except(['order_by','sort_by']);
+$str_param_sort = $obj_fn->parameter($a_param_sort);
 
 if(isset($data)) {
     foreach($fillable as $value){
@@ -95,8 +98,8 @@ if(isset($data)) {
         <div class="form-group">
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
-            <input class="form-control" type="text" name="search" value="">
-            <span class="help-block">Search by Package Id, Package name</span>
+            <input class="form-control" type="text" name="search" value="{{ Input::get('search') }}">
+            <span class="help-block">Search by VoucherId, Voucher name</span>
           </div>
         </div>
         <div class="form-group">
@@ -120,10 +123,10 @@ if(isset($data)) {
           <thead>
 
             <tr>
-              <th>Voucher id</th>
-              <th>Voucher name</th>
-              <th>Price</th>             
-              <th>Fee Amount</th>
+              <th>{!! $obj_fn->sorting('Voucher id','voucher_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Voucher Name','voucher_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Detail','detail_short',$order_by,$sort_by,$str_param_sort,'') !!}</th>        
+              <th>{!! $obj_fn->sorting('Description','description',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                         
             </tr>
 
@@ -131,16 +134,13 @@ if(isset($data)) {
 
           <tbody>
             @if($voucher_count > 0)
-              @foreach($data_voucher as $key => $field)
+              @foreach($datavoucher as $key => $field)
                 <tr>
                   <td class="text-center">{{ $field->$primaryKey }}</td>                  
                   <td>{{ $field->voucher_name }}</td>
                   <td>{{ $field->detail_short }}</td>
-                  <td>{{ $field->description }}%</td>
-                  <?php
-
-dd($field);
-?>
+                  <td>{{ $field->description }}</td>
+                 
                 </tr>
               @endforeach
                 @else

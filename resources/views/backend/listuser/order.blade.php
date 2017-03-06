@@ -3,11 +3,14 @@ $table = $obj_modeluser->table;
 $primaryKey = $obj_modeluser->primaryKey;
 $fillable = $obj_modeluser->fillable;
 
+$order_by = Input::get('order_by');
+$sort_by = Input::get('sort_by');
 
 
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
-
+$a_param_sort = Input::except(['order_by','sort_by']);
+$str_param_sort = $obj_fn->parameter($a_param_sort);
 
 if(isset($data)) {
     foreach($fillable as $value){
@@ -87,7 +90,7 @@ if(isset($data)) {
         <div class="form-group">
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
-            <input class="form-control" type="text" name="search" value="">
+            <input class="form-control" type="text" name="search" value="{{ Input::get('search') }}">
             <span class="help-block">Search by Orders id</span>
           </div>
         </div>
@@ -112,11 +115,11 @@ if(isset($data)) {
           <thead>
 
             <tr>
-              <th>Orders id</th>
-              <th>Price total</th>
-              <th>fee total</th>
-              <th>Quantity</th>             
-              <th>Used</th>
+              <th>{!! $obj_fn->sorting('Order id','order_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Price total','price_total',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Fee total','fee_total',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Date','date',$order_by,$sort_by,$str_param_sort,'') !!}</th>             
+             
                         
             </tr>
 
@@ -124,14 +127,14 @@ if(isset($data)) {
 
           <tbody>
             @if($order_count > 0)
-              @foreach($data_order as $key => $field)
+              @foreach($dataorders as $key => $field)
               
                 <tr>
                   <td class="text-center">{{$field->order_id}}</td>                  
                   <td>{{$field->price_total}}</td>
                   <td>{{$field->fee_total}}</td>
-                  <td>{{$field->quantity}}</td>
-                  <td>{{$field->used}}</td>
+                  <td>{{$field->date}}</td>
+           
       
                 </tr>
               @endforeach

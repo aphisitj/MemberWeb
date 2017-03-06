@@ -3,8 +3,9 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Library\MainFunction;
 
+use App\Library\MainFunction;
+use Mail;
 use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
@@ -12,6 +13,7 @@ use App\Models\PlaceVoucher;
 use App\Models\Package;
 use DB;
 use Input;
+use Validator;
 use Hash;
 
 class AdminPlaceController extends Controller
@@ -29,8 +31,8 @@ class AdminPlaceController extends Controller
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'Place'; // Page Title
-        $this->a_search = ['place_id','place_name','address','status','img',
-                            'facility','service','type','mobile','fee_percent']; // Array Search
+        $this->a_search = ['package_name','price','fee','package_id']; // Array Search
+        $this->a_searchplace = ['place_id','place_name','mobile','place_type']; // Array Search
         $this->path = '_admin/place'; // Url Path
         $this->view_path = 'backend.place.'; // View Path
 
@@ -74,7 +76,7 @@ class AdminPlaceController extends Controller
         if(!empty($search))
         {
             $data = $data->where(function($query) use ($search){
-               foreach($this->a_search as $field)
+               foreach($this->a_searchplace as $field)
                {
                    $query = $query->orWhere($field,'like','%'.$search.'%');
                }
@@ -118,9 +120,8 @@ class AdminPlaceController extends Controller
         $obj_modeluser = $this->obj_modeluser;
         $obj_modelplaceuser = $this->obj_modelplaceuser;
 
-
-        $input = $request->all(); // Get all post from form
-        // $input['password'] = Hash::make($request->password);
+      
+        $input = $request->all();
 
         $dataplace = $obj_modelplace->create($input);
         $datauser = $obj_modeluser->create($input);
@@ -134,11 +135,13 @@ class AdminPlaceController extends Controller
         $datauser->firstname = $request->firstname;
         $datauser->lastname = $request->lastname;
         $datauser->email = $request->email;
+        $datauser->verification = 1 ;
         $dataverify = str_random(30);
         $datauser->verify_email = $dataverify ;
         $datauser['password'] = Hash::make($request->password);   
         $datauser->mobile = $request->mobile;
         $datauser->save();
+
         
 
 
@@ -157,6 +160,7 @@ class AdminPlaceController extends Controller
         $dataplaceuser->place_id = $dataplace->place_id ;      
         $dataplaceuser->save();
 
+       
         return redirect()->to($this->path);
     }
     // ------------------------------------ Show Data : ID
@@ -168,19 +172,20 @@ class AdminPlaceController extends Controller
     public function edit($id){
         $this->model = 'App\Models\Place';
         $this->obj_modelplace = new $this->model;      
-      
-
+        $this->modelpackage = 'App\Models\Package';
+        $this->obj_modelpackage = new $this->modelpackage; 
+        $obj_modelpackage = $this->obj_modelpackage;
 
         $obj_fn = $this->obj_fn;
         $obj_modelplace = $this->obj_modelplace;
-      
-
+        
+        $per_page = config()->get('constants.PER_PAGE');
         $page_title = $this->page_title;
         $url_to = $this->path.'/'.$id;
         $method = 'PUT';
         $txt_manage = 'Update';
 
-
+        $datapackage = $obj_modelpackage->where('place_id',$id);
 
         $data = $obj_modelplace->find($id);
 
@@ -191,10 +196,30 @@ class AdminPlaceController extends Controller
                 ->get();
 
         $path = $this->path;
-        $data_package = DB::table('package')->where('place_id',$id)->get();
-        $package_count = DB::table('package')->count();
+        
+       
 
-        return view($this->view_path.'detail',compact('path','page_title','package_count','data_package','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
+        $order_by = Input::get('order_by');
+
+
+        if(empty($order_by)) $order_by = $obj_modelpackage->primaryKey;
+        $sort_by = Input::get('sort_by');
+        if(empty($sort_by)) $sort_by = 'desc';
+         $search = Input::get('search');
+
+        if(!empty($search)) {
+            $datapackage = $datapackage->where(function($query) use ($search){
+               foreach($this->a_search as $field)
+               {
+                   $query = $query->orWhere($field,'like','%'.$search.'%');
+               }
+            });
+        }
+
+        $datapackage = $datapackage->orderBy($order_by,$sort_by);
+        $datapackage = $datapackage->paginate($per_page);
+        $package_count = $datapackage->count();
+        return view($this->view_path.'detail',compact('path','page_title','datapackage','package_count','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
     }
 
 

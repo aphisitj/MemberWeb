@@ -23,7 +23,7 @@ class AdminUserController extends Controller
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'List User'; // Page Title
-        $this->a_search = ['firstname','lastname','email','password','mobile','type']; // Array Search
+        $this->a_search = ['user_id','firstname','lastname','email','mobile','type']; // Array Search
         $this->path = '_admin/listuser'; // Url Path
         $this->view_path = 'backend.listuser.'; // View Path
 
@@ -38,6 +38,9 @@ class AdminUserController extends Controller
         $obj_fn = $this->obj_fn;
         $obj_model = $this->obj_model;
 
+        $user = $this->user;
+        $user_id = $this->user_id;
+
         $path = $this->path;
         $page_title = $this->page_title;
         $per_page = config()->get('constants.PER_PAGE');
@@ -49,11 +52,6 @@ class AdminUserController extends Controller
 
         $search = Input::get('search');
 
-        $user = $this->user;
-        $user_id = $this->user_id;
-        
-        
-        // $data = $this->obj_model;
         $data = $obj_model;
                     
                          
@@ -99,6 +97,7 @@ class AdminUserController extends Controller
     
         $data = $obj_model->create($input);
         $dataverify = str_random(30);
+        $data->verification = 1 ;
         $data->verify_email = $dataverify;
         $data->save();
 

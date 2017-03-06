@@ -29,7 +29,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
             <label class="control-label col-md-1">Search</label>
             <div class="col-md-3">
               <input class="form-control" type="text" name="search" value="{{ Input::get('search') }}">
-              <span class="help-block">Search by Name, Username</span>
+              <span class="help-block">Search by Name, Email</span>
             </div>
           </div>
           <div class="form-group">
@@ -53,9 +53,9 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
             <thead>
               <tr>
                 <th class="text-center col-sm-2">{!! $obj_fn->sorting('User ID','firstname',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-                <th>{!! $obj_fn->sorting('Name','name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+                <th>{!! $obj_fn->sorting('Name','firstname',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th>{!! $obj_fn->sorting('Email','email',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-                <th>{!! $obj_fn->sorting('Phone','phone',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+                <th>{!! $obj_fn->sorting('Phone','mobile',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th>{!! $obj_fn->sorting('Checkorders','checkorders',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th class="text-center col-sm-2 col-md-2">
                   <a href="{{ url()->to($path.'/create') }}" class="btn btn-circle blue btn-xs"><i class="fa fa-plus"></i> Add</a>
@@ -67,7 +67,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                @foreach($data as $key => $field)
               <tr>
                 <td class="text-center">{{ $field->$primaryKey }}</td>
-                <td>{{ $field->firstname }}</a>
+                <td>{{ $field->firstname }}  {{ $field->lastname }}</a>
                 </td>
                 <!--  <td>{{ $field->lastname }}</td> -->
                 <td>{{ $field->email }}</td>

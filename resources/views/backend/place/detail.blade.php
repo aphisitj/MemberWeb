@@ -3,11 +3,13 @@ $table = $obj_modelplace->table;
 $primaryKey = $obj_modelplace->primaryKey;
 $fillable = $obj_modelplace->fillable;
 
-
+$order_by = Input::get('order_by');
+$sort_by = Input::get('sort_by');
 
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
-
+$a_param_sort = Input::except(['order_by','sort_by']);
+$str_param_sort = $obj_fn->parameter($a_param_sort);
 
 if(isset($data)) {
     foreach($fillable as $value){
@@ -47,7 +49,7 @@ if(isset($data)) {
 
                 <h4>สถานที่ตั้ง</h4> 
 
-                @if( $address === NULL)
+                @if( $address === '')
                   <p> - </p>
                 @else
                   <p>
@@ -95,7 +97,7 @@ if(isset($data)) {
         <div class="form-group">
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
-            <input class="form-control" type="text" name="search" value="">
+            <input class="form-control" type="text" name="search" value="{{ Input::get('search') }}">
             <span class="help-block">Search by Package Id, Package name</span>
           </div>
         </div>
@@ -120,18 +122,19 @@ if(isset($data)) {
           <thead>
 
             <tr>
-              <th>Package id</th>
-              <th>Package name</th>
-              <th>Price</th>             
-              <th>Fee Amount</th>
-              <th>Detail</th>            
+              <th>{!! $obj_fn->sorting('Package id','package_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Package name','package_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Price','price',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Fee Amount','fee',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Detail','Detail',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+                       
             </tr>
 
           </thead>
 
           <tbody>
             @if($package_count > 0)
-              @foreach($data_package as $key => $field)
+              @foreach($datapackage as $key => $field)
                 <tr>
                   <td class="text-center">{{ $field->package_id }}</td>                
                   <td>{{ $field->package_name }}</td>

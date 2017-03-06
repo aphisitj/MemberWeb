@@ -34,7 +34,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="{{ Input::get('search') }}">
-            <span class="help-block">Search by Name</span>
+            <span class="help-block">Search by Place Name </span>
           </div>
         </div>
         <div class="form-group">
@@ -59,8 +59,8 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
             <tr>
               <th class="text-center col-sm-1">{!! $obj_fn->sorting('ID',$primaryKey,$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th>{!! $obj_fn->sorting('Place Name','place_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Type','type',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Fee percent','fee_percent',$order_by,$sort_by,$str_param_sort,'') !!}</th>              
+              <th>{!! $obj_fn->sorting('Place Type','place_type',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Mobile','mobile',$order_by,$sort_by,$str_param_sort,'') !!}</th>              
               <th>{!! $obj_fn->sorting('Status','status',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th>{!! $obj_fn->sorting('Check Detail','detail',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th class="text-center col-sm-2 col-md-2">
@@ -79,10 +79,10 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                   @if ($field->place_type === 1 )
                   <td>Hotel</td>
                   @else
-                  <td>restaurant</td>
+                  <td>Restaurant</td>
                   @endif
 
-                  <td>{{ $field->fee_percent }}</td>
+                  <td>{{ $field->mobile }}</td>
                   <td>{{ $field->status }}</td>
                   <td><a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}">Detail !!</a></td>
                   <td class="text-center">      

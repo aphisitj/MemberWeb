@@ -30,7 +30,7 @@ class AdminPackageDetailController extends Controller
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'Package'; // Page Title
-        $this->a_search = ['voucher_name','voucher_id']; // Array Search
+        $this->a_search = ['package_name','price','fee','package_id']; // Array Search
         $this->path = '_admin/place/package'; // Url Path
         $this->view_path = 'backend.place.'; // View Path
 
@@ -61,14 +61,14 @@ class AdminPackageDetailController extends Controller
     }
     // ------------------------------------ View Update Page
     public function edit($id){
-        $this->model = 'App\Models\Package';
-        $this->obj_modelpackage = new $this->model;      
-        $this->modelvoucher = 'App\Models\Voucher';
-        $this->obj_modelvoucher = new $this->modelvoucher;  
-
+        $this->model = 'App\Models\Voucher';
+        $this->obj_modelvoucher = new $this->model;      
+        
+        $this->modelpackage = 'App\Models\Package';
+        $this->obj_modelpackage = new $this->modelpackage; 
+        $obj_modelpackage = $this->obj_modelpackage;
 
         $obj_fn = $this->obj_fn;
-        $obj_modelpackage = $this->obj_modelpackage;
         $obj_modelvoucher = $this->obj_modelvoucher;
 
         $page_title = $this->page_title;
@@ -77,17 +77,25 @@ class AdminPackageDetailController extends Controller
         $txt_manage = 'Update';
 
 
-        $datavoucher = $obj_modelvoucher->where('voucher_id',$id);
-        $data = $obj_modelpackage->find($id);
+        $data = $obj_modelvoucher->find($id);
+
+        $datapackage = $obj_modelpackage->where('package_id',$data->package_id);
+        
+        
 
 
-        if(empty($order_by)) $order_by = $obj_modelvoucher->primaryKey;
+       
+        
+        $order_by = Input::get('order_by');
+
+
+        if(empty($order_by)) $order_by = $obj_modelpackage->primaryKey;
         $sort_by = Input::get('sort_by');
         if(empty($sort_by)) $sort_by = 'desc';
          $search = Input::get('search');
 
         if(!empty($search)) {
-            $datavoucher = $datavoucher->where(function($query) use ($search){
+            $datapackage = $datapackage->where(function($query) use ($search){
                foreach($this->a_search as $field)
                {
                    $query = $query->orWhere($field,'like','%'.$search.'%');
@@ -95,16 +103,10 @@ class AdminPackageDetailController extends Controller
             });
         }
         $per_page = config()->get('constants.PER_PAGE');
-        $datavoucher = $datavoucher->orderBy($order_by,$sort_by);
-        $datavoucher = $datavoucher->paginate($per_page);
-
-
-        
-        $data_voucher = DB::table('voucher')->where('package_id',$id)->get();
-        $voucher_count = $datavoucher->count();
-        
-
-        return view($this->view_path.'packagedetail',compact('page_title','voucher_count','datavoucher','data','url_to','method','txt_manage','obj_modelpackage','obj_fn'));
+        $datapackage = $datapackage->orderBy($order_by,$sort_by);
+        $datapackage = $datapackage->paginate($per_page);
+        $package_count = $datapackage->count();
+        return view($this->view_path.'packagedetail',compact('page_title','package_count','datapackage','data','url_to','method','txt_manage','obj_modelvoucher','obj_fn'));
     }
 
 

@@ -21,6 +21,7 @@ if(isset($data)) {
 	@extends('backend.layout.main-layout') 
 
 	@section('page-style') 
+	
 	{{ Html::style('assets/global/plugins/jquery-tags-input/jquery.tagsinput.css') }} 
 	{{ Html::style('assets/global/plugins/select2/select2.css') }} 
 	{{ Html::style('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')	}} 

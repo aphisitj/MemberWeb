@@ -1,7 +1,7 @@
  <?php
-$table = $obj_modelpackage->table;
-$primaryKey = $obj_modelpackage->primaryKey;
-$fillable = $obj_modelpackage->fillable;
+$table = $obj_modelvoucher->table;
+$primaryKey = $obj_modelvoucher->primaryKey;
+$fillable = $obj_modelvoucher->fillable;
 
 $order_by = Input::get('order_by');
 $sort_by = Input::get('sort_by');
@@ -21,6 +21,7 @@ if(isset($data)) {
         $$value = "";
     }
 }
+
 ?>
 @extends('backend.layout.main-layout') 
  @section('page-style') 
@@ -45,39 +46,31 @@ if(isset($data)) {
             
               <td class="text-left col-sm-6 col-md-6">
               
-                <h2>{{$package_name}}</h2>
+                <h2>{{$voucher_name}}</h2>
                 <hr>
 
                 <h4>Detail</h4> 
 
-                @if( $detail === NULL)
+                @if( $detail_short === NULL)
                   <p> - </p>
                 @else
                   <p>
-                   {{$detail}}
+                   {{$detail_short}}
                   </p>
                 @endif
 
 
-                <h4>Price</h4>
+                <h4>Description</h4>
 
-                @if( $price === NULL)
+                @if( $description === NULL)
                   <p> - </p>
                 @else
                   <p>
-                   {{$price}}
+                   {{$description}}
                   </p>
                 @endif
 
-                <h4>Fee</h4>
-                              
-                @if( $fee === NULL)
-                  <p> - </p>
-                @else
-                  <p>
-                   {{$fee}}
-                  %</p>
-                @endif
+                
               </td>
 
 
@@ -90,7 +83,6 @@ if(isset($data)) {
   </div>
 
 
-
 <div class="col-md-12">
   <div class="portlet light">
     <div class="form-search">
@@ -99,7 +91,7 @@ if(isset($data)) {
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="{{ Input::get('search') }}">
-            <span class="help-block">Search by VoucherId, Voucher name</span>
+            <span class="help-block">Search by Package Id, Package name</span>
           </div>
         </div>
         <div class="form-group">
@@ -114,7 +106,7 @@ if(isset($data)) {
     <div class="portlet-title">
       <div class="caption">
         <i class="fa fa-database font-green-sharp"></i>
-        <span class="caption-subject font-green-sharp bold">Found {{$voucher_count}} Record(s).</span>
+        <span class="caption-subject font-green-sharp bold">Found {{$package_count}} Record(s).</span>
       </div>
     </div>
     <div class="portlet-body">
@@ -123,24 +115,24 @@ if(isset($data)) {
           <thead>
 
             <tr>
-              <th>{!! $obj_fn->sorting('Voucher id','voucher_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Voucher Name','voucher_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Detail','detail_short',$order_by,$sort_by,$str_param_sort,'') !!}</th>        
-              <th>{!! $obj_fn->sorting('Description','description',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-                        
+              <th>{!! $obj_fn->sorting('Package id','package_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Package name','package_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Price','price',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Fee Amount','fee',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+            
+                       
             </tr>
 
           </thead>
 
           <tbody>
-            @if($voucher_count > 0)
-              @foreach($datavoucher as $key => $field)
+            @if($package_count > 0)
+              @foreach($datapackage as $key => $field)
                 <tr>
-                  <td class="text-center">{{ $field->$primaryKey }}</td>                  
-                  <td>{{ $field->voucher_name }}</td>
-                  <td>{{ $field->detail_short }}</td>
-                  <td>{{ $field->description }}</td>
-                 
+                  <td class="text-center">{{ $field->package_id }}</td>                
+                  <td>{{ $field->package_name }}</td>
+                  <td>{{ $field->price }}</td>
+                  <td>{{ $field->fee }}%</td>                  
                 </tr>
               @endforeach
                 @else

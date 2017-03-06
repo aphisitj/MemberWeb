@@ -75,7 +75,7 @@
                         <p>1</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Sale 3000 package</a>
+                        <a class="title" href="#">Sale 3000 voucher</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -85,7 +85,7 @@
                         <p>2</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Sale 1500 package</a>
+                        <a class="title" href="#">Sale 1500 voucher</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -95,7 +95,7 @@
                         <p>3</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Sale 890 package</a>
+                        <a class="title" href="#">Sale 890 voucher</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -105,7 +105,7 @@
                         <p>4</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Sale 470 package</a>
+                        <a class="title" href="#">Sale 470 voucher</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -115,7 +115,7 @@
                         <p>5</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Sale 300package</a>
+                        <a class="title" href="#">Sale 300 voucher</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -127,7 +127,7 @@
               <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Popular<small>package</small></h2>
+                    <h2>Popular<small>voucher</small></h2>
                    <hr>
                     <div class="clearfix"></div>
                   </div>
@@ -138,7 +138,7 @@
                         <p>1</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Package 1</a>
+                        <a class="title" href="#">Voucher 1</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -148,7 +148,7 @@
                         <p>2</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Package 2</a>
+                        <a class="title" href="#">Voucher 2</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -158,7 +158,7 @@
                         <p>3</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Package 3</a>
+                        <a class="title" href="#">Voucher 3</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -168,7 +168,7 @@
                         <p>4</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Package 4</a>
+                        <a class="title" href="#">Voucher 4</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>
@@ -178,7 +178,7 @@
                         <p>5</p>
                       </a>
                       <div class="media-body">
-                        <a class="title" href="#">Package 5</a>
+                        <a class="title" href="#">Voucher 5</a>
                         <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
                       </div>
                     </article>

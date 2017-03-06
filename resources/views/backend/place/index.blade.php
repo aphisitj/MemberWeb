@@ -16,6 +16,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
 @extends('backend.layout.main-layout') 
 
 @section('page-style') 
+ {{ Html::style('assets/global/plugins/vendors/animate.css/animate.css')}} 
 @endsection 
 
 @section('more-style') 

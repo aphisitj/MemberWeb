@@ -31,7 +31,7 @@ class AdminPlaceController extends Controller
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'Place'; // Page Title
-        $this->a_search = ['package_name','price','fee','package_id']; // Array Search
+        $this->a_search = ['voucher_name','voucher_id']; // Array Search
         $this->a_searchplace = ['place_id','place_name','mobile','place_type']; // Array Search
         $this->path = '_admin/place'; // Url Path
         $this->view_path = 'backend.place.'; // View Path
@@ -172,20 +172,21 @@ class AdminPlaceController extends Controller
     public function edit($id){
         $this->model = 'App\Models\Place';
         $this->obj_modelplace = new $this->model;      
-        $this->modelpackage = 'App\Models\Package';
-        $this->obj_modelpackage = new $this->modelpackage; 
-        $obj_modelpackage = $this->obj_modelpackage;
+        $this->modelvoucher = 'App\Models\Voucher';
+        $this->obj_modelvoucher = new $this->modelvoucher;  
+        $obj_modelvoucher = $this->obj_modelvoucher;
+
 
         $obj_fn = $this->obj_fn;
         $obj_modelplace = $this->obj_modelplace;
         
-        $per_page = config()->get('constants.PER_PAGE');
+        
         $page_title = $this->page_title;
         $url_to = $this->path.'/'.$id;
         $method = 'PUT';
         $txt_manage = 'Update';
 
-        $datapackage = $obj_modelpackage->where('place_id',$id);
+        $datavoucher = $obj_modelvoucher->where('place_id',$id);
 
         $data = $obj_modelplace->find($id);
 
@@ -199,27 +200,28 @@ class AdminPlaceController extends Controller
         
        
 
-        $order_by = Input::get('order_by');
-
-
-        if(empty($order_by)) $order_by = $obj_modelpackage->primaryKey;
+         if(empty($order_by)) $order_by = $obj_modelvoucher->primaryKey;
         $sort_by = Input::get('sort_by');
         if(empty($sort_by)) $sort_by = 'desc';
          $search = Input::get('search');
 
         if(!empty($search)) {
-            $datapackage = $datapackage->where(function($query) use ($search){
+            $datavoucher = $datavoucher->where(function($query) use ($search){
                foreach($this->a_search as $field)
                {
                    $query = $query->orWhere($field,'like','%'.$search.'%');
                }
             });
         }
+        $per_page = config()->get('constants.PER_PAGE');
+        $datavoucher = $datavoucher->orderBy($order_by,$sort_by);
+        $datavoucher = $datavoucher->paginate($per_page);
 
-        $datapackage = $datapackage->orderBy($order_by,$sort_by);
-        $datapackage = $datapackage->paginate($per_page);
-        $package_count = $datapackage->count();
-        return view($this->view_path.'detail',compact('path','page_title','datapackage','package_count','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
+
+        
+        $data_voucher = DB::table('voucher')->where('package_id',$id)->get();
+        $voucher_count = $datavoucher->count();
+        return view($this->view_path.'detail',compact('path','page_title','datavoucher','voucher_count','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
     }
 
 

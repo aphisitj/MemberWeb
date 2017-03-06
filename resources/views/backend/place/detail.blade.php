@@ -33,7 +33,7 @@ if(isset($data)) {
   <div class="col-md-12">
     <div class="portlet light">
       <div class="portlet-body">
-        <form action="" class="form-horizontal" method="GET">
+      
 
           <table>
             <tr>
@@ -83,10 +83,12 @@ if(isset($data)) {
             </tr>
           </table>
 
-        </form>
+      
       </div>
     </div>
   </div>
+
+
 
 
 
@@ -98,7 +100,7 @@ if(isset($data)) {
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="{{ Input::get('search') }}">
-            <span class="help-block">Search by Package Id, Package name</span>
+            <span class="help-block">Search by VoucherId, Voucher name</span>
           </div>
         </div>
         <div class="form-group">
@@ -113,7 +115,7 @@ if(isset($data)) {
     <div class="portlet-title">
       <div class="caption">
         <i class="fa fa-database font-green-sharp"></i>
-        <span class="caption-subject font-green-sharp bold">Found {{$package_count}} Record(s).</span>
+        <span class="caption-subject font-green-sharp bold">Found {{$voucher_count}} Record(s).</span>
       </div>
     </div>
     <div class="portlet-body">
@@ -122,25 +124,25 @@ if(isset($data)) {
           <thead>
 
             <tr>
-              <th>{!! $obj_fn->sorting('Package id','package_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Package name','package_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Price','price',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Fee Amount','fee',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Detail','Detail',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-                       
+              <th>{!! $obj_fn->sorting('Voucher id','voucher_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Voucher Name','voucher_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Detail','detail_short',$order_by,$sort_by,$str_param_sort,'') !!}</th>        
+              <th>{!! $obj_fn->sorting('Description','description',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Detail','Detail',$order_by,$sort_by,$str_param_sort,'') !!}</th>        
             </tr>
 
           </thead>
 
           <tbody>
-            @if($package_count > 0)
-              @foreach($datapackage as $key => $field)
+            @if($voucher_count > 0)
+              @foreach($datavoucher as $key => $field)
+             
                 <tr>
-                  <td class="text-center">{{ $field->package_id }}</td>                
-                  <td>{{ $field->package_name }}</td>
-                  <td>{{ $field->price }}</td>
-                  <td>{{ $field->fee }}%</td>
-                  <td><a href="{{ url()->to($path.'/package/'.$field->package_id.'/edit?1'.$str_param) }}">Detail!!</a></td>
+                  <td class="text-center">{{ $field->voucher_id }}</td>                  
+                  <td>{{ $field->voucher_name }}</td>
+                  <td>{{ $field->detail_short }}</td>
+                  <td>{{ $field->description }}</td>
+                  <td><a href="{{ url()->to($path.'/voucher/'.$field->voucher_id.'/edit?1'.$str_param) }}">Detail!!</a></td>                 
                 </tr>
               @endforeach
                 @else

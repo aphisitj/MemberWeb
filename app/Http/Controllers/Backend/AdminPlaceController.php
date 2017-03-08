@@ -139,6 +139,7 @@ class AdminPlaceController extends Controller
         $datauser->verification = 1 ;
         $dataverify = str_random(30);
         $datauser->verify_email = $dataverify ;
+        $datauser->type = 2 ; 
         $datauser['password'] = Hash::make($request->password);   
         $datauser->mobile = $request->mobile;
         $datauser->save();
@@ -217,7 +218,7 @@ class AdminPlaceController extends Controller
         $per_page = config()->get('constants.PER_PAGE');
         $datavoucher = $datavoucher->orderBy($order_by,$sort_by);
         $datavoucher = $datavoucher->paginate($per_page);
-        $img_place = DB::table('Place_Picture')->where('place_id', $id)
+        $img_place = DB::table('place_picture')->where('place_id', $id)
                     ->get();
 
         

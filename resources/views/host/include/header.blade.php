@@ -112,7 +112,7 @@
                         </ul>
                     </li> -->
           <li class="visible-xs">
-            <a href="{{ url()->to('_host/logout') }}">Logout</a>
+            <a href="{{ url()->to($bo_name.'/logout') }}">Logout</a>
           </li>
         </ul>
       </div>

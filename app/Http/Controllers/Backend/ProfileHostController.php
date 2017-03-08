@@ -75,7 +75,7 @@ class ProfileHostController extends Controller
                     })
                     ->where('user_place.user_id', $user_id)
                     ->get();
-        $img_place = DB::table('Place_Picture')->where('place_id', $place_id)
+        $img_place = DB::table('place_picture')->where('place_id', $place_id)
                     ->get();
 
         return view($this->view_path.'index',compact('page_title','img_place','count_package','count_voucher','data','path','obj_model','obj_fn','dddd'));

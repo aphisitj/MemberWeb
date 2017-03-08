@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Library\MainFunction;
 
 use App\Models\User;
+use App\Models\Place_User;
 
 
 use Hash;
@@ -24,7 +25,8 @@ class HostLoginController extends Controller
             return redirect()->to('_host/');
     }
     public function postForm(Request $request){
-        $data = User::where('email',$request->email)->first();
+        $data = User::where('email',$request->email)->where('type',2)->first();
+        $datauserplace = Place_User::where('user_id',$data->admin_id)->first();
         if(empty($data))
             return redirect()->back()->with(['error','ไม่มีชื่อผู้ใช้งานนี้ในระบบค่ะ']);
         if(!Hash::check($request->password,$data->password))

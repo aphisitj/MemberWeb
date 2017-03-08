@@ -35,7 +35,7 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
   // Route::get('/listuser/update', function () { return view('backend.listuser.update'); });
   
    //Route::get('/place/detail', function () { return view('backend.place.show'); });
-    
+    Route::resource('listuser','Backend\AdminRoleController');
     Route::resource('listuser','Backend\AdminUserController');
     Route::resource('listuser/order','Backend\AdminOrderDetailController');    
     Route::resource('place','Backend\AdminPlaceController');
@@ -56,7 +56,7 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
     Route::controller('_host/login','Backend\HostLoginController');
     Route::get('_host/logout', 'Backend\HostLoginController@logout');
 // });
-Route::group(['middleware'=>'host'], function () {
+    Route::group(['middleware'=>'host'], function () {
     Route::get('_host/department', function () { return view('host.department.index'); });
     Route::get('_host/department/update', function () { return view('host.department.update'); });
     Route::get('_host/department/create', function () { return view('host.department.create'); });
@@ -72,14 +72,14 @@ Route::group(['middleware'=>'host'], function () {
 
     // Route::get('_host', function () { return view('host.profile.index'); });
     Route::get('_host/update', function () { return view('host.profile.update'); });
-    Route::get('_host', function () { return view('host.profile.index'); });
+    //Route::get('_host', function () { return view('host.profile.index'); });
 
     Route::get('_host/voucher/update', function () { return view('host.voucher.update'); });
     Route::get('_host/voucher/create', function () { return view('host.voucher.create'); });
     Route::get('_host/voucher', function () { return view('host.voucher.index'); });
 
     //Route::resource('_host/voucher','Backend\PlaceVoucherController');
-    //Route::resource('_host','Backend\ProfileHostController');
+    Route::resource('_host','Backend\ProfileHostController');
 
 
     

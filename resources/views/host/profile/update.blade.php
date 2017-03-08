@@ -1,62 +1,24 @@
-	@extends('host.layout.main-layout')
+<?php
+$table = $obj_model->table;
+$primaryKey = $obj_model->primaryKey;
+$fillable = $obj_model->fillable;
+
+$a_param = Input::all();
+$str_param = $obj_fn->parameter($a_param);
+
+if(isset($data)) {
+    foreach($fillable as $value){
+        $$value = $data->$value;
+    }
+} else {
+    foreach($fillable as $value){
+        $$value = "";
+    }
+}
+?>
+@extends('host.layout.main-layout')
 	 @section('page-style') 
-	  <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 30%;
-        width: 30%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-    <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
-
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 6
-        });
-        var infoWindow = new google.maps.InfoWindow({map: map});
-
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
-
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSMyyEsMtJt_ARprFAZwIFDrQogEdILkA&callback=initMap">
-    </script>
+	  
 	{{ Html::style('assets/global/plugins/jquery-tags-input/jquery.tagsinput.css') }} 
 	{{ Html::style('assets/global/plugins/select2/select2.css') }}
 	{{ Html::style('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')	}} 
@@ -74,77 +36,54 @@
 		<div class="portlet light">
 			<div class="portlet-body form">
 				<!-- BEGIN FORM-->
-				<form action="" method="POST" enctype="multipart/form-data" class="form-horizontal">
-					<input type="hidden" name="_method" value="">
-					<input type="hidden" name="_token" value="">
-					<input type="hidden" name="str_param" value="">
+				<form action="{{ url()->to($url_to) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+					<input type="hidden" name="_method" value="{{ $method }}">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="str_param" value="{{ $str_param }}">
 					<div class="form-body">
-						<h4 class="font-green-sharp bold uppercase">Edit Profile</h4>
+						
 						<div class="form-group">
 							<label class="control-label col-md-3">Place Name</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control maxlength" name="place_name" value="โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ" maxlength="255">
+								<input type="text" class="form-control maxlength" name="place_name" value="{{ $place_name }}" maxlength="255">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">สถานที่ตั้ง</label>
 							<div class="col-md-6">
-								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Place..." style="resize: vertical" name="address" value="">333 ถนนเชิดวุฒากาศ, สนามบินนานาชาติดอนเมือง, กรุงเทพ, ประเทศไทย</textarea>
+								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Place..."  name="address" value="{{ $address }}">{{ $address }}</textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">สิ่งอำนวยความสะดวก</label>
 							<div class="col-md-6">
-								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Facility..." style="resize: vertical" name="facility" value="">บริการอินเทอร์เน็ต ฟิตเนส</textarea>
+								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Facility..."  name="facility" value="{{ $facility }}">{{ $facility }}</textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">บริการที่มีอยู่</label>
 							<div class="col-md-6">
-								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Service..." style="resize: vertical" name="service" value="">อาหารเช้า</textarea>
+								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Service..."  name="service" value="{{ $service }}">{{$service}}</textarea>
 							</div>
 						</div>
-			 			
-						<div class="form-group">
+			 			<div class="form-group">
 							<label class="control-label col-md-3">Type</label>
 							<div class="col-md-4">
-								<select class="form-control select-default" name="type">
-                                    <option name="type" value="Hotel">โรงแรม</option>
-                                    <option name="type" value="Resterant">ร้านอาหาร</option>
-                                </select>
+								<select class="form-control" name="place_type" id="place_type" >
+					                <option value="1" @if( $place_type === 1 ) selected="selected " @endif >Hotel</option>
+					                <option value="2" @if( $place_type === 2 ) selected="selected " @endif >Restaurant</option>
+                            	</select>
 							</div>
-						</div>
+						</div>	
+						
   			
    				<div id="map"></div>
 
-				<div class="form-group">
-                            <label class="control-label col-md-3">Image Upload </label>
-                            <div class="col-md-9">
-                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
-                                    </div>
-                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
-                                    </div>
-                                    <div>
-                                        <span class="btn default btn-file">
-                                        <span class="fileinput-new">
-                                        Select image </span>
-                                        <span class="fileinput-exists">
-                                        Change </span>
-                                        <input type="file" name="...">
-                                        </span>
-                                        <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
-                                            Remove </a>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
+				
 						<div class="form-actions">
 							<div class="row">
 								<div class="col-md-offset-3 col-md-9">
-									<button type="submit" class="btn green">Update</button>
+									<button type="submit" class="btn green">{{ $txt_manage }}</button>
 									<button type="reset" class="btn default">Reset</button>
 								</div>
 							</div>

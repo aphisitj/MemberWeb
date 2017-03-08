@@ -1,4 +1,12 @@
+<?php
+$table = $obj_model->table;
+$primaryKey = $obj_model->primaryKey;
+$fillable = $obj_model->fillable;
+//dd($place_id);
 
+$a_param = Input::all();
+$str_param = $obj_fn->parameter($a_param);
+?>
   @extends('host.layout.main-layout') 
   @section('page-style')
   {{ Html::style('assets/global/plugins/vendors/animate.css/animate.css')}} 
@@ -21,27 +29,48 @@
               </td>
               
             
-              <td class="text-left col-sm-6 col-md-6">
-       
-                <h2>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</h2>
+             <td class="text-left col-sm-6 col-md-6">
+              
+              @foreach( $data as $key => $field )
+                 <h2>{{ $field->place_name }}</h2>
                 <hr>
 
-                <h4>สถานที่ตั้ง</h4>
-                <p>
-                  333 ถนนเชิดวุฒากาศ, สนามบินนานาชาติดอนเมือง, กรุงเทพ, ประเทศไทย
-                </p>
-                <h4>สิ่งอำนวยความสะดวก</h4>
-                <p>
-                  บริการอินเทอร์เน็ต ฟิตเนส
-                </p>
-                <h4>บริการที่มีอยู่</h4>
-                <p>
-                  อาหารเช้า
-                </p>
-                <a href="{{ url()->to('_host/update') }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a> 
-               
-              </td>
+                <h4>สถานที่ตั้ง</h4> 
 
+                @if( $field->address === '')
+                  <p> - </p>
+                @else
+                  <p>
+                   {{ $field->address }}
+                  </p>
+                @endif
+
+
+                <h4>สิ่งอำนวยความสะดวก</h4>
+
+                @if( $field->service === NULL)
+                  <p> - </p>
+                @else
+                  <p>
+                   {{ $field->service }}
+                  </p>
+                @endif
+
+                <h4>บริการที่มีอยู่</h4>
+                              
+                @if( $field->facility === NULL)
+                  <p> - </p>
+                @else
+                  <p>
+                   {{ $field->facility }}
+                  </p>
+                @endif
+
+                <a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a> 
+              
+              @endforeach
+               
+              </td> 
 
             </tr>
           </table>
@@ -50,7 +79,7 @@
       </div>
     </div>
 
-    <div class="portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                   <div class="tile-stats">
                       <i class="glyphicon glyphicon-credit-card"></i>
                       <h1>4785</h1>
@@ -60,26 +89,26 @@
                   <hr class="colorhr">
                   <div class="tile-stats">
                       <i class="glyphicon glyphicon-gift"></i>
-                      <h1>179</h1>
-                      <h4>Package</h4>
+                      <h1>{{ $count_voucher }}</h1>
+                      <h4>Voucher</h4>
                       <p></p>
                   </div>
                   
                   
               </div>
 
-              <div class="portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                         <i class="glyphicon glyphicon-inbox"></i>
                         <h1>44</h1>
-                        <h4>Orders</h4>
+                        <h4>Fee</h4>
                         <p></p>
                     </div>
                     <hr>
                     <div class="tile-stats">
                         <i class="glyphicon glyphicon-piggy-bank"></i>
-                        <h1>785</h1>
-                        <h4>Fee</h4>
+                        <h1>{{ $count_package }}</h1>
+                        <h4>Package</h4>
                         <p></p>
                     </div>
                                      
@@ -87,7 +116,7 @@
 
               
 
-              <div class="portlet light animated flipInY col-md-6">
+              <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Popular<small>package</small></h2>

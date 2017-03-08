@@ -8,6 +8,8 @@ use App\Library\MainFunction;
 use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
+use App\Models\Voucher;
+use App\Models\Package;
 use Input;
 use Hash;
 use DB;
@@ -17,17 +19,24 @@ class ProfileHostController extends Controller
     public function __construct()
     {
     
-        $this->model = 'App\Models\Place';
-       
+        $this->model = 'App\Models\Place';       
         $this->obj_model = new $this->model; // Obj Model
+        $this->modelplaceuser = 'App\Models\Place_User';      
+        $this->obj_modelplaceuser = new $this->modelplaceuser;
+        $this->modelvoucher = 'App\Models\Voucher';      
+        $this->obj_modelvoucher = new $this->modelvoucher;
+        $this->modelpackage = 'App\Models\Package';      
+        $this->obj_modelpackage = new $this->modelpackage;
+
         $this->obj_fn = new MainFunction(); // Obj Function
 
-        $this->user_id = session()->get('s_host_id');
-        $this->user = Place_User::find($this->user_id);
+        $this->user_id = session()->get('s_host_id'); 
         $this->session_id = $session_id = session()->getId();
 
-        $user = $this->user;
         $user_id = $this->user_id;
+        $this->user = Place_User::find($user_id);
+        $user = $this->user;
+        
         
         
         $this->page_title = 'Profile'; // Page Title
@@ -42,25 +51,32 @@ class ProfileHostController extends Controller
     // ------------------------------------ Show All List Page
     public function index()
     {
+        
         $obj_fn = $this->obj_fn;
+        $obj_modelplaceuser = $this->obj_modelplaceuser;
         $obj_model = $this->obj_model;
+        $obj_modelvoucher = $this->obj_modelvoucher;
+        $obj_modelpackage = $this->obj_modelpackage;
 
         $path = $this->path;
         $page_title = $this->page_title;
         
-        $user = $this->user;
-        $user_id = $this->user_id;
        
+        $user_id = $this->user_id;
+        $user = DB::table('user_place')->where('user_id',$user_id)->first();
+        $place_id = $user->place_id ;
+
+        $count_package = $obj_modelpackage->where('place_id',$place_id)->count();
+        $count_voucher = $obj_modelvoucher->where('place_id',$place_id)->count();
         $data = DB::table('place')
                     ->join('user_place', function ($join) {
                         $join->on('place.place_id', '=', 'user_place.place_id');
                     })
                     ->where('user_place.user_id', $user_id)
                     ->get();
+        
 
-       
-
-        return view($this->view_path.'index',compact('page_title','data','path','obj_model','obj_fn'));
+        return view($this->view_path.'index',compact('page_title','count_package','count_voucher','data','path','obj_model','obj_fn','dddd'));
     }
     // ------------------------------------ View Add Page
     public function create()

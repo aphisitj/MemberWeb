@@ -1,22 +1,4 @@
-<?php
-$table = $obj_model->table;
-$primaryKey = $obj_model->primaryKey;
-$fillable = $obj_model->fillable;
 
-$a_param = Input::all();
-$str_param = $obj_fn->parameter($a_param);
-
-if(isset($data)) {
-    foreach($fillable as $value){
-        $$value = $data->$value;
-    }
-} else {
-    foreach($fillable as $value){
-        $$value = "";
-    }
-}
-
-?>
 @extends('host.layout.main-layout')
 	 @section('page-style') 
 	  
@@ -37,48 +19,10 @@ if(isset($data)) {
 		<div class="portlet light">
 			<div class="portlet-body form">
 				<!-- BEGIN FORM-->
-				<form action="{{ url()->to($url_to) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
-					<input type="hidden" name="_method" value="{{ $method }}">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<input type="hidden" name="str_param" value="{{ $str_param }}">
-					<div class="form-body">
-						
-						<div class="form-group">
-							<label class="control-label col-md-3">Place Name</label>
-							<div class="col-md-4">
-								<input type="text" class="form-control maxlength" name="place_name" value="{{ $place_name }}" maxlength="255">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">สถานที่ตั้ง</label>
-							<div class="col-md-6">
-								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Place..."  name="address" value="{{ $address }}">{{ $address }}</textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">สิ่งอำนวยความสะดวก</label>
-							<div class="col-md-6">
-								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Facility..."  name="facility" value="{{ $facility }}">{{ $facility }}</textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label">บริการที่มีอยู่</label>
-							<div class="col-md-6">
-								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Service..."  name="service" value="{{ $service }}">{{$service}}</textarea>
-							</div>
-						</div>
-			 			<div class="form-group">
-							<label class="control-label col-md-3">Type</label>
-							<div class="col-md-4">
-								<select class="form-control" name="place_type" id="place_type" >
-					                <option value="1" @if( $place_type === 1 ) selected="selected " @endif >Hotel</option>
-					                <option value="2" @if( $place_type === 2 ) selected="selected " @endif >Restaurant</option>
-                            	</select>
-							</div>
-						</div>	
+				
 						
   			
-		   				<form action="{{url('/admin/upload/action')}}" method="post" enctype="multipart/form-data">
+		   				<form action="{{ url()->to($url_to) }}" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						    <div class="row page-header">
 						        <div class="col-sm-12">
@@ -110,17 +54,8 @@ if(isset($data)) {
 						        </div>
 						    </div>
 						</form>
-
 				
-						<div class="form-actions">
-							<div class="row">
-								<div class="col-md-offset-3 col-md-9">
-									<button type="submit" class="btn green">{{ $txt_manage }}</button>
-									<button type="reset" class="btn default">Reset</button>
-								</div>
-							</div>
-						</div>
-				</form>
+						
 				<!-- END FORM-->
 				</div>
 			</div>

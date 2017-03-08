@@ -15,7 +15,7 @@ class Voucher extends Authenticatable
  //    protected $dates = ['deleted_at'];
     public $table = 'voucher';
     public $primaryKey = 'voucher_id';
-    public $fillable = ['voucher_id','voucher_name','detail_short','description','allot','inquiry_flag','package_id'];
+    public $fillable = ['voucher_id','voucher_name','detail_short','description','allot','inquiry_flag','package_id','place_id'];
     protected $guarded = [];
     public $timestamps = true;
 

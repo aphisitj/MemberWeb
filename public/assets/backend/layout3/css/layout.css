@@ -10,10 +10,9 @@
   body {
     background-color: #fff !important;
   }
+  
+ 
 
-  .page-header {
-    display: none;
-  }
 
   .theme-panel {
     display: none;

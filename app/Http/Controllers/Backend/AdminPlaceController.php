@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
 use App\Models\PlaceVoucher;
+use App\Models\Place_Picture;
 use App\Models\Package;
 use DB;
 use Input;
@@ -216,12 +217,13 @@ class AdminPlaceController extends Controller
         $per_page = config()->get('constants.PER_PAGE');
         $datavoucher = $datavoucher->orderBy($order_by,$sort_by);
         $datavoucher = $datavoucher->paginate($per_page);
-
+        $img_place = DB::table('Place_Picture')->where('place_id', $id)
+                    ->get();
 
         
         $data_voucher = DB::table('voucher')->where('package_id',$id)->get();
         $voucher_count = $datavoucher->count();
-        return view($this->view_path.'detail',compact('path','page_title','datavoucher','voucher_count','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
+        return view($this->view_path.'detail',compact('path','page_title','img_place','datavoucher','voucher_count','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
     }
 
 

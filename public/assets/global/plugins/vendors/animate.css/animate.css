@@ -26,6 +26,12 @@ hr {
   margin: 5px;
 
 }
+ .imgsize{
+  width: 100px;
+  height: 100px;
+  }
+.gallery {margin-bottom:10px;}
+.gallery img{width:100%;}
 
 
 .animated {

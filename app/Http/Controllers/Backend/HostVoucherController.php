@@ -8,24 +8,23 @@ use App\Library\MainFunction;
 use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
-use App\Models\PlaceVoucher;
+use App\Models\Voucher;
 use DB;
 use Input;
 use Hash;
 
-class PlaceVoucherController extends Controller
+class HostVoucherController extends Controller
 {
     public function __construct()
     {
         // $this->model = 'App\Models\Admin'; // Model
-        $this->model = 'App\Models\PlaceVoucher';
+        $this->model = 'App\Models\Voucher';
         // $this->model = 'App\Models\Host';
         $this->obj_model = new $this->model; // Obj Model
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'Voucher'; // Page Title
-        $this->a_search = ['place_voucher_id','place_id','voucher_name','price','status','expire_days',
-                            'expire_date','quota','fee_percent','fee_amount','status']; // Array Search
+        $this->a_search = ['voucher_id','place_id','voucher_name','allot','package_id']; // Array Search
         $this->path = '_host/voucher'; // Url Path
         $this->view_path = 'host.voucher.'; // View Path
 
@@ -51,16 +50,13 @@ class PlaceVoucherController extends Controller
 
         $search = Input::get('search');
 
-        $user = $this->user;
+       
         $user_id = $this->user_id;
-        
+        $user = DB::table('user_place')->where('user_id',$user_id)->first();
+        $place_id = $user->place_id ;
         
         // $data = $this->obj_model;
-        $data = DB::table('place_voucher')
-                    ->join('user_place', function ($join) {
-                        $join->on('place_voucher.place_id', '=', 'user_place.place_id');
-                    })
-                    ->where('place_user.user_id', $user_id);
+        $data = $obj_model->where('place_id', $place_id);
                     
                          
         if(!empty($search))
@@ -72,6 +68,7 @@ class PlaceVoucherController extends Controller
                }
             });
         }
+
         $count_data = $data->count();
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
@@ -90,19 +87,25 @@ class PlaceVoucherController extends Controller
         $txt_manage = "Add";
         
 
-        $roles = PlaceVoucher::all();
+        $roles = Voucher::all();
 
-        return view($this->view_path.'update',compact('page_title','url_to','method','txt_manage','obj_model','obj_fn','roles'));
+        return view($this->view_path.'create',compact('page_title','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Data
-    public function store(Request $request ,$id)
+    public function store(Request $request )
     {
         $obj_model = $this->obj_model;
 
         $input = $request->all(); // Get all post from form
         $input['password'] = Hash::make($request->password);
+        $user_id = $this->user_id;
+        $user = DB::table('user_place')->where('user_id',$user_id)->first();
+        $place_id = $user->place_id ;
+
 
         $data = $obj_model->create($input);
+        $data->place_id = $place_id ;
+        $data->save();
 
         return redirect()->to($this->path);
     }
@@ -124,7 +127,7 @@ class PlaceVoucherController extends Controller
 
         $data = $obj_model->find($id);
 
-        $roles = PlaceVoucher::all();
+        $roles = Voucher::all();
 
         return view($this->view_path.'update',compact('page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }

@@ -15,7 +15,7 @@ class User extends Authenticatable
  //    protected $dates = ['deleted_at'];
     public $table = 'user';
     public $primaryKey = 'user_id';
-    public $fillable = ['firstname','lastname','email','password','mobile','type','verify_email','verification'];
+    public $fillable = ['user_id','firstname','lastname','email','password','mobile','type','verify_email','verification'];
     protected $guarded = [];
     public $timestamps = true;
 

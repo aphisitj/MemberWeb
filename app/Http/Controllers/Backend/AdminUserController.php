@@ -114,7 +114,7 @@ class AdminUserController extends Controller
         $obj_fn = $this->obj_fn;
         $obj_model = $this->obj_model;
 
-        $page_title = $this->page_title;
+        $page_title = 'User detail';
         $url_to = $this->path.'/'.$id;
         $method = 'PUT';
         $txt_manage = 'Update';

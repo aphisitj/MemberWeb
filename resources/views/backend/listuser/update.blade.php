@@ -28,7 +28,7 @@ if(isset($data)) {
  @endsection 
  @section('more-style') 
  @endsection 
- @section('page-title') {{ $txt_manage.' '.$page_title }}
+ @section('page-title') {{ $page_title }}
  @endsection 
  @section('page-content')
 	<div class="col-md-12">
@@ -41,6 +41,13 @@ if(isset($data)) {
 					<input type="hidden" name="str_param" value="{{ $str_param }}">
 
 					<div class="form-body">
+					<div class="form-group">
+							<label class="control-label col-md-3">User Id</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="user_id" value="{{ $user_id }}" disabled>
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<label class="control-label col-md-3">Name</label>
 							<div class="col-md-4">
@@ -81,14 +88,7 @@ if(isset($data)) {
 						</div>
 
 						<hr>
-						<div class="form-actions">
-							<div class="row">
-								<div class="col-md-offset-3 col-md-9">
-									<button type="submit" class="btn green">{{ $txt_manage }}</button>
-									<button type="reset" class="btn default">Reset</button>
-								</div>
-							</div>
-						</div>
+						
 				</form>
 				<!-- END FORM -->
 				</div>

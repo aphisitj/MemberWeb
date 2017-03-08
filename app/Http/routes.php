@@ -29,34 +29,32 @@ Route::group(['prefix' => '_admin'], function () {
 });
 Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME')], function () {
   
-  // Route::get('place', function () { return view('backend.place.index'); });
-  // Route::get('place/update', function () { return view('backend.place.update'); });
-  // Route::get('/listuser', function () { return view('backend.listuser.index'); });
-  // Route::get('/listuser/update', function () { return view('backend.listuser.update'); });
   
-   //Route::get('/place/detail', function () { return view('backend.place.show'); });
     Route::resource('listuser','Backend\AdminRoleController');
     Route::resource('listuser','Backend\AdminUserController');
     Route::resource('listuser/order','Backend\AdminOrderDetailController');    
     Route::resource('place','Backend\AdminPlaceController');
     Route::resource('place/voucher','Backend\AdminPackageDetailController');
-    Route::resource('/','Backend\AdminhomeController');
-    //Route::get('/', function () { return view('backend.index'); });
+    Route::resource('/','Backend\AdminhomeController');    
     Route::resource('user-management','Backend\AdminController');
     Route::resource('role','Backend\AdminRoleController');
     Route::resource('page','Backend\AdminPageController');
     Route::resource('create-place','Backend\DefaultController');
     Route::post('check-username','Backend\CheckUsernameController@checkuser');
-  
+  //Route::get('/', function () { return view('backend.index'); });
   
 });
 /* --------------------- Host ------------------- */
-// Route::group(['prefix' => '_host'], function () {
+ Route::group(['prefix' => '_host'], function () {
     Route::get('_host/forget', function () { return view('host.Forget'); });
     Route::controller('_host/login','Backend\HostLoginController');
     Route::get('_host/logout', 'Backend\HostLoginController@logout');
-// });
+ });
     Route::group(['middleware'=>'host'], function () {
+
+
+
+
     Route::get('_host/department', function () { return view('host.department.index'); });
     Route::get('_host/department/update', function () { return view('host.department.update'); });
     Route::get('_host/department/create', function () { return view('host.department.create'); });
@@ -70,18 +68,18 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
   
     Route::get('_host/orders', function () { return view('host.orders.index'); });
 
-    // Route::get('_host', function () { return view('host.profile.index'); });
+    
     Route::get('_host/update', function () { return view('host.profile.update'); });
-    //Route::get('_host', function () { return view('host.profile.index'); });
 
-    Route::get('_host/voucher/update', function () { return view('host.voucher.update'); });
-    Route::get('_host/voucher/create', function () { return view('host.voucher.create'); });
-    Route::get('_host/voucher', function () { return view('host.voucher.index'); });
 
-    //Route::resource('_host/voucher','Backend\PlaceVoucherController');
+    //Route::get('_host/voucher/update', function () { return view('host.voucher.update'); });
+    //Route::get('_host/voucher/create', function () { return view('host.voucher.create'); });
+    //Route::get('_host/voucher', function () { return view('host.voucher.index'); });
+
+    Route::resource('_host/voucher','Backend\HostVoucherController');
     Route::resource('_host','Backend\ProfileHostController');
 
-
+   // Route::resource('_host/uploadimg','Backend\HostUploadimgController');
     
     
 

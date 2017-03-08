@@ -84,11 +84,11 @@
             <a href="{{ url()->to('_host') }}">Home</a>
           </li>
           <li>
-            <a href="{{ url()->to('_host/package') }}">Package</a>
-          </li>
-          <li>
             <a href="{{ url()->to('_host/voucher') }}">Voucher</a>
           </li>
+          <li>
+            <a href="{{ url()->to('_host/package') }}">Package</a>
+          </li>          
           <li>
             <a href="{{ url()->to('_host/department') }}">Department</a>
           </li>

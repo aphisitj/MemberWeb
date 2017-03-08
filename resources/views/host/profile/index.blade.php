@@ -6,6 +6,8 @@ $fillable = $obj_model->fillable;
 
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
+
+
 ?>
   @extends('host.layout.main-layout') 
   @section('page-style')
@@ -23,21 +25,29 @@ $str_param = $obj_fn->parameter($a_param);
         <form action="" class="form-horizontal" method="GET">
 
           <table>
+          
             <tr>
               <td>
-                <img src="{{ url()->asset('assets/backend/img/desktop1.jpg') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+
+
+              @foreach( $img_place as $key => $img )  
+                <img class="mySlides" src="{{ url()->asset('assets/backend/img/'.$img->src) }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+                
+              @endforeach
+
+
               </td>
-              
+               
             
              <td class="text-left col-sm-6 col-md-6">
               
-              @foreach( $data as $key => $field )
-                 <h2>{{ $field->place_name }}</h2>
+            @foreach( $data as $key => $field )  
+                 <h2>{{ $field->place_name }} <small></small></h2>
                 <hr>
 
                 <h4>สถานที่ตั้ง</h4> 
 
-                @if( $field->address === '')
+                @if( $field->address === NULL && $field->address === '')
                   <p> - </p>
                 @else
                   <p>
@@ -48,7 +58,7 @@ $str_param = $obj_fn->parameter($a_param);
 
                 <h4>สิ่งอำนวยความสะดวก</h4>
 
-                @if( $field->service === NULL)
+                @if( $field->service === NULL && $field->service === '')
                   <p> - </p>
                 @else
                   <p>
@@ -58,11 +68,22 @@ $str_param = $obj_fn->parameter($a_param);
 
                 <h4>บริการที่มีอยู่</h4>
                               
-                @if( $field->facility === NULL)
+                @if( $field->facility === NULL )
                   <p> - </p>
                 @else
                   <p>
+                  
                    {{ $field->facility }}
+                  </p>
+                @endif
+                
+                <h4>ประเภท</h4>
+
+                @if( $field->place_type === 1)
+                  <p> Hotel </p>
+                @else
+                  <p>
+                   Restaurant
                   </p>
                 @endif
 
@@ -73,6 +94,7 @@ $str_param = $obj_fn->parameter($a_param);
               </td> 
 
             </tr>
+           
           </table>
 
         </form>        
@@ -165,4 +187,25 @@ $str_param = $obj_fn->parameter($a_param);
 
   </div>
   </div>
-  @endsection @section('page-plugin') @endsection @section('more-script') @endsection
+  @endsection 
+  @section('page-plugin') 
+  <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+               x[i].style.display = "none";  
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}    
+            x[myIndex-1].style.display = "block";  
+            setTimeout(carousel, 2000); // Change image every 2 seconds
+        }
+  </script>
+
+  @endsection
+   @section('more-script') 
+   @endsection

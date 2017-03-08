@@ -52,7 +52,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
           <table class="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <th class="text-center col-sm-2">{!! $obj_fn->sorting('User ID','firstname',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+                <th class="text-center col-sm-2">{!! $obj_fn->sorting('User ID','user_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th>{!! $obj_fn->sorting('Name','firstname',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th>{!! $obj_fn->sorting('Email','email',$order_by,$sort_by,$str_param_sort,'') !!}</th>
                 <th>{!! $obj_fn->sorting('Phone','mobile',$order_by,$sort_by,$str_param_sort,'') !!}</th>

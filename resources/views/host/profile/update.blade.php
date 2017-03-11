@@ -52,7 +52,19 @@ if(isset($data)) {
 						<div class="form-group">
 							<label class="col-md-3 control-label">สถานที่ตั้ง</label>
 							<div class="col-md-6">
-								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Detail Place..."  name="address" value="{{ $address }}">{{ $address }}</textarea>
+								<textarea class="form-control maxlength" maxlength="500" rows="4" placeholder="Address..."  name="address" value="{{ $address }}">{{ $address }}</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Code</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control maxlength" name="code" value="{{ $code }}" maxlength="10">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label">รายละเอียด</label>
+							<div class="col-md-6">
+								<textarea class="form-control maxlength" maxlength="1000" rows="10" placeholder="Detail ..."  name="detail" value="{{ $detail }}">{{ $detail }}</textarea>
 							</div>
 						</div>
 						<div class="form-group">
@@ -78,39 +90,6 @@ if(isset($data)) {
 						</div>	
 						
   			
-		   				<form action="{{url('/admin/upload/action')}}" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						    <div class="row page-header">
-						        <div class="col-sm-12">
-						            <h1 class="">Basic Uploader</h1>
-						        </div>
-						        <div class="col-sm-6 text-right padding-top-20">
-						            <input type="file" name="uploader" id="uploader" />
-						        </div>
-						        <div class="col-sm-6 text-right padding-top-20">
-						            <button class="btn btn-success" type="submit" name = "btn-upload" title="Upload image"><i class="fa fa-upload" ></i> Upload</button>
-						            <button class="btn btn-danger del" type="submit" name = "btn-delete" title="Delete Multiple image"><i class="fa fa-trash-o" ></i> Delete</button>
-						        </div>
-						        <!-- /.col-lg-12 -->
-						    </div>
-						    <div class="panel panel-default">
-						        <div class="panel-body">
-						            <div class="dataTable_wrapper">
-						                <div class="row">
-						                @if($images)
-						                    @foreach($images as $img)
-						                    <div class="col-xs-3 gallery">
-						                        <img src="{{ url()->asset('assets/backend/img/'.$img->src) }}"  />
-						                    </div>
-						                    @endforeach
-						                @endif
-						                </div>
-						 
-						            </div>
-						        </div>
-						    </div>
-						</form>
-
 				
 						<div class="form-actions">
 							<div class="row">

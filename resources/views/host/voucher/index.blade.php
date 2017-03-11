@@ -97,4 +97,8 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
       </div>
     </div>
   </div>
-  @endsection @section('page-plugin') @endsection @section('more-script') @endsection
+  @endsection 
+  @section('page-plugin') 
+  @endsection 
+  @section('more-script') 
+  @endsection

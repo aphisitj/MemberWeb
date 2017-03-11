@@ -1,4 +1,14 @@
+<?php
+$table = $obj_model->table;
+$primaryKey = $obj_model->primaryKey;
+$fillable = $obj_model->fillable;
 
+$a_param = Input::all();
+$str_param = $obj_fn->parameter($a_param);
+
+
+
+?>
 @extends('host.layout.main-layout')
 	 @section('page-style') 
 	  
@@ -13,7 +23,8 @@
     
 	 @endsection @section('more-style')
 	 @endsection @section('page-title')
-	 Edit Profile
+	 {{ $page_title }}
+	 
 	 @endsection @section('page-content')
 	<div class="col-md-12">
 		<div class="portlet light">
@@ -23,7 +34,9 @@
 						
   			
 		   				<form action="{{ url()->to($url_to) }}" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="_method" value="{{ $method }}">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="str_param" value="{{ $str_param }}">
 						    <div class="row page-header">
 						        <div class="col-sm-12">
 						            <h1 class="">Basic Uploader</h1>
@@ -32,8 +45,10 @@
 						            <input type="file" name="uploader" id="uploader" />
 						        </div>
 						        <div class="col-sm-6 text-right padding-top-20">
+						        @if($images_count < 5 )
 						            <button class="btn btn-success" type="submit" name = "btn-upload" title="Upload image"><i class="fa fa-upload" ></i> Upload</button>
-						            <button class="btn btn-danger del" type="submit" name = "btn-delete" title="Delete Multiple image"><i class="fa fa-trash-o" ></i> Delete</button>
+						        @endif
+						            <button class="btn btn-danger del" type="submit" name = "btn-delete" title="Delete Multiple image" " ><i class="fa fa-trash-o" ></i> Delete</button>
 						        </div>
 						        <!-- /.col-lg-12 -->
 						    </div>
@@ -44,7 +59,7 @@
 						                @if($images)
 						                    @foreach($images as $img)
 						                    <div class="col-xs-3 gallery">
-						                        <img src="{{ url()->asset('assets/backend/img/'.$img->src) }}"  />
+						                        <img src="{{ url()->asset('assets/backend/img/'.$img->src) }}" style=" width: 250px; height: 150px" />
 						                    </div>
 						                    @endforeach
 						                @endif

@@ -3,39 +3,33 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Library\MainFunction;
-use Mail;
+
 use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
-use App\Models\PlaceVoucher;
-use App\Models\Place_Picture;
-use App\Models\Package;
 use DB;
 use Input;
-use Validator;
 use Hash;
 
-class AdminPlaceController extends Controller
+class HostDepartmentController extends Controller
 {
     public function __construct()
     {
         // $this->model = 'App\Models\Admin'; // Model
-        $this->modelplace = 'App\Models\Place';
-        $this->obj_modelplace = new $this->modelplace; // Obj Model
+        $this->model = 'App\Models\Place';
+        // $this->model = 'App\Models\Host';
+        $this->obj_model = new $this->model; // Obj Model
+        $this->obj_fn = new MainFunction(); // Obj Function
         $this->modeluser = 'App\Models\User';
         $this->obj_modeluser = new $this->modeluser;
         $this->modelplaceuser = 'App\Models\Place_User';
         $this->obj_modelplaceuser = new $this->modelplaceuser;
-
-        $this->obj_fn = new MainFunction(); // Obj Function
       
-        $this->page_title = 'Place'; // Page Title
-        $this->a_search = ['voucher_name','voucher_id']; // Array Search
-        $this->a_searchplace = ['place_id','place_name','mobile','place_type']; // Array Search
-        $this->path = '_admin/place'; // Url Path
-        $this->view_path = 'backend.place.'; // View Path
+        $this->page_title = 'Department'; // Page Title
+        $this->a_search = ['place_name','place_id']; // Array Search
+        $this->path = '_host/department'; // Url Path
+        $this->view_path = 'host.department.'; // View Path
 
         $this->user_id = session()->get('s_host_id');
         $this->user = Place_User::find($this->user_id);
@@ -45,91 +39,84 @@ class AdminPlaceController extends Controller
     // ------------------------------------ Show All List Page
     public function index()
     {
-        $this->modelplace = 'App\Models\Place';
-        $this->obj_modelplace = new $this->modelplace;
-        $this->modeluser = 'App\Models\User';
-        $this->obj_modeluser = new $this->modeluser;
-         // Obj Model
         $obj_fn = $this->obj_fn;
-        $obj_modelplace = $this->obj_modelplace;
-        $obj_modeluser = $this->obj_modeluser;
-
+        $obj_model = $this->obj_model;
 
         $path = $this->path;
         $page_title = $this->page_title;
         $per_page = config()->get('constants.PER_PAGE');
 
         $order_by = Input::get('order_by');
-        if(empty($order_by)) $order_by = $obj_modelplace->primaryKey;
+        if(empty($order_by)) $order_by = $obj_model->primaryKey;
         $sort_by = Input::get('sort_by');
         if(empty($sort_by)) $sort_by = 'desc';
 
         $search = Input::get('search');
 
-        $user = $this->user;
+       
         $user_id = $this->user_id;
-        
+        $user = DB::table('user_place')->where('user_id',$user_id)->first();
+        $place_id = $user->place_id ;
         
         // $data = $this->obj_model;
-        $data = $obj_modelplace;
+        $data = $obj_model->where('department_id', $place_id);
                     
                          
         if(!empty($search))
         {
             $data = $data->where(function($query) use ($search){
-               foreach($this->a_searchplace as $field)
+               foreach($this->a_search as $field)
                {
                    $query = $query->orWhere($field,'like','%'.$search.'%');
                }
             });
         }
+
         $count_data = $data->count();
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
 
-        return view($this->view_path.'index',compact('page_title','count_data','data','path','obj_modelplace','obj_fn'));
+        return view($this->view_path.'index',compact('page_title','count_data','data','path','obj_model','obj_fn'));
     }
     // ------------------------------------ View Add Page
     public function create()
     {
-
-
         $obj_fn = $this->obj_fn;
-        $obj_modelplace = $this->obj_modelplace;
+        $obj_model = $this->obj_model;
         $obj_modeluser = $this->obj_modeluser;
+
         $page_title = $this->page_title;
         $url_to = $this->path;
         $method = 'POST';
         $txt_manage = "Add";
         
 
-        // $roles = Place::all();
+        $roles = Place_User::all();
 
-        $roles = DB::table('user_place')
-                ->join('user', 'user.user_id', '=', 'user_place.user_id')
-                ->join('place', 'place.place_id', '=', 'user_place.place_id')
-                ->get();
-
-
-
-        return view($this->view_path.'create',compact('page_title','url_to','method','txt_manage','obj_modeluser','obj_modelplace','user_model','obj_fn','roles'));
+        return view($this->view_path.'update',compact('page_title','url_to','method','obj_modeluser','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Data
-    public function store(Request $request)
+    public function store(Request $request )
     {
-        $obj_modelplace = $this->obj_modelplace;
+   
+
+        $input = $request->all(); // Get all post from form
+        $input['password'] = Hash::make($request->password);
+        $user_id = $this->user_id;
+        $user = DB::table('user_place')->where('user_id',$user_id)->first();
+        $place_id = $user->place_id ;
+
+
+        $obj_modelplace = $this->obj_model;
         $obj_modeluser = $this->obj_modeluser;
         $obj_modelplaceuser = $this->obj_modelplaceuser;
 
       
-        $input = $request->all();
+   
 
         $dataplace = $obj_modelplace->create($input);
         $datauser = $obj_modeluser->create($input);
         $dataplaceuser = $obj_modelplaceuser->create($input);
-
-
-
 
         $this->modeluser = 'App\Models\User';
         $this->obj_modeluser = new $this->modeluser;        
@@ -151,6 +138,7 @@ class AdminPlaceController extends Controller
         $this->obj_modelplace = new $this->modelplace;        
         $dataplace->place_name = $request->place_name;
         $dataplace->place_type = $request->placetype;
+        $dataplace->department_id = $place_id ;
         $dataplace->mobile = $request->mobile;
         $dataplace->save();
 
@@ -163,85 +151,54 @@ class AdminPlaceController extends Controller
         $dataplaceuser->save();
 
        
+
         return redirect()->to($this->path);
     }
     // ------------------------------------ Show Data : ID
     public function show($id)
     {
-    
+
     }
     // ------------------------------------ View Update Page
-    public function edit($id){
-        $this->model = 'App\Models\Place';
-        $this->obj_modelplace = new $this->model;      
-        $this->modelvoucher = 'App\Models\Voucher';
-        $this->obj_modelvoucher = new $this->modelvoucher;  
-        $obj_modelvoucher = $this->obj_modelvoucher;
-
-
+    public function edit($id)
+    {
         $obj_fn = $this->obj_fn;
-        $obj_modelplace = $this->obj_modelplace;
-        
-        
+        $obj_model = $this->obj_model;
+		$obj_modeluser = $this->obj_modeluser;
+
         $page_title = $this->page_title;
         $url_to = $this->path.'/'.$id;
         $method = 'PUT';
         $txt_manage = 'Update';
-
-        $datavoucher = $obj_modelvoucher->where('place_id',$id);
-
-        $data = $obj_modelplace->find($id);
-
-        // $roles = Place::all();
-        $roles = DB::table('user_place')
-                ->join('user', 'user.user_id', '=', 'user_place.user_id')
-                ->join('place', 'place.place_id', '=', 'user_place.place_id')
-                ->get();
-
-        $path = $this->path;
+        $user_id = $this->user_id;
         
-       
 
-         if(empty($order_by)) $order_by = $obj_modelvoucher->primaryKey;
-        $sort_by = Input::get('sort_by');
-        if(empty($sort_by)) $sort_by = 'desc';
-         $search = Input::get('search');
+        
 
-        if(!empty($search)) {
-            $datavoucher = $datavoucher->where(function($query) use ($search){
-               foreach($this->a_search as $field)
-               {
-                   $query = $query->orWhere($field,'like','%'.$search.'%');
-               }
-            });
-        }
-        $per_page = config()->get('constants.PER_PAGE');
-        $datavoucher = $datavoucher->orderBy($order_by,$sort_by);
-        $datavoucher = $datavoucher->paginate($per_page);
-        $img_place = DB::table('place_picture')->where('place_id', $id)
-                    ->get();
+        $roles = Place_User::where('place_id',$id)->first();
+        $user_id = $roles->user_id ;
 
-        $img_count = DB::table('place_picture')->where('place_id', $id)
-                    ->count();
+        $data = $obj_model->find($id);
+        $datauser = $obj_modeluser->find($user_id);
 
-        $data_voucher = DB::table('voucher')->where('package_id',$id)->get();
-        $voucher_count = $datavoucher->count();
-        return view($this->view_path.'detail',compact('path','page_title','img_count','img_place','datavoucher','voucher_count','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
+        return view($this->view_path.'update',compact('user','datauser','obj_modeluser','page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }
-
-
-
-   
-
     // ------------------------------------ Record Update Data
     public function update(Request $request,$id)
     {
-        $obj_modelplace = $this->obj_modelplace;
+        $obj_model = $this->obj_model;
+        $obj_modeluser = $this->obj_modeluser;
 
         $input = $request->except(['_token','_method','str_param']); // Get all post from form
         $input['password'] = Hash::make($request->password);
 
-        $data = $obj_modelplace->find($id)->update($input);
+        
+        
+        $roles = Place_User::where('place_id',$id)->first();
+        $user_id = $roles->user_id ;
+
+		$data = $obj_model->find($id)->update($input);
+		$user = $obj_modeluser->find($user_id)->update($input);
 
         $str_param = $request->str_param;
         return redirect()->to($this->path.'?1'.$str_param);
@@ -250,16 +207,15 @@ class AdminPlaceController extends Controller
     public function destroy($id)
     {
         session()->put('ref_url',url()->previous());
-
-        $obj_modelplace = $this->obj_modelplace;
-        $obj_modelplace->find($id)->delete();
-        
+        $obj_model = $this->obj_model;
+        $obj_model->find($id)->delete();
         $placeuser = Place_user::where('place_id', $id)->first();
         $userid = $placeuser->user_id ;
 
         $delplaceuser = Place_user::where('place_id', $id)->delete();
         $delplaceuser = user::where('user_id', $userid)->delete();
-        
+
+
 
         return redirect()->to(session()->get('ref_url'));
     }

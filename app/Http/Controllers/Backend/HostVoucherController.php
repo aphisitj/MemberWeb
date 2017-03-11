@@ -89,7 +89,7 @@ class HostVoucherController extends Controller
 
         $roles = Voucher::all();
 
-        return view($this->view_path.'create',compact('page_title','url_to','method','txt_manage','obj_model','obj_fn','roles'));
+        return view($this->view_path.'update',compact('page_title','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Data
     public function store(Request $request )

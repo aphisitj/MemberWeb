@@ -28,26 +28,31 @@ $str_param = $obj_fn->parameter($a_param);
           
             <tr>
               <td>
+          @foreach( $data as $key => $field ) 
 
-
+              @if( $img_count > 0)
               @foreach( $img_place as $key => $img )  
                 <img class="mySlides" src="{{ url()->asset('assets/backend/img/'.$img->src) }}" alt="HTML5 Icon" style="width:480px;height:300px;">
                 
-              @endforeach
-
+                @endforeach 
+              @else
+               <img class="mySlides" src="{{ url()->asset('assets/backend/img/desktop2.jpg') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+              @endif
+              
+              <a href="{{ url()->to($path.'/uploadimg/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i>เปลี่ยนรูป</a> 
 
               </td>
                
             
              <td class="text-left col-sm-6 col-md-6">
               
-            @foreach( $data as $key => $field )  
+             
                  <h2>{{ $field->place_name }} <small></small></h2>
                 <hr>
 
                 <h4>สถานที่ตั้ง</h4> 
 
-                @if( $field->address === NULL && $field->address === '')
+                @if( $field->address === NULL )
                   <p> - </p>
                 @else
                   <p>
@@ -55,10 +60,9 @@ $str_param = $obj_fn->parameter($a_param);
                   </p>
                 @endif
 
-
                 <h4>สิ่งอำนวยความสะดวก</h4>
 
-                @if( $field->service === NULL && $field->service === '')
+                @if( $field->service === NULL )
                   <p> - </p>
                 @else
                   <p>

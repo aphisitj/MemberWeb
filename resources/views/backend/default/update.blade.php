@@ -18,58 +18,8 @@
 
 @section('page-content')
 <div class="col-md-12">
-        <div class="portlet light">
-            <div class="portlet-body form">
-                <!-- BEGIN FORM-->
-                <form action="#" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-body">
-                        <h4 class="font-green-sharp bold uppercase">Edit Profile</h4>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Place Name</label>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control maxlength" name="input_box" value="" maxlength="255" >
-                            </div>
-                        </div>
-   										
-											<div class="form-group">
-                            <label class="control-label col-md-3">Type</label>
-                            <div class="col-md-4">
-                                <select class="form-control select-default" name="select_box">
-                                    <option value="">Select...</option>
-                                    <option value="Option 1">โรงแรม</option>
-                                    <option value="Option 2">ร้านอาหาร</option>
-                                </select>
-                            </div>
-                        </div>
-											<div class="form-group">
-                            <label class="control-label col-md-3">Fee_percent</label>
-                            <div class="col-md-9">
-                                <div class="input-inline input-medium">
-                                    <input class="form-control touchspin" type="text" value="20" name="spinner">
-                                </div>
-                            </div>
-                        </div>
-                     	<div class="form-group">
-                            <label class="col-md-3 control-label">Detail</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control autosizeme" rows="4" placeholder="Detail Place..." style="resize: vertical" name="textarea"></textarea>
-                            </div>
-                        </div>
-											<div class="form-actions">
-                        <div class="row">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn green">Edit</button>
-                                <button type="reset" class="btn default">Reset</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!-- END FORM-->
-            </div>
-        </div>
-
-    </div>
+        
+           
 
     <div class="col-md-12">
         <div class="portlet light">

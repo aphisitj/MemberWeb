@@ -40,12 +40,7 @@ if(isset($data)) {
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="str_param" value="{{ $str_param }}">
 					<div class="form-body">
-						<div class="form-group">
-							<label class="control-label col-md-3">Voucher Id</label>
-							<div class="col-md-4">
-								<input type="text" class="form-control maxlength" maxlength="255" name="voucher_id" value="{{ $voucher_id }}" disabled>
-							</div>
-						</div>
+						
 						<div class="form-group">
 							<label class="control-label col-md-3">VoucherName</label>
 							<div class="col-md-4">

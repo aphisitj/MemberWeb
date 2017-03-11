@@ -32,7 +32,7 @@ $str_param = $obj_fn->parameter($a_param);
 
               @if( $img_count > 0)
               @foreach( $img_place as $key => $img )  
-                <img class="mySlides" src="{{ url()->asset('assets/backend/img/'.$img->src) }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+                <img class="mySlides" src="{{ url()->asset('assets/backend/img/place/'.$img->src) }}" alt="HTML5 Icon" style="width:480px;height:300px;">
                 
                 @endforeach 
               @else

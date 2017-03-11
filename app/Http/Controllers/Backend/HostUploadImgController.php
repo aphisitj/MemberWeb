@@ -121,9 +121,9 @@ class HostUploadimgController extends Controller{
         $place_id = $user->place_id ;
         if($request->exists('btn-upload')){
             $file = $request->file('uploader');
-            $path = 'assets/backend/img';
+            $path = 'assets/backend/img/place';
             $filename = $file->getClientOriginalName();
-            $file->move('assets/backend/img',$file->getClientOriginalName());
+            $file->move('assets/backend/img/place',$file->getClientOriginalName());
             $image = new Place_Picture;
             $image->src = $filename;
             $image->place_id = $place_id;

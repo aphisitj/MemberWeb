@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
 use App\Models\Voucher;
+use App\Models\Voucher_Picture;
 use DB;
 use Input;
 use Hash;
@@ -129,7 +130,10 @@ class HostVoucherController extends Controller
 
         $roles = Voucher::all();
 
-        return view($this->view_path.'update',compact('page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
+        $images = Voucher_Picture::where('voucher_id',$id)->get();
+        $images_count = Voucher_Picture::where('voucher_id',$id)->count();
+
+        return view($this->view_path.'update',compact('images','images_count','page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Update Data
     public function update(Request $request,$id)
@@ -140,6 +144,25 @@ class HostVoucherController extends Controller
         $input['password'] = Hash::make($request->password);
 
         $data = $obj_model->find($id)->update($input);
+
+          if($request->exists('btn-upload')){
+            $file = $request->file('uploader');
+            $path = 'assets/backend/img/voucher';
+            $filename = $file->getClientOriginalName();
+            $file->move('assets/backend/img/voucher',$file->getClientOriginalName());
+            $image = new Voucher_Picture;
+            $image->src = $filename;
+            $image->voucher_id = $id;
+            $image->save();
+            echo 'Uploaded';
+            return redirect()->back();
+        }
+
+        if($request->exists('btn-delete')){
+         $delplaceuser = Place_Picture::where('voucher_id', $id)->delete();
+            echo 'Delete';
+            return redirect()->back();
+        }
 
         $str_param = $request->str_param;
         return redirect()->to($this->path.'?1'.$str_param);

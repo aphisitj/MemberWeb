@@ -23,7 +23,7 @@ $str_param = $obj_fn->parameter($a_param);
     
 	 @endsection @section('more-style')
 	 @endsection @section('page-title')
-	 {{ $page_title }}
+	 
 	 
 	 @endsection @section('page-content')
 	<div class="col-md-12">
@@ -39,7 +39,7 @@ $str_param = $obj_fn->parameter($a_param);
 						<input type="hidden" name="str_param" value="{{ $str_param }}">
 						    <div class="row page-header">
 						        <div class="col-sm-12">
-						            <h1 class="">Basic Uploader</h1>
+						            <h1 class="">{{ $page_title }}</h1>
 						        </div>
 						        <div class="col-sm-6 text-right padding-top-20">
 						            <input type="file" name="uploader" id="uploader" />
@@ -59,7 +59,7 @@ $str_param = $obj_fn->parameter($a_param);
 						                @if($images)
 						                    @foreach($images as $img)
 						                    <div class="col-xs-3 gallery">
-						                        <img src="{{ url()->asset('assets/backend/img/'.$img->src) }}" style=" width: 250px; height: 150px" />
+						                        <img src="{{ url()->asset('assets/backend/img/place/'.$img->src) }}" style=" width: 250px; height: 150px" />
 						                    </div>
 						                    @endforeach
 						                @endif

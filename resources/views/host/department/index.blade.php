@@ -22,7 +22,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
 @endsection 
 
 @section('page-title') 
-Department 
+{{ $page_title }} 
 @endsection .
 
 @section('page-content')
@@ -57,7 +57,7 @@ Department
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th class="text-center col-sm-2">{!! $obj_fn->sorting('Department ID','place_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th class="text-center">{!! $obj_fn->sorting('Department ID','place_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th>{!! $obj_fn->sorting('Department Name','place_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th>{!! $obj_fn->sorting('Mobile','mobile',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th>{!! $obj_fn->sorting('Type','place_type',$order_by,$sort_by,$str_param_sort,'') !!}</th>

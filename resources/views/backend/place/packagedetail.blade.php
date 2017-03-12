@@ -40,9 +40,19 @@ if(isset($data)) {
           <table>
             <tr>
               <td>
-                <img src="{{ url()->asset('assets/backend/img/desktop1.jpg') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+                            
+              @if( $count_voucherimg > 0)
+
+                  @foreach( $img_voucher as $key => $img )  
+                    <img class="mySlides" src="{{ url()->asset('assets/backend/img/voucher/'.$img->src) }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+                    
+                  @endforeach 
+
+              @else
+               <img class="mySlides" src="{{ url()->asset('assets/backend/img/voucher/desktop2.jpg') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+              @endif
+
               </td>
-              
             
               <td class="text-left col-sm-6 col-md-6">
               
@@ -153,6 +163,22 @@ if(isset($data)) {
 </div>
 @endsection 
 @section('page-plugin')
+<script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+               x[i].style.display = "none";  
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}    
+            x[myIndex-1].style.display = "block";  
+            setTimeout(carousel, 2000); // Change image every 2 seconds
+        }
+  </script>
 @endsection 
 @section('more-script') 
 @endsection

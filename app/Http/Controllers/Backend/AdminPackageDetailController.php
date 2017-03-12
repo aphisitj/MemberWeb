@@ -106,7 +106,13 @@ class AdminPackageDetailController extends Controller
         $datapackage = $datapackage->orderBy($order_by,$sort_by);
         $datapackage = $datapackage->paginate($per_page);
         $package_count = $datapackage->count();
-        return view($this->view_path.'packagedetail',compact('page_title','package_count','datapackage','data','url_to','method','txt_manage','obj_modelvoucher','obj_fn'));
+        $img_voucher = DB::table('voucher_picture')->where('voucher_id', $id)
+                    ->get();
+        $count_voucherimg = DB::table('voucher_picture')->where('voucher_id', $id)
+                    ->count();
+
+
+        return view($this->view_path.'packagedetail',compact('page_title','img_voucher','count_voucherimg','package_count','datapackage','data','url_to','method','txt_manage','obj_modelvoucher','obj_fn'));
     }
 
 

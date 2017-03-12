@@ -26,6 +26,12 @@ hr {
   margin: 5px;
 
 }
+
+.divsize{
+  
+  font-size: 35px;
+  margin: 5px;
+}
  .imgsize{
   width: 100px;
   height: 100px;
@@ -33,7 +39,15 @@ hr {
 .gallery {margin-bottom:10px;}
 .gallery img{width:100%;}
 
-
+.icon {
+  display: inline-block;
+  float: right;
+  padding: 7px 0 0 0;
+}
+.icon > i {
+  color: #a47a51;
+  font-size: 26px;
+}
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

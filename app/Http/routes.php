@@ -64,7 +64,7 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
     //Route::get('_host/package/create', function () { return view('host.package.create'); });
     //Route::get('_host/package/update', function () { return view('host.package.update'); });
 
-    Route::get('_host/payment', function () { return view('host.payment.index'); });
+    //Route::get('_host/payment', function () { return view('host.payment.index'); });
   
     Route::get('_host/orders', function () { return view('host.orders.index'); });
 
@@ -75,6 +75,7 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
     //Route::get('_host/voucher/update', function () { return view('host.voucher.update'); });
     //Route::get('_host/voucher/create', function () { return view('host.voucher.create'); });
     //Route::get('_host/voucher', function () { return view('host.voucher.index'); });
+    Route::resource('_host/payment','Backend\HostPaymentController');
     Route::resource('_host/department','Backend\HostDepartmentController');
     Route::resource('_host/package','Backend\HostPackageController');
     Route::resource('_host/voucher','Backend\HostVoucherController');

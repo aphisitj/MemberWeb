@@ -31,7 +31,7 @@ class HostPaymentController extends Controller
 
         $this->obj_fn = new MainFunction(); // Obj Function
       
-        $this->page_title = 'Orders'; // Page Title
+        $this->page_title = 'Payment'; // Page Title
         $this->a_search = ['order_id']; // Array Search
         $this->path = '_admin/payment'; // Url Path
         $this->view_path = 'host.payment.'; // View Path
@@ -61,12 +61,11 @@ class HostPaymentController extends Controller
 
         $user_id = $this->user_id;
         $this->user = Place_User::find($user_id);
-        $user = $this->user;
-        
+        $user = $this->user;        
         $user = DB::table('user_place')->where('user_id',$user_id)->first();
         $place_id = $user->place_id ;
-
-
+        $user = $this->user;
+        $user_id = $this->user_id;
         $data_order = DB::table('orders')
             ->join('order_package', 'orders.order_id', '=', 'order_package.order_package_id')
             ->join('order_voucher', 'order_package.order_package_id', '=', 'order_voucher.order_voucher_id')
@@ -75,7 +74,6 @@ class HostPaymentController extends Controller
             ->join('place', 'place.place_id', '=', 'package.place_id')            
             ->Where('place.place_id',$place_id)                      
             ->get();
-
         $order_count = DB::table('orders')
             ->join('order_package', 'orders.order_id', '=', 'order_package.order_package_id')
             ->join('order_voucher', 'order_package.order_package_id', '=', 'order_voucher.order_voucher_id')
@@ -83,8 +81,9 @@ class HostPaymentController extends Controller
             ->join('package', 'package.package_id', '=', 'order_package.package_id')
             ->join('place', 'place.place_id', '=', 'package.place_id')            
             ->Where('place.place_id',$place_id)   
-            ->count();
-
+            ->count();        
+        $data = $obj_modelorder;
+        $count_data = $data->count();  
 
 
 
@@ -99,13 +98,7 @@ class HostPaymentController extends Controller
 
         $search = Input::get('search');
 
-        $user = $this->user;
-        $user_id = $this->user_id;
-        
-        
-        // $data = $this->obj_model;
-        $data = $obj_modelorder;
-                    
+                 
                          
         if(!empty($search))
         {
@@ -116,7 +109,7 @@ class HostPaymentController extends Controller
                }
             });
         }
-        $count_data = $data->count();
+        
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
 

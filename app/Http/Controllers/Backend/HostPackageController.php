@@ -54,10 +54,8 @@ class HostPackageController extends Controller
         $user_id = $this->user_id;
         $user = DB::table('user_place')->where('user_id',$user_id)->first();
         $place_id = $user->place_id ;
-        
-        // $data = $this->obj_model;
         $data = $obj_model->where('place_id', $place_id);
-                    
+        $count_data = $data->count();            
                          
         if(!empty($search))
         {
@@ -69,7 +67,7 @@ class HostPackageController extends Controller
             });
         }
 
-        $count_data = $data->count();
+        
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
 

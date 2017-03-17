@@ -49,7 +49,7 @@ class AdminPlaceController extends Controller
         $this->obj_modelplace = new $this->modelplace;
         $this->modeluser = 'App\Models\User';
         $this->obj_modeluser = new $this->modeluser;
-         // Obj Model
+         
         $obj_fn = $this->obj_fn;
         $obj_modelplace = $this->obj_modelplace;
         $obj_modeluser = $this->obj_modeluser;
@@ -68,11 +68,8 @@ class AdminPlaceController extends Controller
 
         $user = $this->user;
         $user_id = $this->user_id;
-        
-        
-        // $data = $this->obj_model;
         $data = $obj_modelplace;
-                    
+        $count_data = $data->count();           
                          
         if(!empty($search))
         {
@@ -83,7 +80,7 @@ class AdminPlaceController extends Controller
                }
             });
         }
-        $count_data = $data->count();
+       
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
 
@@ -100,10 +97,9 @@ class AdminPlaceController extends Controller
         $page_title = $this->page_title;
         $url_to = $this->path;
         $method = 'POST';
-        $txt_manage = "Add";
-        
+        $txt_manage = "Add";        
 
-        // $roles = Place::all();
+        
 
         $roles = DB::table('user_place')
                 ->join('user', 'user.user_id', '=', 'user_place.user_id')
@@ -123,7 +119,6 @@ class AdminPlaceController extends Controller
 
       
         $input = $request->all();
-
         $dataplace = $obj_modelplace->create($input);
         $datauser = $obj_modeluser->create($input);
         $dataplaceuser = $obj_modelplaceuser->create($input);
@@ -189,17 +184,22 @@ class AdminPlaceController extends Controller
         $txt_manage = 'Update';
 
         $datavoucher = $obj_modelvoucher->where('place_id',$id);
-
         $data = $obj_modelplace->find($id);
-
-        // $roles = Place::all();
         $roles = DB::table('user_place')
                 ->join('user', 'user.user_id', '=', 'user_place.user_id')
                 ->join('place', 'place.place_id', '=', 'user_place.place_id')
                 ->get();
+        $img_place = DB::table('place_picture')->where('place_id', $id)
+                    ->get();
+
+        $img_count = DB::table('place_picture')->where('place_id', $id)
+                    ->count();
+
+        $data_voucher = DB::table('voucher')->where('package_id',$id)->get();
+        $voucher_count = $datavoucher->count();
 
         $path = $this->path;
-        
+            
        
 
          if(empty($order_by)) $order_by = $obj_modelvoucher->primaryKey;
@@ -215,17 +215,11 @@ class AdminPlaceController extends Controller
                }
             });
         }
+        
         $per_page = config()->get('constants.PER_PAGE');
         $datavoucher = $datavoucher->orderBy($order_by,$sort_by);
         $datavoucher = $datavoucher->paginate($per_page);
-        $img_place = DB::table('place_picture')->where('place_id', $id)
-                    ->get();
-
-        $img_count = DB::table('place_picture')->where('place_id', $id)
-                    ->count();
-
-        $data_voucher = DB::table('voucher')->where('package_id',$id)->get();
-        $voucher_count = $datavoucher->count();
+        
         return view($this->view_path.'detail',compact('path','page_title','img_count','img_place','datavoucher','voucher_count','data','url_to','method','txt_manage','obj_modelplace','obj_fn','roles'));
     }
 

@@ -13,28 +13,29 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
 
 
 ?>
-@extends('host.layout.main-layout')
+@extends('backend.layout.main-layout') 
 
 @section('page-style') 
+ {{ Html::style('assets/global/plugins/vendors/animate.css/animate.css')}} 
 @endsection 
 
 @section('more-style') 
-@endsection 
+@endsection
 
-@section('page-title') 
-{{ $page_title }} 
-@endsection 
-
+@section('page-title')
+    {{ $page_title }}
+@endsection
 @section('page-content')
 <div class="col-md-12">
+
   <div class="portlet light">
     <div class="form-search">
-      <form action="" class="form-horizontal" method="GET">
+      <form action="{{ url()->to($path) }}" class="form-horizontal" method="GET">
         <div class="form-group">
           <label class="control-label col-md-1">Search</label>
           <div class="col-md-3">
             <input class="form-control" type="text" name="search" value="{{ Input::get('search') }}">
-            <span class="help-block">Search by Department name</span>
+            <span class="help-block">Search by Place Type ID ,Place Type Name </span>
           </div>
         </div>
         <div class="form-group">
@@ -57,35 +58,32 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th class="text-center">{!! $obj_fn->sorting('Department ID','place_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Department Name','place_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Mobile','mobile',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Type','place_type',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th class="text-center col-sm-2">{!! $obj_fn->sorting('Place Type ID',$primaryKey,$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Place Type Name TH','place_type_name_th',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+              <th>{!! $obj_fn->sorting('Place Type Name EN','place_type_name_en',$order_by,$sort_by,$str_param_sort,'') !!}</th>             
               <th class="text-center col-sm-2 col-md-2">
                 <a href="{{ url()->to($path.'/create') }}" class="btn btn-circle blue btn-xs"><i class="fa fa-plus"></i> Add</a>
               </th>
             </tr>
           </thead>
-          <tbody>
 
+          <tbody>
             @if($count_data > 0)
               @foreach($data as $key => $field)
                 <tr>
-                <td class="text-center">{{ $field->place_id }}</td>
-                <td>{{ $field->place_name }}</td>
-                <td>{{ $field->mobile }}</td>
-                <td>{{ $field->place_type }}</td>   
-                <td class="text-center">
-                  <a href="{{ url()->to($path.'/'.$field->$primaryKey .'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>
-                  
-
-                  <form action="{{ url()->to($path.'/'.$field->$primaryKey) }}" class="form-delete" parent-data-id="{{ $field->$primaryKey }}" method="POST">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="button" class="btn btn-xs btn-circle red btn-delete" data-id="{{ $field->$primaryKey }}"><i class="fa fa-trash-o"></i></button>
-                  </form>
-                </td>
-              </tr>
+                  <td class="text-center">{{ $field->$primaryKey }}</td>                         
+                  <td>{{ $field->place_type_name_th }}</td>
+                  <td>{{ $field->place_type_name_en }}</td>
+                 
+                  <td class="text-center">      
+                    <a href="{{ url()->to($path.'/'.$field->$primaryKey .'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>                                
+                      <form action="{{ url()->to($path.'/'.$field->$primaryKey) }}" class="form-delete" parent-data-id="{{ $field->$primaryKey }}" method="POST" >
+                        <input type="hidden" name="_method" value="delete">
+                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="button" class="btn btn-xs btn-circle red btn-delete" data-id="{{ $field->$primaryKey }}"><i class="fa fa-trash-o"></i></button>
+                      </form>
+                  </td>
+                </tr>
               @endforeach
                 @else
                   <tr>
@@ -94,19 +92,17 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
               @endif
 
 
-            
-
           </tbody>
         </table>
       </div>
-
+      {!! $data->appends(Input::except('page'))->render() !!}
     </div>
   </div>
 </div>
+@endsection 
+
+@section('page-plugin')
+@endsection 
+
+@section('more-script') 
 @endsection
-
- @section('page-plugin') 
- @endsection 
-
- @section('more-script') 
- @endsection

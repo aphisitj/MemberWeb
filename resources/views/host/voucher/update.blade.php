@@ -3,8 +3,20 @@ $table = $obj_model->table;
 $primaryKey = $obj_model->primaryKey;
 $fillable = $obj_model->fillable;
 
+$tablepackage = $obj_modelpackage->table;
+$primaryKeypackage = $obj_modelpackage->primaryKey;
+$fillablepackage = $obj_modelpackage->fillable;
+
+$order_by = Input::get('order_by');
+$sort_by = Input::get('sort_by');
+
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
+$a_param_sort = Input::except(['order_by','sort_by']);
+$str_param_sort = $obj_fn->parameter($a_param_sort);
+
+
+
 
 if(isset($data)) {
     foreach($fillable as $value){
@@ -15,6 +27,8 @@ if(isset($data)) {
         $$value = "";
     }
 }
+
+
 ?>
 @extends('host.layout.main-layout') 
 @section('page-style') 
@@ -29,7 +43,7 @@ if(isset($data)) {
   @section('more-style')
   @endsection 
   @section('page-title')
-   Voucher update
+   {{ $txt_manage.' '.$page_title }} 
    @endsection @section('page-content')
 	<div class="col-md-12">
 		<div class="portlet light">
@@ -62,19 +76,76 @@ if(isset($data)) {
 						<div class="form-group">
 							<label class="control-label col-md-3">Package ID</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control maxlength" maxlength="255" name="package_id" value="{{ $package_id }}">
+								<input type="text" class="form-control maxlength" maxlength="255" id="packageid" name="package_id" value="{{ $package_id }}">
 							</div>
 						</div>	
+						<hr>
 					
+						<h2>Package</h2>
+      					 <div class="portlet-body">
+					        <div class="table-responsive">
+								 <table class="table table-striped table-bordered table-hover">
+									<thead>
+							            <tr>
+							              <th class="text-center">{!! $obj_fn->sorting('Package Id','package_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th>{!! $obj_fn->sorting('Package Name','package_name',$order_by,$sort_by,$str_param_sort,'') !!}</th>              
+							              <th class="col-sm-2 col-md-2">{!! $obj_fn->sorting('Detail','detail',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th>{!! $obj_fn->sorting('Price','price',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th>{!! $obj_fn->sorting('Fee','fee',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th>{!! $obj_fn->sorting('Quota','quota',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th>{!! $obj_fn->sorting('Expire Type','expire_type',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th>{!! $obj_fn->sorting('Expire Day','expire_day',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th>{!! $obj_fn->sorting('Expire Date','expire_date',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th>{!! $obj_fn->sorting('Public','public',$order_by,$sort_by,$str_param_sort,'') !!}</th>
+							              <th class="text-center col-sm-2 col-md-2">
+							          		<p>Add Package</p>
+							              </th>
+							            </tr>
+							         </thead>
+			         				<tbody>
+          
 
+							          @if($count_data > 0)
+							              	@foreach($datapackage as $key => $field)
+									            <tr>
+									              <td class="text-center">{{ $field->package_id }}</td>
+									              <td>{{ $field->package_name }}</td>              
+									              <td>{{ $field->detail }}</td>
+									              <td>{{ $field->price }}</td>
+									              <th>{{ $field->fee }}%</th>
+									              <td>{{ $field->quota }}</td>
+									              <td>{{ $field->expire_type }}</td>
+									              <td class="text-center">@if($field->expire_type == 1){{ $field->expire_day }}@else <p>-</p> @endif</td>
+									              <td class="text-center">@if($field->expire_type == 2){{ $field->expire_date }}@else <p>-</p> @endif</td>
+									              <td class="text-center">@if($field->public == 1) <p> Public </p> @else <p> Private </p> @endif</td>
+									              <td class="text-center">         
+													
+													<form>
+													 <input class="btn btn-circle blue btn-xs" type="button" value="{{ $field->package_id }}" onclick="doAction(this.value)">													
+													</form>	
+									                      
+									              </td>
+									            </tr>
+							              	@endforeach
+							            @else
+							                  <tr>
+							                   	<td class="text-center" colspan="9">No Result.</td>
+							                  </tr>
+							            @endif
 
+							        </tbody>
+					          </table>
+					        </div>
+					        
+     					</div>
+					<hr>
 					<form action="{{ url()->to($url_to) }}" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="_method" value="{{ $method }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="str_param" value="{{ $str_param }}">
 						    <div class="row page-header">
 						        <div class="col-sm-12">
-						            <h1 class="">{{ $page_title }}</h1>
+						            <h1 class="">{{ $page_title }} Img</h1>
 						        </div>
 						        <div class="col-sm-6 text-right padding-top-20">
 						            <input type="file" name="uploader" id="uploader" />
@@ -123,6 +194,15 @@ if(isset($data)) {
 	</div>
 	@endsection 
 	@section('page-plugin') 
+	 <script type="text/javascript">
+  function doAction(value)
+  {
+   // Don't really have anything to set...just show the value
+   
+   document.getElementById("packageid").value = value ;
+   
+  }
+ </script>
 	{{ Html::script('assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}
 	{{ Html::script('assets/global/plugins/jquery-validation/js/additional-methods.min.js') }} 
 	{{ Html::script('assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }} 

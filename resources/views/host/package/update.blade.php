@@ -29,7 +29,7 @@ if(isset($data)) {
 @endsection 
 
 @section('page-title')
-    Update Package
+    {{ $txt_manage.' '.$page_title }} 
 @endsection
 @section('page-content')
 <div class="col-md-12">

@@ -13,7 +13,15 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
 
 //dd($data_order);
 ?>
-@extends('host.layout.main-layout') @section('page-style') @endsection @section('more-style') @endsection @section('page-title') Payment @endsection @section('page-content')
+@extends('host.layout.main-layout') 
+@section('page-style') 
+@endsection 
+@section('more-style') 
+@endsection 
+@section('page-title') 
+{{ $page_title }} 
+@endsection 
+@section('page-content')
 <div class="col-md-12">
   <div class="portlet light">
     <div class="form-search">

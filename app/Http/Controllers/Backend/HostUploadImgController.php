@@ -15,7 +15,7 @@ use Input;
 use Hash;
 use DB;
 
-class HostUploadimgController extends Controller{
+class HostUploadImgController extends Controller{
 
     public function __construct()
     {
@@ -73,6 +73,8 @@ class HostUploadimgController extends Controller{
     // ------------------------------------ View Update Page
     public function edit($id)
     {
+        $this->user_id = session()->get('s_host_id'); 
+        $this->session_id = $session_id = session()->getId();
         $obj_fn = $this->obj_fn;
         $obj_model = $this->obj_model;
 
@@ -86,17 +88,11 @@ class HostUploadimgController extends Controller{
         $data = $obj_model->find($id);
         $images = Place_Picture::where('place_id',$id)->get();
         $roles = Place::all();
-         
-        $this->user_id = session()->get('s_host_id'); 
-        $this->session_id = $session_id = session()->getId();
-
         $user_id = $this->user_id;
         $this->user = Place_User::find($user_id);
-        $user = $this->user;
-        
+        $user = $this->user;        
         $user = DB::table('user_place')->where('user_id',$user_id)->first();
         $place_id = $user->place_id ;
-
         $images = Place_Picture::where('place_id',$place_id)->get();
         $images_count = Place_Picture::where('place_id',$place_id)->count();
         $path = $this->path;

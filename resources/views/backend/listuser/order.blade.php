@@ -24,13 +24,18 @@ if(isset($data)) {
 //dd($data_order);
 ?>
 @extends('backend.layout.main-layout') 
+
  @section('page-style') 
  {{ Html::style('assets/global/plugins/vendors/animate.css/animate.css')}} 
  @endsection 
+
  @section('more-style') 
  @endsection 
+
  @section('page-title')
+ {{ $page_title }} {{ $txt_manage }}
  @endsection
+
 @section('page-content')
   <div class="col-md-12">
     <div class="portlet light">
@@ -40,7 +45,7 @@ if(isset($data)) {
           <table>
             <tr>
               <td>
-                <img src="{{ url()->asset('assets/backend/img/desktop1.jpg') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+                <img src="{{ url()->asset('assets/backend/layout3/img/logo-default.png') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
               </td>
               
             
@@ -113,38 +118,28 @@ if(isset($data)) {
       <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
           <thead>
-
             <tr>
               <th>{!! $obj_fn->sorting('Order id','order_id',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th>{!! $obj_fn->sorting('Price total','price_total',$order_by,$sort_by,$str_param_sort,'') !!}</th>
               <th>{!! $obj_fn->sorting('Fee total','fee_total',$order_by,$sort_by,$str_param_sort,'') !!}</th>
-              <th>{!! $obj_fn->sorting('Date','date',$order_by,$sort_by,$str_param_sort,'') !!}</th>             
-             
-                        
+              <th>{!! $obj_fn->sorting('Date','date',$order_by,$sort_by,$str_param_sort,'') !!}</th>                       
             </tr>
-
           </thead>
-
           <tbody>
             @if($order_count > 0)
-              @foreach($dataorders as $key => $field)
-              
+              @foreach($dataorders as $key => $field)              
                 <tr>
                   <td class="text-center">{{$field->order_id}}</td>                  
                   <td>{{$field->price_total}}</td>
                   <td>{{$field->fee_total}}</td>
-                  <td>{{$field->date}}</td>
-           
-      
+                  <td>{{$field->date}}</td>     
                 </tr>
               @endforeach
                 @else
                   <tr>
                     <td class="text-center" colspan="9">No Result.</td>
                      </tr>
-            @endif
-
-           
+            @endif    
 
 
           </tbody>
@@ -157,5 +152,6 @@ if(isset($data)) {
 @endsection 
 @section('page-plugin')
 @endsection 
+
 @section('more-script') 
 @endsection

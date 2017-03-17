@@ -3,9 +3,6 @@ $table = $obj_model->table;
 $primaryKey = $obj_model->primaryKey;
 $fillable = $obj_model->fillable;
 
-$tableuser = $obj_modeluser->table;
-$primaryKeyuser = $obj_modeluser->primaryKey;
-$fillableuser = $obj_modeluser->fillable;
 
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
@@ -20,18 +17,8 @@ if(isset($data)) {
     }
 }
 
-if(isset($datauser)) {
-    foreach($fillableuser as $value){
-        $$value = $datauser->$value;
-    }
-} else {
-    foreach($fillableuser as $value){
-        $$value = "";
-    }
-}
-
 ?>
-@extends('host.layout.main-layout') 
+@extends('backend.layout.main-layout') 
 
 @section('page-style') 
  {{ Html::style('assets/global/plugins/jquery-tags-input/jquery.tagsinput.css') }} 
@@ -47,8 +34,8 @@ if(isset($datauser)) {
   @endsection 
 
   @section('page-title')
-	{{ $txt_manage.' '.$page_title }} 
-  @endsection
+	 {{ $txt_manage.' '.$page_title }}
+	@endsection
   @section('page-content')
 <div class="col-md-12">
 		<div class="portlet light">
@@ -58,69 +45,23 @@ if(isset($datauser)) {
 					<input type="hidden" name="_method" value="{{ $method }}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="str_param" value="{{ $str_param }}">
-					<div class="form-body">
-
-
-						
-						<div class="form-group">
-							<label class="control-label col-md-3">Place name</label>
-							<div class="col-md-4">
-								<input type="text" class="form-control" name="place_name" value="{{ $place_name }}">
-							</div>
-						</div>						
-
-						<div class="form-group">
-							<label class="control-label col-md-3">Type</label>
-							<div class="col-md-4">
-								<select class="form-control" name="placetype" id="placetype">
-
-					            @foreach( $dataplacetype as $key => $type )  
-                					<option value="2" @if( $place_type === $type->place_type_id ) selected="selected " @endif >{{ $type->place_type_name_th }}</option>                
-               					@endforeach 
-
-                            	</select>
-							</div>
-						</div>		
-
-						<div class="control-label col-md-3">					        
-					        <span class="caption-subject font-green-sharp bold">User</span>
-					      </div>
-					 	<div class="form-group">						
-						</div>
+					<div class="form-body">				
 					     
 
 
-					      <div class="form-group">
-						<label class="control-label col-md-3">Fristname</label>
+					<div class="form-group">
+						<label class="control-label col-md-3">Place Type Name TH</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" name="firstname" value="{{ $firstname }}">
+							<input type="text" class="form-control" name="place_type_name_th" value="{{ $place_type_name_th }}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">lastname</label>
+						<label class="control-label col-md-3">Place Type Name EN</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" name="lastname" value="{{ $lastname }}">
+							<input type="text" class="form-control" name="place_type_name_en" value="{{ $place_type_name_en }}">
 						</div>
 					</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">Email</label>
-							<div class="col-md-4">
-								<input type="email" class="form-control" name="email" value="{{ $email }}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="control-label col-md-3">Phone</label>
-							<div class="col-md-4">
-								<input type="tel" max="10" class="form-control" name="mobile" value="{{ $mobile }}">
-							</div>
-						</div>
-						<div class="form-group last password-strength">
-							<label class="control-label col-md-3">Password</label>
-							<div class="col-md-4">
-								<input type="password" class="form-control" name="password" value="{{ $password }}">
-							</div>
-						</div>
+						
 						
 
 					<hr>

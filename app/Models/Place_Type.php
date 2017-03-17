@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class Package extends Model
+class Place_Type extends Model
 {
 
     // use SoftDeletes;
-    public $table = 'package';
-    public $primaryKey = 'package_id';
-    public $fillable = ['package_id','package_name','detail','price','fee','expire_type','expire_day','expire_date','public','quota','place_id'];
+    public $table = 'place_type';
+    public $primaryKey = 'place_type_id';
+    public $fillable = ['place_type_id','place_type_name_th','place_type_name_en'];
 
     // public $fillable = ['place_id','place_name','address','status','img',
     //                         'facility','service','type','fee_percent','email','phone','password','username'];
@@ -20,9 +20,9 @@ class Package extends Model
     public $timestamps = true;
     // protected $dates = ['deleted_at'];
 
-    public function package()
+    public function place_type()
     {
-        return $this->belongsToMany('App\Models\Package');
+        return $this->belongsToMany('App\Models\Place_Type');
     }
 
 }

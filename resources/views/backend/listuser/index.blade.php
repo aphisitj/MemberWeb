@@ -14,12 +14,17 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
 ?>
 
   @extends('backend.layout.main-layout') 
+
   @section('page-style') 
   @endsection 
+
   @section('more-style') 
   @endsection 
-  @section('page-title') {{ $page_title }} 
+
+  @section('page-title') 
+  {{ $page_title }} 
   @endsection 
+
   @section('page-content')
   <div class="col-md-12">
     <div class="portlet light">
@@ -74,9 +79,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                 <td>{{ $field->mobile }}</td>                
                 <td><a href="{{ url()->to($path.'/order/'.$field->$primaryKey .'/edit?1'.$str_param) }}">Orders !!</a></td>
                 <td class="text-center">
-                  <a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>
-
-                  
+                  <a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a>                  
                   <form action="{{ url()->to($path.'/'.$field->$primaryKey) }}" class="form-delete" parent-data-id="{{ $field->$primaryKey }}" method="POST">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -98,7 +101,9 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
     </div>
   </div>
   @endsection 
+  
   @section('page-plugin')
   @endsection 
+
   @section('more-script') 
   @endsection

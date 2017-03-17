@@ -24,8 +24,7 @@
                   <div class="tile-stats portlet light">
                       <div class="icon"><i class="glyphicon glyphicon-piggy-bank"></i></div>
                       <div class="divsize">{{$sum_fee}}</div>
-                      <h2>Fee</h2>
-                      
+                      <h2>Fee</h2>                      
                       <p></p>
                   </div>
                 
@@ -33,8 +32,7 @@
                       <div class="icon"><i class="glyphicon glyphicon-inbox"></i></div>
                       <div class="divsize">{{$count_orders}}</div>
                       <h2>Orders</h2>
-                      <p></p>
-                      
+                      <p></p>                      
                   </div>
               </div>
 
@@ -42,8 +40,7 @@
                 <div class="portlet light  tile-stats">
                        <div class="icon"><i class="glyphicon glyphicon-user"></i></div>
                       <div class="divsize">{{$count_data}}</div>
-                      <h2>Users</h2>
-                      
+                      <h2>Users</h2>                      
                         <p></p>
                     </div>
               
@@ -62,8 +59,8 @@
                     </div>
               </div>
 
-    <div >
-                   <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div>
+              <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Popular<small>place</small></h2>
@@ -195,7 +192,6 @@
 @endsection 
 
 @section('page-plugin')
-
 @endsection 
 
 

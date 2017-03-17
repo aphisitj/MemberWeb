@@ -16,7 +16,7 @@ $str_param = $obj_fn->parameter($a_param);
    @section('more-style') 
    @endsection 
    @section('page-title') 
-   HOST
+   {{ $page_title }} 
    @endsection 
    @section('page-content')
   <div class="col-md-12">
@@ -105,38 +105,44 @@ $str_param = $obj_fn->parameter($a_param);
       </div>
     </div>
 
-    <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                      <i class="glyphicon glyphicon-credit-card"></i>
-                      <h1>4785</h1>
-                      <h4>Total Payment</h4>
-                      <p></p>
+    <div class="divmargin animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  
+                   <div class="tile-stats portlet light">
+                      <div class="icon"><i class="glyphicon glyphicon-credit-card"></i></div>
+                      <div class="divsize">{{ $count_voucher }}</div>
+                      <h2>Total Payment</h2>
+                      <p></p>                      
                   </div>
-                  <hr class="colorhr">
-                  <div class="tile-stats">
-                      <i class="glyphicon glyphicon-gift"></i>
-                      <h1>{{ $count_voucher }}</h1>
-                      <h4>Voucher</h4>
-                      <p></p>
+                 
+                  
+  
+                  <div class="tile-stats portlet light">
+                      <div class="icon"><i class="glyphicon glyphicon-gift"></i></div>
+                      <div class="divsize">{{ $count_voucher }}</div>
+                      <h2>Voucher</h2>
+                      <p></p>                      
                   </div>
+
                   
                   
               </div>
 
-              <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                        <i class="glyphicon glyphicon-inbox"></i>
-                        <h1>44</h1>
-                        <h4>Fee</h4>
-                        <p></p>
-                    </div>
-                    <hr>
-                    <div class="tile-stats">
-                        <i class="glyphicon glyphicon-piggy-bank"></i>
-                        <h1>{{ $count_package }}</h1>
-                        <h4>Package</h4>
-                        <p></p>
-                    </div>
+              <div class="divmargin  animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+               <div class="tile-stats portlet light">
+                      <div class="icon"><i class="glyphicon glyphicon-inbox"></i></div>
+                      <div class="divsize">44</div>
+                      <h2>Fee</h2>
+                      <p></p>                      
+                  </div>
+                   <div class="tile-stats portlet light">
+                      <div class="icon"><i class="glyphicon glyphicon-piggy-bank"></i></div>
+                      <div class="divsize">{{ $count_package }}</div>
+                      <h2>Package</h2>
+                      <p></p>                      
+                  </div>
+
+                
                                      
               </div>
 

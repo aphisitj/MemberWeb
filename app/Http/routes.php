@@ -32,7 +32,8 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
   
     Route::resource('listuser','Backend\AdminRoleController');
     Route::resource('listuser','Backend\AdminUserController');
-    Route::resource('listuser/order','Backend\AdminOrderDetailController');    
+    Route::resource('listuser/order','Backend\AdminOrderDetailController');  
+    Route::resource('placetype','Backend\AdminPlaceTypeController');   
     Route::resource('place','Backend\AdminPlaceController');
     Route::resource('place/voucher','Backend\AdminPackageDetailController');
     Route::resource('/','Backend\AdminhomeController');    
@@ -53,35 +54,14 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
     Route::group(['middleware'=>'host'], function () {
 
 
-
-
-    //Route::get('_host/department', function () { return view('host.department.index'); });
-    //Route::get('_host/department/update', function () { return view('host.department.update'); });
-    //Route::get('_host/department/create', function () { return view('host.department.create'); });
-
-
-    //Route::get('_host/package', function () { return view('host.package.index'); });
-    //Route::get('_host/package/create', function () { return view('host.package.create'); });
-    //Route::get('_host/package/update', function () { return view('host.package.update'); });
-
-    //Route::get('_host/payment', function () { return view('host.payment.index'); });
-  
-    Route::get('_host/orders', function () { return view('host.orders.index'); });
-
-    
-    Route::get('_host/update', function () { return view('host.profile.update'); });
-
-
-    //Route::get('_host/voucher/update', function () { return view('host.voucher.update'); });
-    //Route::get('_host/voucher/create', function () { return view('host.voucher.create'); });
-    //Route::get('_host/voucher', function () { return view('host.voucher.index'); });
+    Route::get('_host/inquiry', function () { return view('host.inquiry.index'); });
     Route::resource('_host/payment','Backend\HostPaymentController');
     Route::resource('_host/department','Backend\HostDepartmentController');
     Route::resource('_host/package','Backend\HostPackageController');
     Route::resource('_host/voucher','Backend\HostVoucherController');
     Route::resource('_host','Backend\ProfileHostController');
 
-    Route::resource('_host/uploadimg','Backend\HostUploadimgController');
+    Route::resource('_host/uploadimg','Backend\HostUploadImgController');
     
     
 

@@ -28,9 +28,7 @@ class AdminOrderDetailController extends Controller
         $this->modeluser = 'App\Models\User';
         $this->obj_modeluser = new $this->modeluser;
      	$this->modelorder = 'App\Models\Orders';
-        $this->obj_modelorder = new $this->modelorder;      
-      
-
+        $this->obj_modelorder = new $this->modelorder;
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'Orders'; // Page Title
@@ -82,7 +80,12 @@ class AdminOrderDetailController extends Controller
 
 
         $dataorders = $obj_modelorders->Where('user_id',$id) ;
+        $order_count = $dataorders->count();
         $data = $obj_modeluser->find($id);
+        $datauser = DB::table('orders')
+                    ->Where('user_id',$id)
+                    ->get();
+
 
         if(empty($order_by)) $order_by = $obj_modelorders->primaryKey;
         $sort_by = Input::get('sort_by');
@@ -97,27 +100,12 @@ class AdminOrderDetailController extends Controller
                }
             });
         }
-        $per_page = config()->get('constants.PER_PAGE');
+
+
+        
         $dataorders = $dataorders->orderBy($order_by,$sort_by);
         $dataorders = $dataorders->paginate($per_page);
-        $order_count = $dataorders->count();
-
-        // $data_order = DB::table('orders')
-        //     ->join('order_package', 'orders.order_id', '=', 'order_package.order_package_id')
-        //     ->join('order_voucher', 'order_package.order_package_id', '=', 'order_voucher.order_voucher_id')
-        //     ->select('orders.*', 'order_package.*','order_voucher.*')
-        //     ->Where('orders.user_id',$id)                      
-        //     ->get();
-
-        $datauser = DB::table('orders')
-            ->Where('user_id',$id)
-            ->get();
-        // $order_count = DB::table('orders')
-        //     ->join('order_package', 'orders.order_id', '=', 'order_package.order_package_id')
-        //     ->join('order_voucher', 'order_package.order_package_id', '=', 'order_voucher.order_voucher_id')
-        //     ->select('orders.user_id', 'order_package.*')
-        //     ->Where('orders.user_id',$id) 
-        //     ->count();
+        $per_page = config()->get('constants.PER_PAGE');            
       
         
 
@@ -135,10 +123,10 @@ class AdminOrderDetailController extends Controller
 
         $input = $request->except(['_token','_method','str_param']); // Get all post from form
         $input['password'] = Hash::make($request->password);
-
         $data = $obj_modelplace->find($id)->update($input);
 
         $str_param = $request->str_param;
+
         return redirect()->to($this->path.'?1'.$str_param);
     }
     // ------------------------------------ Delete Data

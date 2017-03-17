@@ -21,11 +21,14 @@ $str_param = $obj_fn->parameter($a_param);
 	{{ Html::style('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}
 	 {{ Html::style('assets/global/plugins/vendors/animate.css/animate.css')}} 
     
-	 @endsection @section('more-style')
-	 @endsection @section('page-title')
+	 @endsection 
+	 @section('more-style')
+	 @endsection 
+	 @section('page-title')
+	 {{ $txt_manage.' '.$page_title }} 
 	 
-	 
-	 @endsection @section('page-content')
+	 @endsection 
+	 @section('page-content')
 	<div class="col-md-12">
 		<div class="portlet light">
 			<div class="portlet-body form">
@@ -39,7 +42,7 @@ $str_param = $obj_fn->parameter($a_param);
 						<input type="hidden" name="str_param" value="{{ $str_param }}">
 						    <div class="row page-header">
 						        <div class="col-sm-12">
-						            <h1 class="">{{ $page_title }}</h1>
+						            <h1 class="">{{ $page_title }} </h1>
 						        </div>
 						        <div class="col-sm-6 text-right padding-top-20">
 						            <input type="file" name="uploader" id="uploader" />

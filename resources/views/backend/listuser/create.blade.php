@@ -16,9 +16,9 @@ if(isset($data)) {
     }
 }
 ?>
+@extends('backend.layout.main-layout') 
 
-
-@extends('backend.layout.main-layout') @section('page-style') 
+@section('page-style') 
 {{ Html::style('assets/global/plugins/jquery-tags-input/jquery.tagsinput.css') }} 
 {{ Html::style('assets/global/plugins/select2/select2.css') }} 
 {{ Html::style('assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}} 
@@ -31,7 +31,8 @@ if(isset($data)) {
  @section('more-style') 
  @endsection
 
- @section('page-title') {{ $txt_manage.' '.$page_title }}
+ @section('page-title') 
+ {{ $txt_manage.' '.$page_title }}
  @endsection 
 
 @section('page-content')
@@ -99,7 +100,9 @@ if(isset($data)) {
 	</div>
 
 </div>
-@endsection @section('page-plugin') 
+@endsection 
+
+@section('page-plugin') 
 {{ Html::script('assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }} 
 {{ Html::script('assets/global/plugins/jquery-validation/js/additional-methods.min.js') }} 
 {{ Html::script('assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')}} 
@@ -114,6 +117,7 @@ if(isset($data)) {
 {{ Html::script('assets/global/plugins/ckeditor/ckeditor.js') }} 
 {{ Html::script('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}} 
 @endsection
+
 @section('more-script') 
 {{ Html::script('js/backend/validation.js') }} 
 {{ Html::script('js/backend/default.js') }} 

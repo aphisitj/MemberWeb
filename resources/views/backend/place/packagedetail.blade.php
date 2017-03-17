@@ -30,6 +30,7 @@ if(isset($data)) {
  @section('more-style') 
  @endsection 
  @section('page-title')
+  {{ $page_title }} {{ $txt_manage }}
  @endsection
 @section('page-content')
   <div class="col-md-12">
@@ -49,7 +50,7 @@ if(isset($data)) {
                   @endforeach 
 
               @else
-               <img class="mySlides" src="{{ url()->asset('assets/backend/img/voucher/desktop2.jpg') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+               <img class="mySlides" src="{{ url()->asset('assets/backend/layout3/img/logo-default.png') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
               @endif
 
               </td>

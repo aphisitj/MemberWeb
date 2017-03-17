@@ -10,6 +10,7 @@ use App\Models\Place;
 use App\Models\Place_User;
 use App\Models\Voucher;
 use App\Models\Voucher_Picture;
+use App\Models\Package;
 use DB;
 use Input;
 use Hash;
@@ -22,10 +23,13 @@ class HostVoucherController extends Controller
         $this->model = 'App\Models\Voucher';
         // $this->model = 'App\Models\Host';
         $this->obj_model = new $this->model; // Obj Model
+        $this->modelpackage = 'App\Models\Package';        
+        $this->obj_modelpackage = new $this->modelpackage; 
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'Voucher'; // Page Title
         $this->a_search = ['voucher_id','place_id','voucher_name','allot','package_id']; // Array Search
+        $this->a_searchpackage = ['package_id','package_name'];
         $this->path = '_host/voucher'; // Url Path
         $this->view_path = 'host.voucher.'; // View Path
 
@@ -55,10 +59,8 @@ class HostVoucherController extends Controller
         $user_id = $this->user_id;
         $user = DB::table('user_place')->where('user_id',$user_id)->first();
         $place_id = $user->place_id ;
-        
-        // $data = $this->obj_model;
         $data = $obj_model->where('place_id', $place_id);
-                    
+        $count_data = $data->count();           
                          
         if(!empty($search))
         {
@@ -70,7 +72,7 @@ class HostVoucherController extends Controller
             });
         }
 
-        $count_data = $data->count();
+        
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
 
@@ -87,10 +89,10 @@ class HostVoucherController extends Controller
         $method = 'POST';
         $txt_manage = "Add";
         
-
+       
         $roles = Voucher::all();
 
-        return view($this->view_path.'update',compact('page_title','url_to','method','txt_manage','obj_model','obj_fn','roles'));
+        return view($this->view_path.'create',compact('page_title','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Data
     public function store(Request $request )
@@ -120,20 +122,51 @@ class HostVoucherController extends Controller
     {
         $obj_fn = $this->obj_fn;
         $obj_model = $this->obj_model;
+        $obj_modelpackage = $this->obj_modelpackage;
 
+        
+        $per_page = config()->get('constants.PER_PAGE');
         $page_title = $this->page_title;
         $url_to = $this->path.'/'.$id;
         $method = 'PUT';
         $txt_manage = 'Update';
+        $path = $this->path;
 
+        $order_by = Input::get('order_by');
+        if(empty($order_by)) $order_by = $obj_modelpackage->primaryKey;
+        $sort_by = Input::get('sort_by');
+        if(empty($sort_by)) $sort_by = 'desc';
+
+        $search = Input::get('search');
+
+       
+        $user_id = $this->user_id;
+        $userplace = DB::table('user_place')->where('user_id',$user_id)->first();
+        $place_idget = $userplace->place_id ;     
+        $datapackage = $obj_modelpackage->where('place_id', $place_idget);
+        $count_data = $datapackage->count();          
         $data = $obj_model->find($id);
-
         $roles = Voucher::all();
-
         $images = Voucher_Picture::where('voucher_id',$id)->get();
-        $images_count = Voucher_Picture::where('voucher_id',$id)->count();
+        $images_count = Voucher_Picture::where('voucher_id',$id)->count(); 
+                        
+        if(!empty($search))
+        {
+            $datapackage = $datapackage->where(function($query) use ($search){
+               foreach($this->a_searchpackage as $field)
+               {
+                   $query = $query->orWhere($field,'like','%'.$search.'%');
+               }
+            });
+        }
 
-        return view($this->view_path.'update',compact('images','images_count','page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
+        
+        $datapackage = $datapackage->orderBy($order_by,$sort_by);
+        $datapackage = $datapackage->paginate($per_page);
+        
+
+
+        return view($this->view_path.'update',compact('obj_modelpackage','images','count_data','datapackage','path','images_count','page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Update Data
     public function update(Request $request,$id)
@@ -161,6 +194,15 @@ class HostVoucherController extends Controller
         if($request->exists('btn-delete')){
          $delplaceuser = Place_Picture::where('voucher_id', $id)->delete();
             echo 'Delete';
+            return redirect()->back();
+        }
+        if($request->exists('btn-add')){
+        $obj_model = $this->obj_model;
+
+        $input = $request->except(['_token','_method','str_param']); // Get all post from form
+        $input['password'] = Hash::make($request->password);
+
+        $data = $obj_model->find($id)->update($input);
             return redirect()->back();
         }
 

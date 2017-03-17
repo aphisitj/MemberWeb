@@ -57,10 +57,8 @@ class HostDepartmentController extends Controller
         $user_id = $this->user_id;
         $user = DB::table('user_place')->where('user_id',$user_id)->first();
         $place_id = $user->place_id ;
-        
-        // $data = $this->obj_model;
         $data = $obj_model->where('department_id', $place_id);
-                    
+        $count_data = $data->count();           
                          
         if(!empty($search))
         {
@@ -72,7 +70,7 @@ class HostDepartmentController extends Controller
             });
         }
 
-        $count_data = $data->count();
+        
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
 
@@ -89,11 +87,11 @@ class HostDepartmentController extends Controller
         $url_to = $this->path;
         $method = 'POST';
         $txt_manage = "Add";
-        
+        $dataplacetype = DB::table('place_type')->get();
 
         $roles = Place_User::all();
 
-        return view($this->view_path.'update',compact('page_title','url_to','method','obj_modeluser','txt_manage','obj_model','obj_fn','roles'));
+        return view($this->view_path.'update',compact('page_title','dataplacetype','url_to','method','obj_modeluser','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Data
     public function store(Request $request )
@@ -109,14 +107,13 @@ class HostDepartmentController extends Controller
 
         $obj_modelplace = $this->obj_model;
         $obj_modeluser = $this->obj_modeluser;
-        $obj_modelplaceuser = $this->obj_modelplaceuser;
-
-      
+        $obj_modelplaceuser = $this->obj_modelplaceuser;     
    
 
         $dataplace = $obj_modelplace->create($input);
         $datauser = $obj_modeluser->create($input);
         $dataplaceuser = $obj_modelplaceuser->create($input);
+
 
         $this->modeluser = 'App\Models\User';
         $this->obj_modeluser = new $this->modeluser;        
@@ -171,17 +168,15 @@ class HostDepartmentController extends Controller
         $method = 'PUT';
         $txt_manage = 'Update';
         $user_id = $this->user_id;
-        
-
-        
-
-        $roles = Place_User::where('place_id',$id)->first();
         $user_id = $roles->user_id ;
 
+
+        $dataplacetype = DB::table('place_type')->get();
+        $roles = Place_User::where('place_id',$id)->first();        
         $data = $obj_model->find($id);
         $datauser = $obj_modeluser->find($user_id);
 
-        return view($this->view_path.'update',compact('user','datauser','obj_modeluser','page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
+        return view($this->view_path.'update',compact('user','dataplacetype','datauser','obj_modeluser','page_title','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Update Data
     public function update(Request $request,$id)
@@ -190,9 +185,7 @@ class HostDepartmentController extends Controller
         $obj_modeluser = $this->obj_modeluser;
 
         $input = $request->except(['_token','_method','str_param']); // Get all post from form
-        $input['password'] = Hash::make($request->password);
-
-        
+        $input['password'] = Hash::make($request->password);        
         
         $roles = Place_User::where('place_id',$id)->first();
         $user_id = $roles->user_id ;

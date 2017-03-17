@@ -19,7 +19,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
   @section('more-style') 
   @endsection 
   @section('page-title') 
-    Voucher
+    {{ $page_title }} 
    @endsection @section('page-content')
   <div class="col-md-12">
     <div class="portlet light">

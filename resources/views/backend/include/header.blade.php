@@ -46,7 +46,10 @@
             <a href="{{ url()->to($bo_name.'/place') }}">Place</a>
           </li>
           <li>
-            <a href="{{ url()->to($bo_name.'/listuser') }}">listuser</a>
+            <a href="{{ url()->to($bo_name.'/listuser') }}">Listuser</a>
+          </li>
+          <li>
+            <a href="{{ url()->to($bo_name.'/placetype') }}">Placetype</a>
           </li>
           
           <li class="visible-xs">

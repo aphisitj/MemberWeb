@@ -53,7 +53,7 @@ class AdminUserController extends Controller
         $search = Input::get('search');
 
         $data = $obj_model;
-                    
+        $count_data = $data->count();            
                          
         if(!empty($search))
         {
@@ -64,7 +64,7 @@ class AdminUserController extends Controller
                }
             });
         }
-        $count_data = $data->count();
+        
         $data = $data->orderBy($order_by,$sort_by);
         $data = $data->paginate($per_page);
 

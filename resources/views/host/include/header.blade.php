@@ -96,7 +96,7 @@
             <a href="{{ url()->to('_host/payment') }}">Payment</a>
           </li>
           <li>
-            <a href="#">ตอบคำถาม</a>
+            <a href="{{ url()->to('_host/inquiry') }}">Inquiry</a>
           </li>
           <!--                     <li class="menu-dropdown classic-menu-dropdown ">
                         <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">

@@ -28,7 +28,8 @@ if(isset($data)) {
  @endsection 
  @section('more-style') 
  @endsection 
- @section('page-title') {{ $page_title }}
+ @section('page-title') 
+ {{ $page_title }}
  @endsection 
  @section('page-content')
 	<div class="col-md-12">
@@ -41,7 +42,8 @@ if(isset($data)) {
 					<input type="hidden" name="str_param" value="{{ $str_param }}">
 
 					<div class="form-body">
-					<div class="form-group">
+
+						<div class="form-group">
 							<label class="control-label col-md-3">User Id</label>
 							<div class="col-md-4">
 								<input type="text" class="form-control" name="user_id" value="{{ $user_id }}" disabled>
@@ -56,33 +58,33 @@ if(isset($data)) {
 						</div>
 						
 											
-							<div class="form-group">
-								<label class="control-label col-md-3">Email</label>
-								<div class="col-md-4">
-									<input type="email" class="form-control" name="email" value="{{ $email }}" disabled>
-								</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Email</label>
+							<div class="col-md-4">
+								<input type="email" class="form-control" name="email" value="{{ $email }}" disabled>
 							</div>
+						</div>
 
-							<div class="form-group">
-								<label class="control-label col-md-3">Phone</label>
-								<div class="col-md-4">
-									<input type="tel" class="form-control" name="mobile" value="{{ $mobile }}" disabled>
-								</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Phone</label>
+							<div class="col-md-4">
+								<input type="tel" class="form-control" name="mobile" value="{{ $mobile }}" disabled>
 							</div>
+						</div>
 						
 						<div class="form-group">
-								<label class="control-label col-md-3">Verify email</label>
-								<div class="col-md-4">
-									<input type="text" class="form-control" name="firstname" value="{{ $verify_email }}" disabled>
-								</div>
+							<label class="control-label col-md-3">Verify email</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="firstname" value="{{ $verify_email }}" disabled>
 							</div>
+						</div>
 						
 						<div class="form-group">
-								<label class="control-label col-md-3">Verification</label>
-								<div class="col-md-4">
-									<input type="text" class="form-control" name="firstname" value="{{ $verification }}" disabled>
-								</div>
+							<label class="control-label col-md-3">Verification</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="firstname" value="{{ $verification }}" disabled>
 							</div>
+						</div>
 
 							
 						</div>
@@ -96,6 +98,7 @@ if(isset($data)) {
 
 		</div>
 		@endsection 
+		
 		@section('page-plugin') 
 		{{ Html::script('assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }} 
 		{{ Html::script('assets/global/plugins/jquery-validation/js/additional-methods.min.js') }} 
@@ -111,6 +114,7 @@ if(isset($data)) {
 		 {{ Html::script('assets/global/plugins/ckeditor/ckeditor.js') }} 
 		 {{ Html::script('assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')	}} 
 		 @endsection 
+
 		 @section('more-script') 
 		 {{ Html::script('js/backend/validation.js') }} 
 		 {{ Html::script('js/backend/default.js') }}

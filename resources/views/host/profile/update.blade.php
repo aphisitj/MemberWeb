@@ -31,7 +31,7 @@ if(isset($data)) {
     
 	 @endsection @section('more-style')
 	 @endsection @section('page-title')
-	 Edit Profile
+	 {{ $txt_manage.' '.$page_title }} 
 	 @endsection @section('page-content')
 	<div class="col-md-12">
 		<div class="portlet light">
@@ -82,9 +82,12 @@ if(isset($data)) {
 			 			<div class="form-group">
 							<label class="control-label col-md-3">Type</label>
 							<div class="col-md-4">
-								<select class="form-control" name="place_type" id="place_type" >
-					                <option value="1" @if( $place_type === 1 ) selected="selected " @endif >Hotel</option>
-					                <option value="2" @if( $place_type === 2 ) selected="selected " @endif >Restaurant</option>
+								<select class="form-control" name="place_type" id="place_type" >							
+					               
+					            @foreach( $dataplacetype as $key => $type )  
+                					<option value="2" @if( $place_type === $type->place_type_id ) selected="selected " @endif >{{ $type->place_type_name_th }}</option>                
+               					@endforeach 
+               					
                             	</select>
 							</div>
 						</div>	

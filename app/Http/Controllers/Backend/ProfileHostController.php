@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
 use App\Models\Place_Picture;
+use App\Models\Place_Type;
 use App\Models\Voucher;
 use App\Models\Package;
 use Input;
@@ -75,13 +76,16 @@ class ProfileHostController extends Controller
                     })
                     ->where('user_place.user_id', $user_id)
                     ->get();
+
         $img_place = DB::table('place_picture')->where('place_id', $place_id)
                     ->get();
         $img_count = DB::table('place_picture')->where('place_id', $place_id)
                     ->count();
+        $dataplacetype = DB::table('place_type')->get();
+                    
 
 
-        return view($this->view_path.'index',compact('page_title','img_place','img_count','count_package','count_voucher','data','path','obj_model','obj_fn','dddd'));
+        return view($this->view_path.'index',compact('dataplacetype','page_title','img_place','img_count','count_package','count_voucher','data','path','obj_model','obj_fn','dddd'));
     }
     // ------------------------------------ View Add Page
     public function create()
@@ -131,12 +135,12 @@ class ProfileHostController extends Controller
         $data = $obj_model->find($id);
         $images = Place_Picture::where('place_id',$id)->get();
         $roles = Place::all();
-         
+        $dataplacetype = DB::table('place_type')->get();
                 
  
        
     
-        return view($this->view_path.'update',compact('page_title','images','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
+        return view($this->view_path.'update',compact('dataplacetype','page_title','images','data','url_to','method','txt_manage','obj_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Update Data
     public function update(Request $request,$id)

@@ -19,7 +19,7 @@ class AdminhomeController extends Controller
     public function __construct()
     {
     
-        // $this->model = 'App\Models\Admin'; // Model
+        
         $this->model = 'App\Models\User';
         $this->obj_model = new $this->model; // Obj Model
         $this->model_place = 'App\Models\Place';
@@ -28,7 +28,6 @@ class AdminhomeController extends Controller
         $this->obj_model_package = new $this->model_package;
         $this->model_orders = 'App\Models\Orders';
         $this->obj_model_orders = new $this->model_orders;
-
         $this->obj_fn = new MainFunction(); // Obj Function
       
         $this->page_title = 'List User'; // Page Title
@@ -36,8 +35,7 @@ class AdminhomeController extends Controller
         $this->path = '_admin'; // Url Path
         $this->view_path = 'backend.home.'; // View Path
 
-        $this->user_id = session()->get('s_host_id');
-        //$this->user = Place_User::find($this->user_id);
+        $this->user_id = session()->get('s_host_id');        
         $this->session_id = $session_id = session()->getId();  
     }
 
@@ -67,10 +65,6 @@ class AdminhomeController extends Controller
         $count_orders = $data_orders->count();
         $sum_fee = $data_orders->sum('fee_total');
         $sum_price = $data_orders->sum('price_total');
-
-
-
-
         $data = $data->paginate($per_page);
         
         return view($this->view_path.'index',compact('page_title',

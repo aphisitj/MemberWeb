@@ -77,11 +77,11 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
                   <td class="text-center">{{ $field->$primaryKey }}</td>
                   <td><a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}">{{ $field->place_name }}</a></td>
                   
-                  @if ($field->place_type === 1 )
-                  <td>Hotel</td>
-                  @else
-                  <td>Restaurant</td>
-                  @endif
+                  
+                  
+                  
+                  <td>{{ $field->place_type_name_en }}</td>
+                 
 
                   <td>{{ $field->mobile }}</td>
                   <td>{{ $field->status }}</td>

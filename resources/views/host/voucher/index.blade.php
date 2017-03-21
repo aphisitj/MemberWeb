@@ -93,7 +93,7 @@ $str_param_sort = $obj_fn->parameter($a_param_sort);
             </tbody>
           </table>
         </div>
-    
+    {!! $data->appends(Input::except('page'))->render() !!}
       </div>
     </div>
   </div>

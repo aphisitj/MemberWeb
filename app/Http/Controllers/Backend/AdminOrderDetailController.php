@@ -102,10 +102,10 @@ class AdminOrderDetailController extends Controller
         }
 
 
-        
+        $per_page = config()->get('constants.PER_PAGE');  
         $dataorders = $dataorders->orderBy($order_by,$sort_by);
         $dataorders = $dataorders->paginate($per_page);
-        $per_page = config()->get('constants.PER_PAGE');            
+                  
       
         
 

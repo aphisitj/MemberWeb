@@ -142,8 +142,8 @@ class HostVoucherController extends Controller
        
         $user_id = $this->user_id;
         $userplace = DB::table('user_place')->where('user_id',$user_id)->first();
-        $place_idget = $userplace->place_id ;     
-        $datapackage = $obj_modelpackage->where('place_id', $place_idget);
+        $place_id = $userplace->place_id ;     
+        $datapackage = $obj_modelpackage->where('place_id', $place_id)->where('public', 1);
         $count_data = $datapackage->count();          
         $data = $obj_model->find($id);
         $roles = Voucher::all();
@@ -181,6 +181,9 @@ class HostVoucherController extends Controller
           if($request->exists('btn-upload')){
             $file = $request->file('uploader');
             $path = 'assets/backend/img/voucher';
+            if($file === null){
+                 return redirect()->back();
+            }
             $filename = $file->getClientOriginalName();
             $file->move('assets/backend/img/voucher',$file->getClientOriginalName());
             $image = new Voucher_Picture;
@@ -199,7 +202,7 @@ class HostVoucherController extends Controller
         if($request->exists('btn-add')){
         $obj_model = $this->obj_model;
 
-        $input = $request->except(['_token','_method','str_param']); // Get all post from form
+        $input = $request->except(['_token','_method','str_param']); 
         $input['password'] = Hash::make($request->password);
 
         $data = $obj_model->find($id)->update($input);

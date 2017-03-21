@@ -70,10 +70,10 @@ class ProfileHostController extends Controller
 
         $count_package = $obj_modelpackage->where('place_id',$place_id)->count();
         $count_voucher = $obj_modelvoucher->where('place_id',$place_id)->count();
-        $data = DB::table('place')
-                    ->join('user_place', function ($join) {
-                        $join->on('place.place_id', '=', 'user_place.place_id');
-                    })
+        $wow = $obj_modelvoucher->where('place_id',$place_id)->count();
+        $data = DB::table('place')                    
+                    ->join('user_place', 'place.place_id', '=', 'user_place.place_id')
+                    ->join('place_type', 'place_type.place_type_id', '=', 'place.place_type')
                     ->where('user_place.user_id', $user_id)
                     ->get();
 

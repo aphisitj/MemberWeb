@@ -68,7 +68,8 @@ class AdminPlaceController extends Controller
 
         $user = $this->user;
         $user_id = $this->user_id;
-        $data = $obj_modelplace;
+        $data = $obj_modelplace
+                ->join('place_type', 'place_type.place_type_id', '=', 'place.place_type');
         $count_data = $data->count();           
                          
         if(!empty($search))

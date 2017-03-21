@@ -20,42 +20,7 @@
 
 
           <!-- END USER LOGIN DROPDOWN -->
-          <li class="droddown dropdown-separator"><span class="separator"></span></li>
-
-          <li role="presentation" class="dropdown">
-          
-            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-envelope-o"></i>
-              <span class="badge bg-green">1</span>
-            </a>
-            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                
-            <hr>
-              <li>
-                <a>
-                  <span class="image"><img src="{{ url()->asset('assets/backend/img/desktop1.jpg') }}" width="40" height="40" alt="Profile Image" /></span>
-                  <span>
-                          <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                  <br>
-                  </span>
-                  <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                </a>
-              </li>
-              <hr>
-
-              <li>
-                <div class="text-center">
-                  <a>
-                    <strong>See All Alerts</strong>
-                    <i class="fa fa-angle-right"></i>
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </li>
+      
 
 
 
@@ -88,15 +53,18 @@
           </li>
           <li>
             <a href="{{ url()->to('_host/package') }}">Package</a>
-          </li>          
+          </li> 
+          @if(session()->get('s_host_department_id') === null )
           <li>
             <a href="{{ url()->to('_host/department') }}">Department</a>
           </li>
+          @endif
           <li>
             <a href="{{ url()->to('_host/payment') }}">Payment</a>
           </li>
           <li>
-            <a href="{{ url()->to('_host/inquiry') }}">Inquiry</a>
+            <a href="{{ url()->to('_host/inquiry') }}" >Inquiry</a>
+            
           </li>
           <!--                     <li class="menu-dropdown classic-menu-dropdown ">
                         <a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;">

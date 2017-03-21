@@ -8,28 +8,28 @@ use App\Library\MainFunction;
 use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
+use App\Models\Order_voucher;
+use App\Models\Order_package;
+use App\Models\Orders;
+use App\Models\Inquiry;
 use DB;
 use Input;
 use Hash;
 
-class HostDepartmentController extends Controller
+class HostInquiryController extends Controller
 {
     public function __construct()
     {
-        // $this->model = 'App\Models\Admin'; // Model
-        $this->model = 'App\Models\Place';
-        // $this->model = 'App\Models\Host';
+        
+        $this->model = 'App\Models\Inquiry';       
         $this->obj_model = new $this->model; // Obj Model
         $this->obj_fn = new MainFunction(); // Obj Function
-        $this->modeluser = 'App\Models\User';
-        $this->obj_modeluser = new $this->modeluser;
-        $this->modelplaceuser = 'App\Models\Place_User';
-        $this->obj_modelplaceuser = new $this->modelplaceuser;
+        
       
-        $this->page_title = 'Department'; // Page Title
-        $this->a_search = ['place_name','place_id']; // Array Search
-        $this->path = '_host/department'; // Url Path
-        $this->view_path = 'host.department.'; // View Path
+        $this->page_title = 'Inquiry'; // Page Title
+        $this->a_search = ['departure_date','arrival_date','inquiry_id','order_voucher_id']; // Array Search
+        $this->path = '_host/inquiry'; // Url Path
+        $this->view_path = 'host.inquiry.'; // View Path
 
         $this->user_id = session()->get('s_host_id');
         $this->user = Place_User::find($this->user_id);
@@ -57,7 +57,14 @@ class HostDepartmentController extends Controller
         $user_id = $this->user_id;
         $user = DB::table('user_place')->where('user_id',$user_id)->first();
         $place_id = $user->place_id ;
-        $data = $obj_model->where('department_id', $place_id);
+        $data = $obj_model
+            ->join('order_voucher', 'inquiry.order_voucher_id', '=', 'order_voucher.order_voucher_id')
+            ->join('order_package', 'order_package.order_package_id', '=', 'order_voucher.order_package_id')
+            ->join('orders', 'orders.order_id', '=', 'order_package.order_id')
+            ->join('user', 'user.user_id', '=', 'orders.user_id')
+            ->join('voucher', 'voucher.voucher_id', '=', 'order_voucher.voucher_id')
+            ->join('package', 'package.package_id', '=', 'voucher.package_id')
+            ->where('voucher.place_id',$place_id);
         $count_data = $data->count();           
                          
         if(!empty($search))
@@ -167,13 +174,12 @@ class HostDepartmentController extends Controller
         $url_to = $this->path.'/'.$id;
         $method = 'PUT';
         $txt_manage = 'Update';
-        $user_id = $this->user_id ;
-        
+        $user_id = $this->user_id;
+        $user_id = $roles->user_id ;
 
 
         $dataplacetype = DB::table('place_type')->get();
-        $roles = Place_User::where('place_id',$id)->first();  
-        $user_id = $roles->user_id ;      
+        $roles = Place_User::where('place_id',$id)->first();        
         $data = $obj_model->find($id);
         $datauser = $obj_modeluser->find($user_id);
 

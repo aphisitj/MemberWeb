@@ -7,7 +7,7 @@ use App\Library\MainFunction;
 
 use App\Models\User;
 use App\Models\Place_User;
-
+use App\Models\Place;
 
 use Hash;
 use Cookie;
@@ -25,8 +25,10 @@ class HostLoginController extends Controller
             return redirect()->to('_host/');
     }
     public function postForm(Request $request){
-        $data = User::where('email',$request->email)->where('type',2)->first();
-        $datauserplace = Place_User::where('user_id',$data->admin_id)->first();
+        $data = User::join('user_place', 'user.user_id', '=', 'user_place.user_id')->
+        join('place', 'user_place.place_id', '=', 'place.place_id')->where('email',$request->email)->first();
+       
+
         if(empty($data))
             return redirect()->back()->with(['error','ไม่มีชื่อผู้ใช้งานนี้ในระบบค่ะ']);
         if(!Hash::check($request->password,$data->password))
@@ -36,6 +38,8 @@ class HostLoginController extends Controller
         session()->put('s_host_id',$data->admin_id);
         session()->put('s_host_name',$data->firstname.' '.$data->lastname);
         session()->put('s_host_email',$data->email);
+        session()->put('s_host_department_id',$data->department_id);
+
         if($remember_me == 1){
             Cookie::queue('c_host_id',$data->user_id,525600);
         }else{

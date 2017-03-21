@@ -48,7 +48,8 @@
     <!-- BEGIN LOGIN FORM -->
     <form class="login-form" action="{{ url('_host/login/form') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <h3 class="form-title">Login to your account</h3>
+        <h3 class="form-title">Login to your account  </h3>
+        <h4>( Host )</h4>
         <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>
 			<span>

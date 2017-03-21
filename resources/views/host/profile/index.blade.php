@@ -36,7 +36,7 @@ $str_param = $obj_fn->parameter($a_param);
                 
                 @endforeach 
               @else
-               <img class="mySlides" src="{{ url()->asset('assets/backend/img/desktop2.jpg') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
+               <img class="mySlides" src="{{ url()->asset('assets/backend/layout3/img/logo-default.png') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
               @endif
               
               <a href="{{ url()->to($path.'/uploadimg/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i>เปลี่ยนรูป</a> 
@@ -83,13 +83,11 @@ $str_param = $obj_fn->parameter($a_param);
                 
                 <h4>ประเภท</h4>
 
-                @if( $field->place_type === 1)
-                  <p> Hotel </p>
-                @else
+               
                   <p>
-                   Restaurant
+                  {{ $field->place_type_name_th }}
                   </p>
-                @endif
+                
 
                 <a href="{{ url()->to($path.'/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i></a> 
               

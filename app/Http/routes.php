@@ -54,7 +54,8 @@ Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME
     Route::group(['middleware'=>'host'], function () {
 
 
-    Route::get('_host/inquiry', function () { return view('host.inquiry.index'); });
+    //Route::get('_host/inquiry', function () { return view('host.inquiry.index'); });
+    Route::resource('_host/inquiry','Backend\HostInquiryController');
     Route::resource('_host/payment','Backend\HostPaymentController');
     Route::resource('_host/department','Backend\HostDepartmentController');
     Route::resource('_host/package','Backend\HostPackageController');

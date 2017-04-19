@@ -46,6 +46,9 @@
             <a href="{{ url()->to($bo_name.'/place') }}">Place</a>
           </li>
           <li>
+            <a href="{{ url()->to($bo_name.'/circulation') }}">Circulation</a>
+          </li>
+          <li>
             <a href="{{ url()->to($bo_name.'/listuser') }}">Listuser</a>
           </li>
           <li>

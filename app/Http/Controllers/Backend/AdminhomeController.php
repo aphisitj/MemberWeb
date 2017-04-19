@@ -10,6 +10,8 @@ use App\Models\Place;
 use App\Models\Place_User;
 use App\Models\Package;
 use App\Models\Orders;
+use App\Models\Order_package;
+use App\Models\Order_voucher;
 use Input;
 use Hash;
 use DB;
@@ -57,8 +59,35 @@ class AdminhomeController extends Controller
         $data_place = $obj_place;            
         $data_package = $obj_package;                  
         $data_orders = $obj_orders;
-        
+        $ratingvoucher = 1;
+        $ratingplacer = 1;
+      
 
+        $datadate = $data_orders
+                    ->join('order_package', 'order_package.order_id', '=', 'orders.order_id')
+                    ->join('package', 'package.package_id', '=', 'order_package.package_id')
+                    ->join('place', 'place.place_id', '=', 'package.place_id')
+                    ->select('*', DB::raw('SUM(orders.price_total) as sumprice'))                 
+                    ->groupBy('place.place_id')->get();
+
+
+
+         $datapopularvr = Order_voucher::join('voucher', 'voucher.voucher_id', '=', 'order_voucher.voucher_id')
+                    ->join('place', 'place.place_id', '=', 'voucher.place_id')
+                    ->select('*', DB::raw('COUNT(order_voucher.voucher_id) as count'))
+                    ->groupBy('order_voucher.voucher_id')
+                    ->orderBy('count', 'desc')
+                    ->take(5)->get();
+
+        $datapopularplace = Order_voucher::join('voucher', 'voucher.voucher_id', '=', 'order_voucher.voucher_id')
+                    ->join('place', 'place.place_id', '=', 'voucher.place_id')
+                    ->select('*', DB::raw('COUNT(place.place_id) as countsum'))
+                    ->groupBy('place.place_id')
+                    ->orderBy('countsum', 'desc')
+                    ->take(5)->get();
+        
+        
+        
         $count_data = $data->count();
         $count_place = $data_place->count();
         $count_package = $data_package->count();
@@ -66,9 +95,10 @@ class AdminhomeController extends Controller
         $sum_fee = $data_orders->sum('fee_total');
         $sum_price = $data_orders->sum('price_total');
         $data = $data->paginate($per_page);
+
         
-        return view($this->view_path.'index',compact('page_title',
-            'sum_price','sum_fee','count_orders','count_package','count_place','count_data','data','path','obj_model','obj_fn'));
+        return view($this->view_path.'index',compact('ratingplacer','ratingvoucher','datapopularvr','page_title',
+            'sum_price','sum_fee','count_orders','datapopularplace','count_package','count_place','count_data','data','path','obj_model','obj_fn'));
     }
     
 }

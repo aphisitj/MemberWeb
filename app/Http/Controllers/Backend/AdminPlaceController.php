@@ -10,8 +10,12 @@ use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
 use App\Models\PlaceVoucher;
+use App\Models\Place_Type;
 use App\Models\Place_Picture;
 use App\Models\Package;
+use App\Models\Order_voucher;
+use App\Models\Order_package;
+use App\Models\Orders;
 use DB;
 use Input;
 use Validator;
@@ -69,7 +73,10 @@ class AdminPlaceController extends Controller
         $user = $this->user;
         $user_id = $this->user_id;
         $data = $obj_modelplace
-                ->join('place_type', 'place_type.place_type_id', '=', 'place.place_type');
+                 ->join('place_type', 'place_type.place_type_id', '=', 'place.place_type') ;
+
+       
+                
         $count_data = $data->count();           
                          
         if(!empty($search))
@@ -101,7 +108,7 @@ class AdminPlaceController extends Controller
         $txt_manage = "Add";        
 
         
-
+        $dataplacetype = DB::table('place_type')->get();
         $roles = DB::table('user_place')
                 ->join('user', 'user.user_id', '=', 'user_place.user_id')
                 ->join('place', 'place.place_id', '=', 'user_place.place_id')
@@ -109,7 +116,7 @@ class AdminPlaceController extends Controller
 
 
 
-        return view($this->view_path.'create',compact('page_title','url_to','method','txt_manage','obj_modeluser','obj_modelplace','user_model','obj_fn','roles'));
+        return view($this->view_path.'create',compact('dataplacetype','page_title','url_to','method','txt_manage','obj_modeluser','obj_modelplace','user_model','obj_fn','roles'));
     }
     // ------------------------------------ Record Data
     public function store(Request $request)

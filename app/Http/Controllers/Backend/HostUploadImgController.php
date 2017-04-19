@@ -117,7 +117,7 @@ class HostUploadImgController extends Controller{
         $place_id = $user->place_id ;
         if($request->exists('btn-upload')){
             $file = $request->file('uploader');
-            $path = 'assets/backend/img/place';
+            $path = 'assets/backend/img/place';            
              if($file === null){
                  return redirect()->back();
             }
@@ -127,6 +127,9 @@ class HostUploadImgController extends Controller{
             $image->src = $filename;
             $image->place_id = $place_id;
             $image->save();
+            if ($e instanceof PDOException) {
+                 return redirect()->back();
+            }
             echo 'Uploaded';
         }
 

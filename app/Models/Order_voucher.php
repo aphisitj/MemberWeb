@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class Orders_voucher extends Model
+class Order_voucher extends Model
 {
 
     // use SoftDeletes;
-    public $table = 'orders_voucher';
-    public $primaryKey = 'orders_voucher_id';
-    public $fillable = ['orders_voucher_id','orders_package_id','voucher_id','used','max','status'];
+    public $table = 'order_voucher';
+    public $primaryKey = 'order_voucher_id';
+    public $fillable = ['order_voucher_id','order_package_id','voucher_id','used','max','status'];
 
     // public $fillable = ['place_id','place_name','address','status','img',
     //                         'facility','service','type','fee_percent','email','phone','password','username'];
@@ -22,7 +22,7 @@ class Orders_voucher extends Model
 
     public function orders_voucher()
     {
-        return $this->belongsToMany('App\Models\Orders_voucher');
+        return $this->belongsToMany('App\Models\Order_voucher');
     }
 
 }

@@ -11,7 +11,7 @@ $str_param = $obj_fn->parameter($a_param);
 $a_param_sort = Input::except(['order_by','sort_by']);
 $str_param_sort = $obj_fn->parameter($a_param_sort);
 
-
+//dd($data);
 ?>
 @extends('backend.layout.main-layout') 
 

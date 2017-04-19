@@ -61,8 +61,9 @@ if(isset($data)) {
 							<label class="control-label col-md-3">Type</label>
 							<div class="col-md-4">
 								<select class="form-control" name="placetype" id="placetype">
-					                <option value="1">Hotel</option>
-					                <option value="2" >Restaurant</option>
+					            @foreach( $dataplacetype as $key => $type )  
+                					<option value="{{ $type->place_type_id }}" @if( $place_type === $type->place_type_id ) selected="selected " @endif >{{ $type->place_type_name_th }}</option>                
+               					@endforeach 
                             	</select>
 							</div>
 						</div>		

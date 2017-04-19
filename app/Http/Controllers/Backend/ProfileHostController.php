@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Models\Place;
 use App\Models\Place_User;
 use App\Models\Place_Picture;
+use App\Models\Orders;
+use App\Models\Order_package;
+use App\Models\Order_voucher;
 use App\Models\Place_Type;
 use App\Models\Voucher;
 use App\Models\Package;
@@ -70,6 +73,8 @@ class ProfileHostController extends Controller
 
         $count_package = $obj_modelpackage->where('place_id',$place_id)->count();
         $count_voucher = $obj_modelvoucher->where('place_id',$place_id)->count();
+
+
         $wow = $obj_modelvoucher->where('place_id',$place_id)->count();
         $data = DB::table('place')                    
                     ->join('user_place', 'place.place_id', '=', 'user_place.place_id')
@@ -82,10 +87,30 @@ class ProfileHostController extends Controller
         $img_count = DB::table('place_picture')->where('place_id', $place_id)
                     ->count();
         $dataplacetype = DB::table('place_type')->get();
+
+        $datapopularvr = Order_voucher::join('voucher', 'voucher.voucher_id', '=', 'order_voucher.voucher_id')
+                    ->join('place', 'place.place_id', '=', 'voucher.place_id')
+                    ->select('*', DB::raw('COUNT(order_voucher.voucher_id) as count'))
+                    ->where('place.place_id', $place_id)
+                    ->groupBy('order_voucher.voucher_id')
+                    ->orderBy('count', 'desc')
+                    ->take(5)->get();
+
+        $dataprice = $obj_model
+                    ->leftJoin('package', 'place.place_id', '=', 'package.place_id')
+                    ->join('order_package', 'package.package_id', '=', 'order_package.package_id')
+                    ->join('orders', 'order_package.order_id', '=', 'orders.order_id')
+                    ->select('*', DB::raw('SUM(orders.price_total) as sumprice'),DB::raw('SUM(orders.fee_total) as sumfee')) 
+                    ->where('place.place_id', $place_id)                
+                    ->groupBy('place.place_id')
+                    ->get();
+
+
+        $ratingvoucher = 1;
                     
 
 
-        return view($this->view_path.'index',compact('dataplacetype','page_title','img_place','img_count','count_package','count_voucher','data','path','obj_model','obj_fn','dddd'));
+        return view($this->view_path.'index',compact('dataprice','ratingvoucher','datapopularvr','dataplacetype','page_title','img_place','img_count','count_package','count_voucher','data','path','obj_model','obj_fn','dddd'));
     }
     // ------------------------------------ View Add Page
     public function create()

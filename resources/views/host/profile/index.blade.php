@@ -2,7 +2,7 @@
 $table = $obj_model->table;
 $primaryKey = $obj_model->primaryKey;
 $fillable = $obj_model->fillable;
-//dd($place_id);
+//dd($dataprice);
 
 $a_param = Input::all();
 $str_param = $obj_fn->parameter($a_param);
@@ -39,7 +39,7 @@ $str_param = $obj_fn->parameter($a_param);
                <img class="mySlides" src="{{ url()->asset('assets/backend/layout3/img/logo-default.png') }}" alt="HTML5 Icon" style="width:480px;height:300px;">
               @endif
               
-              <a href="{{ url()->to($path.'/uploadimg/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="fa fa-edit"></i>เปลี่ยนรูป</a> 
+              <a href="{{ url()->to($path.'/uploadimg/'.$field->$primaryKey.'/edit?1'.$str_param) }}" class="btn btn-xs btn-circle green"><i class="glyphicon glyphicon-picture"></i>เปลี่ยนรูป</a> 
 
               </td>
                
@@ -104,23 +104,24 @@ $str_param = $obj_fn->parameter($a_param);
     </div>
 
     <div class="divmargin animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  
+                @foreach( $dataprice as $key => $sum )    
                    <div class="tile-stats portlet light">
                       <div class="icon"><i class="glyphicon glyphicon-credit-card"></i></div>
-                      <div class="divsize">{{ $count_voucher }}</div>
+                      <div class="divsize">{{ $sum->sumprice }}</div>
                       <h2>Total Payment</h2>
                       <p></p>                      
-                  </div>
-                 
+                  </div>                
                   
   
+                
+               
                   <div class="tile-stats portlet light">
                       <div class="icon"><i class="glyphicon glyphicon-gift"></i></div>
-                      <div class="divsize">{{ $count_voucher }}</div>
-                      <h2>Voucher</h2>
+                      <div class="divsize">{{ $sum->sumfee }}</div>
+                      <h2>Total Fee</h2>
                       <p></p>                      
                   </div>
-
+             @endforeach 
                   
                   
               </div>
@@ -129,8 +130,8 @@ $str_param = $obj_fn->parameter($a_param);
 
                <div class="tile-stats portlet light">
                       <div class="icon"><i class="glyphicon glyphicon-inbox"></i></div>
-                      <div class="divsize">44</div>
-                      <h2>Fee</h2>
+                      <div class="divsize">{{ $count_voucher }}</div>
+                      <h2>Voucher</h2>
                       <p></p>                      
                   </div>
                    <div class="tile-stats portlet light">
@@ -146,49 +147,43 @@ $str_param = $obj_fn->parameter($a_param);
 
               
 
-              <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+               <div class="divmargin portlet light animated flipInY col-lg-5 col-md-12 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Popular<small>package</small></h2>
+                    <h2>Popular<small>voucher</small></h2>
                    <hr>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>1</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Package 1</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>2</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Package 2</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>3</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Package 3</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    
-                    
-                  </div>
-                </div>
-              </div>  
+
+                  <div class="table-responsive">
+                    <table class=" table table-hover">
+
+                    <thead>
+                        <tr>
+                            <th class="text-center col-sm-2">อันดับ</th>
+                            <th class="text-center ">Sale</th>
+                            <th class="text-center ">Voucher Name</th>
+                            
+                        </tr>
+                        </thead>
+                        <thead>
+                        @foreach($datapopularvr as $key => $field)
+                                    <tr>
+                                        <td class="text-center">{{ $ratingvoucher++ }}</td>
+                                        <td class="text-center">{{ $field->count }}</td>
+                                        <td class="text-center ">{{ $field->voucher_name }}</td>
+                                                                             
+                                    </tr>                              
+                        @endforeach
+                                    
+                                                               
+                       
+                     </tbody>
+                    </table>
+                   </div>
+
+                 </div>
+              </div>
 
     
 

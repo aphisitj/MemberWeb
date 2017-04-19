@@ -1,3 +1,7 @@
+<?php 
+//dd($datapopularplace);
+
+ ?>
 @extends('backend.layout.main-layout') 
 
 @section('page-style') 
@@ -28,15 +32,27 @@
                       <p></p>
                   </div>
                 
-                  <div class="tile-stats portlet light">
+                  
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+                    <div class=" portlet light tile-stats">
+                      <div class="icon"><i class="glyphicon glyphicon-gift"></i></div>
+                      <div class="divsize">{{$count_package}}</div>
+                      <h2>Package</h2>
+                      <p></p>
+                    </div>
+
+                    <div class="tile-stats portlet light">
                       <div class="icon"><i class="glyphicon glyphicon-inbox"></i></div>
                       <div class="divsize">{{$count_orders}}</div>
                       <h2>Orders</h2>
                       <p></p>                      
                   </div>
+
               </div>
 
-              <div class="animated flipInY col-lg-2 col-md-3 col-sm-6 col-xs-12">
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="portlet light  tile-stats">
                        <div class="icon"><i class="glyphicon glyphicon-user"></i></div>
                       <div class="divsize">{{$count_data}}</div>
@@ -51,141 +67,80 @@
                         <p></p>
                     </div>
                  
-                    <div class=" portlet light tile-stats">
-                      <div class="icon"><i class="glyphicon glyphicon-gift"></i></div>
-                      <div class="divsize">{{$count_package}}</div>
-                      <h2>Package</h2>
-                      <p></p>
-                    </div>
               </div>
 
-            <div>
-              <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Popular<small>place</small></h2>
-                   <hr>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>1</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Sale 3000 voucher</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>2</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Sale 1500 voucher</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>3</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Sale 890 voucher</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>4</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Sale 470 voucher</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>5</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Sale 300 voucher</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    
-                  </div>
-                </div>
-              </div>
-
-              <div class="divmargin portlet light animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+           
+              <div class="divmargin portlet light animated flipInY col-lg-12 col-md-12 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Popular<small>voucher</small></h2>
                    <hr>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>1</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Voucher 1</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>2</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Voucher 2</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>3</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Voucher 3</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>4</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Voucher 4</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    <article class="media event">
-                      <a class="pull-left date">
-                        <p></p>
-                        <p>5</p>
-                      </a>
-                      <div class="media-body">
-                        <a class="title" href="#">Voucher 5</a>
-                        <p>โรงแรมอมารี ดอนเมือง แอร์พอร์ต กรุงเทพฯ</p>
-                      </div>
-                    </article>
-                    
-                  </div>
-                </div>
+
+                  <div class="table-responsive">
+                    <table class=" table table-hover">
+
+                    <thead>
+                        <tr>
+                            <th class="text-center col-sm-1">อันดับ</th>
+                            <th class="text-center col-sm-1">Sale</th>
+                            <th class="text-center col-sm-1">Voucher Name</th>
+                            <th class="text-center col-sm-1">Place</th>
+                        </tr>
+                        </thead>
+                        <thead>
+                          @foreach($datapopularvr as $key => $field)
+                                    <tr>
+                                        <td class="text-center">{{ $ratingvoucher++ }}</td>
+                                        <td class="text-center">{{ $field->count }} Voucher</td>
+                                        <td>{{ $field->voucher_name  }}</td>
+                                        <td>{{ $field->place_name  }}</td>                                      
+                                    </tr>                              
+                       @endforeach
+                     </tbody>
+                    </table>
+                   </div>
+
+                 </div>
               </div>
-    </div>
+
+              
+
+              <div class="divmargin portlet light animated flipInY col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Popular<small>place</small></h2>
+                   <hr>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="table-responsive">
+                    <table class=" table table-hover table-striped">
+
+                    <thead>
+                        <tr>
+                            <th class="text-center col-sm-1">อันดับ</th>
+                            <th class="text-center col-sm-1">Sale</th>
+                            <th class="text-center col-sm-1">Place</th>
+                        </tr>
+                        </thead>
+                        <thead>
+                          @foreach($datapopularplace as $key => $field)
+                                    <tr>
+                                        <td class="text-center">{{ $ratingplacer++ }}</td>
+                                        <td class="text-center">{{ $field->countsum }} Voucher</td>
+                                     
+                                        <td>{{ $field->place_name  }}</td>                                      
+                                    </tr>                              
+                       @endforeach
+                     </tbody>
+                    </table>
+                   </div>
+
+                 </div>
+              </div>
+
  
 
     </div>

@@ -30,7 +30,7 @@ Route::group(['prefix' => '_admin'], function () {
 Route::group(['middleware'=>'admin','prefix' => config()->get('constants.BO_NAME')], function () {
   
   
-    Route::resource('listuser','Backend\AdminRoleController');
+    Route::resource('circulation','Backend\AdminCirculationController');
     Route::resource('listuser','Backend\AdminUserController');
     Route::resource('listuser/order','Backend\AdminOrderDetailController');  
     Route::resource('placetype','Backend\AdminPlaceTypeController');   

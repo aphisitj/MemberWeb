@@ -85,7 +85,7 @@ if(isset($data)) {
 								<select class="form-control" name="place_type" id="place_type" >							
 					               
 					            @foreach( $dataplacetype as $key => $type )  
-                					<option value="2" @if( $place_type === $type->place_type_id ) selected="selected " @endif >{{ $type->place_type_name_th }}</option>                
+                					<option value="{{ $type->place_type_id }}" @if( $place_type === $type->place_type_id ) selected="selected " @endif >{{ $type->place_type_name_th }}</option>                
                					@endforeach 
                					
                             	</select>
